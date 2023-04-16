@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+
+const Render = [
+  {
+    title: "Rents",
+    text: "Rents хэсэг дарагдсан байна",
+  },
+  {
+    title: "R.Histiory",
+    text: "R.History хэсэг дарагдсан байна",
+  },
+];
 
 const Supplier = () => {
+  const [selectedRender, setSelectedRender] = React.useState({
+    text: "",
+  });
+
+  const handleClicked = (text) => {
+    setSelectedRender(text);
+  };
+
   return (
     <div className="container mx-auto  w-full">
       <div style={{ height: "900px" }} className="flex pt-20">
@@ -29,9 +48,30 @@ const Supplier = () => {
             style={{ width: "700px", height: "600px" }}
             className="border-2 border-2-black "
           >
-            <div className="flex text-center w-full ">
-              <div className="w-3/6 border border-black">Rents</div>
-              <div className="w-3/6 border border-black">R.History</div>
+            <div className="flex text-center w-full">
+              {/* <div className="w-3/6 border border-black">Rents</div>
+              <div className="w-3/6 border border-black">R.History</div> */}
+              {Render.map((el, id) => (
+                <div
+                  key={id}
+                  className="w-3/6 border border-black"
+                  onClick={() => {
+                    handleClicked(el);
+                  }}
+                >
+                  {el.title}
+                </div>
+              ))}
+            </div>
+            <div className="bg-blue-500 text-2xl text-white h-96 p-8">
+              <p>{selectedRender.text}</p>
+            </div>
+            <div className="flex justify-end">
+              <div style={{ marginTop: "480px" }} className="p-3">
+                <button className="p-5 w-40 rounded-lg text-white bg-gradient-to-r from-cyan-500 to-blue-500">
+                  Add Product
+                </button>
+              </div>
             </div>
           </div>
         </div>

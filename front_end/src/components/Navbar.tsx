@@ -176,6 +176,7 @@ export default function PrimarySearchAppBar() {
           >
             MUI
           </Typography>
+
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
