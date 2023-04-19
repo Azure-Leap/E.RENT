@@ -4,6 +4,8 @@ import { NavContext } from "@/context/NavContext";
 import Navbar from "@/components/Navbar";
 import Sidenav from "@/components/Sidenav";
 import LoginModal from "@/components/Auth/Login";
+import RegisterUserModal from "@/components/Auth/RegisterUser";
+import RegisterBusinessModal from "@/components/Auth/RegisterBusiness";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -11,7 +13,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Navbar />
       <Sidenav />
       <Component {...pageProps} />
-      <LoginModal/>
+      <LoginModal />
+      <RegisterUserModal />
+      <RegisterBusinessModal />
     </NavContext>
   );
 }
