@@ -12,6 +12,8 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import CloseIcon from '@mui/icons-material/Close'
+import { Person, Business } from "@mui/icons-material";
 
 const loginstyle = {
   position: "absolute" as "absolute",
@@ -19,7 +21,7 @@ const loginstyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 720,
+  height: 760,
   bgcolor: "white",
   outline: "none",
   p: 4,
@@ -38,7 +40,6 @@ const CyanInput = styled(TextField)({
     },
   },
 });
-
 export default function RegisterUserModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -46,7 +47,17 @@ export default function RegisterUserModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <Button
+      sx={{
+        border: 1,
+        height: "44px",
+        color: "#06b6d4",
+        marginLeft: "70px",
+      }}
+      onClick={handleOpen}
+    >
+      <Person />
+    </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -76,14 +87,16 @@ export default function RegisterUserModal() {
               variant="h4"
               color={"white"}
               sx={{
-                display: "flex",
+                display: "inline-flex",
                 justifyContent: "center",
                 paddingTop: "10px",
                 paddingBottom: "10px",
+                marginLeft:"35%"
               }}
             >
               Register
             </Typography>
+            <Button sx={{marginLeft:"25%",marginBottom:"2%"}} disableRipple onClick={handleClose}><CloseIcon sx={{color:"white"}} /></Button>
           </Box>
           <Box
             sx={{
@@ -127,16 +140,20 @@ export default function RegisterUserModal() {
                   Address:
                 </Typography>
                 <Box sx={{ width: "414px", marginTop: "5px" }}>
-                  <FormControl sx={{ width: "130px" }}>
+                  <FormControl sx={{ width: "130px",borderColor:"#06b6b4" }}>
                     <InputLabel id="demo-simple-select-label">Хот</InputLabel>
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Hot"
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                          },
+                        },
+                      }}
                     >
                       <MenuItem value={10}>Ulaanbaatar</MenuItem>
-                      <MenuItem value={20}>Arhangai</MenuItem>
-                      <MenuItem value={30}>Bayn-Ulgii</MenuItem>
                     </Select>
                   </FormControl>
                   <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
@@ -146,11 +163,9 @@ export default function RegisterUserModal() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      label="Hot"
+                      label="Duureg"
                     >
                       <MenuItem value={10}>Bayngol</MenuItem>
-                      <MenuItem value={20}>Baynzurh</MenuItem>
-                      <MenuItem value={30}>Sukh-Baatar</MenuItem>
                     </Select>
                   </FormControl>
                   <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
@@ -158,18 +173,18 @@ export default function RegisterUserModal() {
                     <Select
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      label="Hot"
+                      label="Horoo"
                     >
                       <MenuItem value={10}>1-r horoo</MenuItem>
-                      <MenuItem value={20}>2-r horoo</MenuItem>
-                      <MenuItem value={30}>3-r horoo</MenuItem>
                     </Select>
                   </FormControl>
                   <CyanInput
                     id="outlined-basic"
                     label="Дэлгэрэнгүй хаяг"
+                    multiline
+                    rows={2}
                     InputLabelProps={{
-                      style: { color: "#06b6d4", height: "88px" },
+                      style: { color: "#06b6d4",},
                     }}
                     variant="outlined"
                     sx={{ width: 414, height: 44, marginTop: "10px" }}
@@ -181,7 +196,7 @@ export default function RegisterUserModal() {
                 label="Password"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
-                sx={{ width: 414, height: 44, marginTop: "20px" }}
+                sx={{ width: 414, height: 44, marginTop: "45px" }}
               />
               <CyanInput
                 id="outlined-basic"
@@ -220,7 +235,6 @@ export default function RegisterUserModal() {
               }}
             >
               <Checkbox
-                defaultChecked
                 sx={{
                   "& .MuiSvgIcon-root": { fontSize: 20 },
                   color: "#06c6d4",

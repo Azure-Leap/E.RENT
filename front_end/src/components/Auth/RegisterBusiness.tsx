@@ -3,20 +3,25 @@ import { alpha, styled } from "@mui/material/styles";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Link from "@mui/material/Link";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import CloseIcon from '@mui/icons-material/Close'
+import { Person, Business } from "@mui/icons-material";
 
 const loginstyle = {
   position: "absolute" as "absolute",
-  top: "50%",
+  top: "45%",
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 550,
+  height: 760,
   bgcolor: "white",
   outline: "none",
   p: 4,
@@ -35,7 +40,6 @@ const CyanInput = styled(TextField)({
     },
   },
 });
-
 export default function RegisterBusinessModal() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -43,7 +47,17 @@ export default function RegisterBusinessModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <Button
+      sx={{
+        border: 1,
+        height: "44px",
+        color: "#06b6d4",
+        marginLeft: "70px",
+      }}
+      onClick={handleOpen}
+    >
+      <Business />
+    </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -73,14 +87,16 @@ export default function RegisterBusinessModal() {
               variant="h4"
               color={"white"}
               sx={{
-                display: "flex",
+                display: "inline-flex",
                 justifyContent: "center",
                 paddingTop: "10px",
                 paddingBottom: "10px",
+                marginLeft:"35%"
               }}
             >
               Register
             </Typography>
+            <Button sx={{marginLeft:"25%",marginBottom:"2%"}} disableRipple onClick={handleClose}><CloseIcon sx={{color:"white"}} /></Button>
           </Box>
           <Box
             sx={{
@@ -110,17 +126,77 @@ export default function RegisterBusinessModal() {
               />
               <CyanInput
                 id="outlined-basic"
-                label="Password"
+                label="Phone-Number"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{ width: 414, height: 44, marginTop: "20px" }}
               />
+              <Box>
+                <Typography
+                  variant="h6"
+                  sx={{ marginTop: "20px" }}
+                  color="#06b6d4"
+                >
+                  Address:
+                </Typography>
+                <Box sx={{ width: "414px", marginTop: "5px" }}>
+                  <FormControl sx={{ width: "130px",borderColor:"#06b6b4" }}>
+                    <InputLabel id="demo-simple-select-label">Хот</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Hot"
+                      MenuProps={{
+                        PaperProps: {
+                          sx: {
+                          },
+                        },
+                      }}
+                    >
+                      <MenuItem value={10}>Ulaanbaatar</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
+                    <InputLabel id="demo-simple-select-label">
+                      Дүүрэг
+                    </InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Duureg"
+                    >
+                      <MenuItem value={10}>Bayngol</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
+                    <InputLabel id="demo-simple-select-label">Хороо</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      label="Horoo"
+                    >
+                      <MenuItem value={10}>1-r horoo</MenuItem>
+                    </Select>
+                  </FormControl>
+                  <CyanInput
+                    id="outlined-basic"
+                    label="Дэлгэрэнгүй хаяг"
+                    multiline
+                    rows={2}
+                    InputLabelProps={{
+                      style: { color: "#06b6d4",},
+                    }}
+                    variant="outlined"
+                    sx={{ width: 414, height: 44, marginTop: "10px" }}
+                  />
+                </Box>
+              </Box>
               <CyanInput
                 id="outlined-basic"
-                label="Confirm-Password"
+                label="Password"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
-                sx={{ width: 414, height: 44, marginTop: "20px" }}
+                sx={{ width: 414, height: 44, marginTop: "45px" }}
               />
               <CyanInput
                 id="outlined-basic"
@@ -159,7 +235,6 @@ export default function RegisterBusinessModal() {
               }}
             >
               <Checkbox
-                defaultChecked
                 sx={{
                   "& .MuiSvgIcon-root": { fontSize: 20 },
                   color: "#06c6d4",
