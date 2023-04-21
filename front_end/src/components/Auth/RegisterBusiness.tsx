@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import CloseIcon from '@mui/icons-material/Close'
+import CloseIcon from "@mui/icons-material/Close";
 import { Person, Business } from "@mui/icons-material";
 
 const loginstyle = {
@@ -24,7 +24,7 @@ const loginstyle = {
   height: 760,
   bgcolor: "white",
   outline: "none",
-  p: 4,
+  p: 5,
   borderRadius: "5px",
 };
 const CyanInput = styled(TextField)({
@@ -47,17 +47,17 @@ export default function RegisterBusinessModal() {
 
   return (
     <>
-    <Button
-      sx={{
-        border: 1,
-        height: "44px",
-        color: "#06b6d4",
-        marginLeft: "70px",
-      }}
-      onClick={handleOpen}
-    >
-      <Business />
-    </Button>
+      <Button
+        sx={{
+          border: 1,
+          height: "44px",
+          color: "#06b6d4",
+          width: "50px",
+        }}
+        onClick={handleOpen}
+      >
+        <Business />
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -91,12 +91,18 @@ export default function RegisterBusinessModal() {
                 justifyContent: "center",
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                marginLeft:"35%"
+                marginLeft: "35%",
               }}
             >
               Register
             </Typography>
-            <Button sx={{marginLeft:"25%",marginBottom:"2%"}} disableRipple onClick={handleClose}><CloseIcon sx={{color:"white"}} /></Button>
+            <Button
+              sx={{ marginLeft: "25%", marginBottom: "2%" }}
+              disableRipple
+              onClick={handleClose}
+            >
+              <CloseIcon sx={{ color: "white" }} />
+            </Button>
           </Box>
           <Box
             sx={{
@@ -140,16 +146,29 @@ export default function RegisterBusinessModal() {
                   Address:
                 </Typography>
                 <Box sx={{ width: "414px", marginTop: "5px" }}>
-                  <FormControl sx={{ width: "130px",borderColor:"#06b6b4" }}>
+                  <FormControl sx={{ width: "130px", borderColor: "#06b6d4" }}>
                     <InputLabel id="demo-simple-select-label">Хот</InputLabel>
                     <Select
+                      sx={{
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Hot"
                       MenuProps={{
                         PaperProps: {
-                          sx: {
-                          },
+                          sx: {},
                         },
                       }}
                     >
@@ -161,6 +180,20 @@ export default function RegisterBusinessModal() {
                       Дүүрэг
                     </InputLabel>
                     <Select
+                      sx={{
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Duureg"
@@ -171,6 +204,21 @@ export default function RegisterBusinessModal() {
                   <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
                     <InputLabel id="demo-simple-select-label">Хороо</InputLabel>
                     <Select
+                      sx={{
+                        color: "#06b6d4",
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Horoo"
@@ -184,7 +232,7 @@ export default function RegisterBusinessModal() {
                     multiline
                     rows={2}
                     InputLabelProps={{
-                      style: { color: "#06b6d4",},
+                      style: { color: "#06b6d4" },
                     }}
                     variant="outlined"
                     sx={{ width: 414, height: 44, marginTop: "10px" }}
@@ -279,7 +327,7 @@ export default function RegisterBusinessModal() {
                   sx={{ color: "#06b6d4" }}
                   textTransform="capitalize"
                 >
-                  Login
+                  Нэвтрэх
                 </Typography>
               </Button>
             </Box>

@@ -10,10 +10,10 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import CloseIcon from '@mui/icons-material/Close'
-import { Person, Business } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
+import { Person, Business, Login } from "@mui/icons-material";
+import LoginModal from "./Login";
 
 const loginstyle = {
   position: "absolute" as "absolute",
@@ -24,7 +24,7 @@ const loginstyle = {
   height: 760,
   bgcolor: "white",
   outline: "none",
-  p: 4,
+  p: 5,
   borderRadius: "5px",
 };
 const CyanInput = styled(TextField)({
@@ -47,17 +47,17 @@ export default function RegisterUserModal() {
 
   return (
     <>
-    <Button
-      sx={{
-        border: 1,
-        height: "44px",
-        color: "#06b6d4",
-        marginLeft: "70px",
-      }}
-      onClick={handleOpen}
-    >
-      <Person />
-    </Button>
+      <Button
+        sx={{
+          border: 1,
+          height: "44px",
+          color: "#06b6d4",
+          width: "50px",
+        }}
+        onClick={handleOpen}
+      >
+        <Person />
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -91,12 +91,18 @@ export default function RegisterUserModal() {
                 justifyContent: "center",
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                marginLeft:"35%"
+                marginLeft: "37%",
               }}
             >
               Register
             </Typography>
-            <Button sx={{marginLeft:"25%",marginBottom:"2%"}} disableRipple onClick={handleClose}><CloseIcon sx={{color:"white"}} /></Button>
+            <Button
+              sx={{ marginLeft: "23%", marginBottom: "2%" }}
+              disableRipple
+              onClick={handleClose}
+            >
+              <CloseIcon sx={{ color: "white" }} />
+            </Button>
           </Box>
           <Box
             sx={{
@@ -108,7 +114,7 @@ export default function RegisterUserModal() {
             <Box sx={{ marginTop: "25px" }}>
               <CyanInput
                 id="outlined-basic"
-                label="E-Mail"
+                label="И Мэйл"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{
@@ -119,14 +125,14 @@ export default function RegisterUserModal() {
               />
               <CyanInput
                 id="outlined-basic"
-                label="Username"
+                label="Түрээслэгчийн нэр"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{ width: 414, height: 44, marginTop: "20px" }}
               />
               <CyanInput
                 id="outlined-basic"
-                label="Phone-Number"
+                label="Утасны дугаар"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{ width: 414, height: 44, marginTop: "20px" }}
@@ -137,19 +143,33 @@ export default function RegisterUserModal() {
                   sx={{ marginTop: "20px" }}
                   color="#06b6d4"
                 >
-                  Address:
+                  Хаяг:
                 </Typography>
                 <Box sx={{ width: "414px", marginTop: "5px" }}>
-                  <FormControl sx={{ width: "130px",borderColor:"#06b6b4" }}>
+                  <FormControl sx={{ width: "130px", borderColor: "#06b6b4" }}>
                     <InputLabel id="demo-simple-select-label">Хот</InputLabel>
                     <Select
+                      sx={{
+                        "": {},
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Hot"
                       MenuProps={{
                         PaperProps: {
-                          sx: {
-                          },
+                          sx: {},
                         },
                       }}
                     >
@@ -161,6 +181,20 @@ export default function RegisterUserModal() {
                       Дүүрэг
                     </InputLabel>
                     <Select
+                      sx={{
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Duureg"
@@ -171,6 +205,20 @@ export default function RegisterUserModal() {
                   <FormControl sx={{ width: "130px", marginLeft: "12px" }}>
                     <InputLabel id="demo-simple-select-label">Хороо</InputLabel>
                     <Select
+                      sx={{
+                        ".MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                          borderColor: "#06b6d4",
+                        },
+                        ".MuiSvgIcon-root ": {
+                          fill: "#06b6d4",
+                        },
+                      }}
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
                       label="Horoo"
@@ -184,7 +232,7 @@ export default function RegisterUserModal() {
                     multiline
                     rows={2}
                     InputLabelProps={{
-                      style: { color: "#06b6d4",},
+                      style: { color: "#06b6d4" },
                     }}
                     variant="outlined"
                     sx={{ width: 414, height: 44, marginTop: "10px" }}
@@ -193,14 +241,14 @@ export default function RegisterUserModal() {
               </Box>
               <CyanInput
                 id="outlined-basic"
-                label="Password"
+                label="Нууц үг"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{ width: 414, height: 44, marginTop: "45px" }}
               />
               <CyanInput
                 id="outlined-basic"
-                label="Confirm-Password"
+                label="Нууц үг бататгах"
                 InputLabelProps={{ style: { color: "#06b6d4" } }}
                 variant="outlined"
                 sx={{ width: 414, height: 44, marginTop: "20px" }}
@@ -241,7 +289,7 @@ export default function RegisterUserModal() {
                 }}
               />
               <Typography sx={{ fontSize: "14px" }} color="#06c6d4">
-                Agree to terms and conditions
+                Нөхцөл, болзлыг зөвшөөрч байна.
               </Typography>
             </Box>
             <Box
@@ -272,16 +320,15 @@ export default function RegisterUserModal() {
               }}
             >
               <Button disabled sx={{ color: "#06b6d4" }}>
-                Already have an account?
-              </Button>
-              <Button href="#" sx={{ color: "#06b6d4" }} component={Link}>
-                <Typography
-                  sx={{ color: "#06b6d4" }}
-                  textTransform="capitalize"
-                >
-                  Login
+                <Typography textTransform="capitalize">
+                  Аккаунт байгаа юу?
                 </Typography>
               </Button>
+              <Button
+                href="#"
+                sx={{ color: "#06b6d4" }}
+                component={LoginModal}
+              ></Button>
             </Box>
           </Box>
         </Box>

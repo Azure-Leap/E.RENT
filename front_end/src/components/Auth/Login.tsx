@@ -8,8 +8,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Checkbox from "@mui/material/Checkbox";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import { Person, Business } from "@mui/icons-material";
+import RegisterChooseModal from "./RegisterChoose";
 
 const loginstyle = {
   position: "absolute" as "absolute",
@@ -17,11 +17,10 @@ const loginstyle = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: 500,
-  height: 420,
+  height: 430,
   bgcolor: "white",
   outline: "none",
-  p: 4,
-  borderRadius: "5px",
+  p: 5,
 };
 const CyanInput = styled(TextField)({
   "& .MuiOutlinedInput-root": {
@@ -44,7 +43,11 @@ export default function LoginModal() {
 
   return (
     <>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>
+        <Typography sx={{ color: "#06b6d4" }} textTransform="capitalize">
+          Нэвтрэх
+        </Typography>
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -68,7 +71,6 @@ export default function LoginModal() {
               left: "0",
               width: "100%",
               marginBottom: "15px",
-              borderRadius: "5px",
             }}
           >
             <Typography
@@ -191,7 +193,7 @@ export default function LoginModal() {
                 style={{ backgroundColor: "transparent" }}
                 variant="contained"
               >
-                <Typography>Login</Typography>
+                <Typography>Нэвтрэх</Typography>
               </Button>
             </Box>
             <Box
@@ -203,12 +205,16 @@ export default function LoginModal() {
               }}
             >
               <Button href="#" sx={{ color: "#06b6d4" }} component={Link}>
-                Forgot Password?
+                <Typography sx={{ fontSize: "12px" }}>
+                  Нууц үгээ мартсан уу?
+                </Typography>
               </Button>
               <Button disabled>|</Button>
-              <Button href="#" sx={{ color: "#06b6d4" }} component={Link}>
-                Create new Account
-              </Button>
+              <Button
+                href="#"
+                sx={{ color: "#06b6d4" }}
+                component={RegisterChooseModal}
+              ></Button>
             </Box>
           </Box>
         </Box>

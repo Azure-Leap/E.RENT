@@ -1,18 +1,18 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import {Button, Typography} from '@mui/material';
-import RegisterUserModal from './RegisterUser';
-import RegisterBusinessModal from './RegisterBusiness';
-import CloseIcon from '@mui/icons-material/Close';  
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Modal from "@mui/material/Modal";
+import { Button, Typography } from "@mui/material";
+import RegisterUserModal from "./RegisterUser";
+import RegisterBusinessModal from "./RegisterBusiness";
+import CloseIcon from "@mui/icons-material/Close";
 
 const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  height:"170px",
-  bgcolor: 'background.paper',
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  height: "170px",
+  bgcolor: "background.paper",
   outline: "none",
   boxShadow: 24,
   pt: 2,
@@ -52,23 +52,35 @@ function ChildModal() {
 
 export default function RegisterChooseModal() {
   const [open, setOpen] = React.useState(false);
-  const handleOpen = () => {
+  const handleOpenChoose = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleCloseChoose = () => {
     setOpen(false);
   };
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+    <Box>
+      <Button
+        onClick={handleOpenChoose}
+        sx={{ fontSize: "12px", color: "#06b6d4" }}
+      >
+        Шинэ аккаунт үүсгэх
+      </Button>
       <Modal
         open={open}
-        onClose={handleClose}
+        onClose={handleCloseChoose}
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <Box sx={{ ...style, width: 400, display:"flex", flexDirection:"column" }}>
+        <Box
+          sx={{
+            ...style,
+            width: 400,
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Box
             sx={{
               background:
@@ -88,25 +100,55 @@ export default function RegisterChooseModal() {
                 justifyContent: "center",
                 paddingTop: "10px",
                 paddingBottom: "10px",
-                marginLeft:"35%"
+                marginLeft: "35%",
               }}
             >
               Register
             </Typography>
-            <Button sx={{marginLeft:"15%",marginBottom:"2%"}} disableRipple onClick={handleClose}><CloseIcon sx={{color:"white"}} /></Button>
+            <Button
+              sx={{ marginLeft: "15%", marginBottom: "2%" }}
+              disableRipple
+              onClick={handleCloseChoose}
+            >
+              <CloseIcon sx={{ color: "white" }} />
+            </Button>
           </Box>
-          <Box sx={{marginTop:"70px",display:"flex",flexDirection:"row"}}>    
-            <Box sx={{display:"flex",flexDirection:"column", }}>
-              <RegisterUserModal     /> 
-              <Typography color="#06b6d4" sx={{marginLeft:"65%",marginTop:"5px"}}>User</Typography>
+          <Box
+            sx={{
+              marginTop: "70px",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <RegisterUserModal />
+              <Typography color="#06b6d4" sx={{ marginTop: "5px" }}>
+                Түрээслэгч
+              </Typography>
             </Box>
-            <Box sx={{display:"flex",flexDirection:"column",justifyContent:"center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                paddingLeft: "10%",
+              }}
+            >
               <RegisterBusinessModal />
-              <Typography color="#06b6d4" sx={{marginLeft:"55%",marginTop:"5px"}}>Supplier</Typography>
+              <Typography color="#06b6d4" sx={{ marginTop: "5px" }}>
+                Түрээслүүлэгч
+              </Typography>
             </Box>
           </Box>
         </Box>
       </Modal>
-    </div>
+    </Box>
   );
 }
