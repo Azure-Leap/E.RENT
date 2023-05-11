@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import { Schema, model,Types } from "mongoose";
 import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema({
@@ -28,8 +28,8 @@ const UserSchema = new mongoose.Schema({
   cardNumber: {
     type: String,
   },
+  user_id: { type: Types.ObjectId, ref: "user" },
 }, { timestamps: true });
 
-const user = model("User", UserSchema);
-
-export default user;
+const User = mongoose.model("User", UserSchema);
+export default User;

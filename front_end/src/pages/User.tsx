@@ -1,8 +1,7 @@
-import SupplierProfile from "@/components/SupplierComp/SupplierProfile";
 import UserProfile from "@/components/User/userProfile";
 import React, { useState } from "react";
 
-const Supplier = () => {
+const User = () => {
   return (
     <div
       style={{
@@ -16,4 +15,4 @@ const Supplier = () => {
   );
 };
 
-export default Supplier;
+export default User;

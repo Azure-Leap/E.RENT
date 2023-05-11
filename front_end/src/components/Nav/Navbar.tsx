@@ -3,9 +3,11 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import NabPages from "./NabPages";
-import { useState } from "react";
+import  React, { useState ,useEffect, useContext} from "react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import{ useRouter } from "next/router";
+import { AuthContext } from "@/context/AuthContext";
+import {signIn,signOut} from "next-auth"
 
 const imgPic01 = require("../../assets/images/notification-bell.png");
 const imgPic02 = require("../../assets/images/navbar_cart.png");
@@ -32,6 +34,9 @@ const Navbar = ({ products }: any) => {
     router.push(`/search?title=${value}`);
     setSearch(filterProducts);
   };
+  //Auth
+  
+  const {renter, supplier , logOut} = useContext(AuthContext)
 
   // responsive mobile menu
 
@@ -39,6 +44,18 @@ const Navbar = ({ products }: any) => {
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
+
+  //Login?
+  // const [isLogged, setIsLogged] = React.useState(true);
+
+  //Modal
+  
+  const [showModal, setShowModal] = React.useState(false);
+  
+  const [isModal,setIsModal] =useState(false)
+
+
+
   return (
     <div className="pt-3">
       <div className="bg-white h-20 shadow-md ">
@@ -86,7 +103,68 @@ const Navbar = ({ products }: any) => {
               <Image src={imgPic04} alt="pic" height={35} width={35} />
               <Image src={imgPic02} alt="pic" height={35} width={35} />
               <span className="absolute top-5 right-36 text-[13px] bg-cyan-400 h-[18px] w-[18px] rounded-full place-item-center items-center text-white">0</span>
-              <Image src={imgPic03} alt="pic" height={35} width={35} />
+              {renter ? (
+                <>
+                  <Image src={imgPic03} alt="pic" height={100} width={35}  itemType="button" onClick={()=>setIsModal((e:any)=>!e)}/>
+                  {isModal && (
+                    <div className="bg-cyan-400 absolute mt-10 ml-36 rounded-lg w-28 z-50">
+                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
+                          <h3 className="w-full text-center text-white font-bold">
+                            Profile</h3>
+                        </a>
+                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
+                          <h3 className="w-full text-center text-white font-bold">
+                            Rents</h3>
+                        </a>
+                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
+                          <h3 className="w-full text-center text-white font-bold">  
+                          Bookmark</h3>
+                        </a>
+                        <button onClick={logOut} className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
+                          <h3 className="w-full text-center text-white font-bold">Logout</h3>
+                        </button>
+                    </div>
+                  )}
+                </>
+                ) : (
+                  <>
+                  <button
+                  className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
+                  type="button"
+                  onClick={() => setShowModal(true)}
+                >
+                  Нэвтрэх
+                </button>
+                {showModal ? (
+                <>
+                  <div
+                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                  >
+                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                      <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                          <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
+                            <a href="/UserAuth/loginUser">Түрээслэгч</a>
+                          </button>
+                          <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4">
+                            <a href="/login">Түрээслүүлэгч</a>
+                          </button>
+                        </div>
+                          <button
+                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                            type="button"
+                            onClick={() => setShowModal(false)}
+                          >
+                            Close
+                          </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                </>
+              ) : null}
+                </>
+              )}
             </div>
           </div>
         </div>
