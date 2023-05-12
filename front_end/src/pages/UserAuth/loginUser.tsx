@@ -47,16 +47,6 @@ const LoginUser = () => {
       toast.error("Амжилтгүй", { autoClose: 1000, position: "bottom-right" });
     }
   };
-  const getCurrentUser = async function (): Promise<Parse.User | null> {
-    const currentUser: Parse.User = await Parse.User.current();
-    if (currentUser !== null) {
-      Alert.alert(
-        'Success!',
-        `${currentUser.get('username')} is the current user!`,
-      );
-    }
-    return currentUser;
-  };
 
   return (
     <NavLayout>

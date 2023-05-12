@@ -18,11 +18,6 @@ import { useEffect,useState,useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 
 const Index = () => {
-  const {renter , setUserRenter , logOut} = useContext(AuthContext)
-  useEffect(()=>{
-    const rser = window.localStorage.getItem("renter")
-    console.log("renterNav",rser)
-  })
   return (
     <NavLayout>
       <SwiperSection />

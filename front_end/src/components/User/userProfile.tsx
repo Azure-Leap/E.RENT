@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import Rents from "@/components/UserComp/Rents";
 import History from "@/components/UserComp/History";
 import Bookmark from "@/components/UserComp/Bookmark";
 import Footer from "@/components/Footer";
 import { ResetTvRounded } from "@mui/icons-material";
+import { AuthContext } from "@/context/AuthContext";
 const COMPONENTS = [
   {
     title: "Rents",
@@ -20,10 +21,11 @@ const COMPONENTS = [
 ];
 
 const UserProfile = () => {
-  useEffect(()=>{
-    window.localStorage.getItem("renter")
-    console.log("renter",localStorage.renter)
-  },["renter"])
+  const {renter , setUserRenter } = useContext(AuthContext)
+  const username = ()=>{
+    const renter =localStorage.getItem("renter")
+    console.log("renter",renter)
+  }
   const [selectedComponent, setSelectedComponent] = useState({
     title: "",
     component: "",
@@ -39,8 +41,9 @@ const UserProfile = () => {
             <div className="flex justify-center ">
               <img src="./images/user.png" width={100} />
             </div>
-            <h1 className="font-semibold text-zinc-600 text-xl pt-5" >
-            </h1>
+              <h1 className="font-semibold text-zinc-600 text-xl pt-5" >
+                {}
+              </h1>
             <p className="font-light text-zinc-600 ">Ulaanbaatar, Mongolia</p>
             <div className="p-5">
               <button

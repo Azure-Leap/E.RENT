@@ -121,7 +121,7 @@ const Navbar = ({ products }: any) => {
                           <h3 className="w-full text-center text-white font-bold">  
                           Bookmark</h3>
                         </a>
-                        <a  className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent" itemType="button" onClick={()=>{setUserRenter(false)}}>
+                        <a  className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent" itemType="button" onClick={()=>{logOut()}}>
                           <h3 className="w-full text-center text-white font-bold">Logout</h3>
                         </a>
                     </div>

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
 
@@ -20,7 +21,8 @@ const AuthProvider = ({ children }: any) => {
     console.log("Clicked Log Out Button");
     setSupplier(null);
     setRenter(null);
-    // localStorage.removeItem("user");
+    localStorage.removeItem("renter");
+    toast.error("Гарлаа", { autoClose: 1000, position: "bottom-right" });
   };
 
 
