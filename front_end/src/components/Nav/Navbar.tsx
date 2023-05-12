@@ -7,7 +7,7 @@ import  React, { useState ,useEffect, useContext} from "react";
 import axios from "axios";
 import{ useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContext";
-import {signIn,signOut} from "next-auth"
+import { toast } from "react-toastify";
 
 const imgPic01 = require("../../assets/images/notification-bell.png");
 const imgPic02 = require("../../assets/images/navbar_cart.png");
@@ -36,7 +36,9 @@ const Navbar = ({ products }: any) => {
   };
   //Auth
   
-  const {renter, supplier , logOut} = useContext(AuthContext)
+  const {renter , setUserRenter , logOut} = useContext(AuthContext)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // responsive mobile menu
 
@@ -46,14 +48,13 @@ const Navbar = ({ products }: any) => {
   };
 
   //Login?
-  // const [isLogged, setIsLogged] = React.useState(true);
+  const [isLogged, setIsLogged] = React.useState(false);
 
   //Modal
   
   const [showModal, setShowModal] = React.useState(false);
   
   const [isModal,setIsModal] =useState(false)
-
 
 
   return (
@@ -120,9 +121,9 @@ const Navbar = ({ products }: any) => {
                           <h3 className="w-full text-center text-white font-bold">  
                           Bookmark</h3>
                         </a>
-                        <button onClick={logOut} className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
+                        <a  className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent" itemType="button" onClick={()=>{setUserRenter(false)}}>
                           <h3 className="w-full text-center text-white font-bold">Logout</h3>
-                        </button>
+                        </a>
                     </div>
                   )}
                 </>

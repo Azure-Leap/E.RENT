@@ -64,7 +64,6 @@ const RegisterUser = () => {
         position: "bottom-right",
       });
       console.log(result)
-      router.push("/UserAuth/loginUser");
     } catch {
       toast.error("Түрээслэгч амжилтгүй бүртгэгдлээ. ", {
         autoClose: 1000,

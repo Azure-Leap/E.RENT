@@ -11,13 +11,18 @@ const AuthProvider = ({ children }: any) => {
   const [renter, setRenter] = useState<any>(null);
   const setUserRenter = (sup: any) => {
     setRenter(sup);
+    console.log("beforeloc",setRenter)
+    localStorage.setItem("renter", JSON.stringify(sup));
+    console.log("local",localStorage)
   };
 
   const logOut = () => {
     console.log("Clicked Log Out Button");
     setSupplier(null);
+    setRenter(null);
     // localStorage.removeItem("user");
   };
+
 
   return (
     <AuthContext.Provider value={{ supplier, setUserSupplier, renter, setUserRenter, logOut }}>

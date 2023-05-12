@@ -34,16 +34,28 @@ const LoginUser = () => {
       })) as any;
 
       console.log("res",res);
-      setUserRenter(res.data.renter);
+      setUserRenter(res.data.user);
+      console.log("set",setUserRenter)
 
       toast.success("Амжилттай нэвтэрлээ", {
         autoClose: 2000,
         position: "bottom-right",
       });
       router.push("/"); 
+      console.log("orloo")
     } catch {
       toast.error("Амжилтгүй", { autoClose: 1000, position: "bottom-right" });
     }
+  };
+  const getCurrentUser = async function (): Promise<Parse.User | null> {
+    const currentUser: Parse.User = await Parse.User.current();
+    if (currentUser !== null) {
+      Alert.alert(
+        'Success!',
+        `${currentUser.get('username')} is the current user!`,
+      );
+    }
+    return currentUser;
   };
 
   return (
