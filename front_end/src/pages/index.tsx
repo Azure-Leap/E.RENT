@@ -14,7 +14,7 @@ import LoginModal from "@/components/Auth/Login";
 import Hover from "@/components/Hover/hover";
 import ProductSwiper from "@/components/Product/ProductCard/ProductSwiper";
 import Navbar from "@/components/Nav/Navbar";
-import { useEffect,useState,useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "@/context/AuthContext";
 
 const Index = () => {

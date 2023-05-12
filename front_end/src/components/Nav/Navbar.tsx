@@ -3,9 +3,9 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import NabPages from "./NabPages";
-import  React, { useState ,useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import{ useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContext";
 import { toast } from "react-toastify";
 
@@ -28,15 +28,17 @@ const Navbar = ({ products }: any) => {
     e.preventDefault();
     const { value } = e.target.searchInput;
     console.log("value:", value);
-    const filterProducts = products?.filter((product: any) => product.title.toLowerCase().include(value.toLowerCase()));
+    const filterProducts = products?.filter((product: any) =>
+      product.title.toLowerCase().include(value.toLowerCase())
+    );
     const res = await axios(`http://localhost:9000/products?title=${value}`);
     console.log("search", res);
     router.push(`/search?title=${value}`);
     setSearch(filterProducts);
   };
   //Auth
-  
-  const {renter , setUserRenter , logOut} = useContext(AuthContext)
+
+  const { renter, setUserRenter, logOut } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -51,18 +53,22 @@ const Navbar = ({ products }: any) => {
   const [isLogged, setIsLogged] = React.useState(false);
 
   //Modal
-  
-  const [showModal, setShowModal] = React.useState(false);
-  
-  const [isModal,setIsModal] =useState(false)
 
+  const [showModal, setShowModal] = React.useState(false);
+
+  const [isModal, setIsModal] = useState(false);
 
   return (
     <div className="pt-3">
       <div className="bg-white h-20 shadow-md ">
         <div className="container mx-auto  items-center gap-15 flex justify-between">
           <picture className="flex gap-10 items-center">
-            <img src="./images/e.rent.png" height={100} width={100} alt="imagew" />
+            <img
+              src="./images/e.rent.png"
+              height={100}
+              width={100}
+              alt="imagew"
+            />
           </picture>
           {/* Search heseg ehlej bg ni  */}
 
@@ -84,8 +90,20 @@ const Navbar = ({ products }: any) => {
                   type="submit"
                   className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white rounded-r-lg  hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 bg-transparent"
                 >
-                  <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                  <svg
+                    aria-hidden="true"
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    ></path>
                   </svg>
                   <span className="sr-only px-5">Хайх</span>
                 </button>
@@ -103,67 +121,94 @@ const Navbar = ({ products }: any) => {
               <Image src={imgPic01} alt="pic" height={35} width={35} />
               <Image src={imgPic04} alt="pic" height={35} width={35} />
               <Image src={imgPic02} alt="pic" height={35} width={35} />
-              <span className="absolute top-5 right-36 text-[13px] bg-cyan-400 h-[18px] w-[18px] rounded-full place-item-center items-center text-white">0</span>
+              <span className="absolute top-5 right-36 text-[13px] bg-cyan-400 h-[18px] w-[18px] rounded-full place-item-center items-center text-white">
+                0
+              </span>
               {renter ? (
                 <>
-                  <Image src={imgPic03} alt="pic" height={100} width={35}  itemType="button" onClick={()=>setIsModal((e:any)=>!e)}/>
+                  <Image
+                    src={imgPic03}
+                    alt="pic"
+                    height={100}
+                    width={35}
+                    itemType="button"
+                    onClick={() => setIsModal((e: any) => !e)}
+                  />
                   {isModal && (
                     <div className="bg-cyan-400 absolute mt-10 ml-36 rounded-lg w-28 z-50">
-                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
-                          <h3 className="w-full text-center text-white font-bold">
-                            Profile</h3>
-                        </a>
-                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
-                          <h3 className="w-full text-center text-white font-bold">
-                            Rents</h3>
-                        </a>
-                        <a href="/User" className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent">
-                          <h3 className="w-full text-center text-white font-bold">  
-                          Bookmark</h3>
-                        </a>
-                        <a  className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent" itemType="button" onClick={()=>{logOut()}}>
-                          <h3 className="w-full text-center text-white font-bold">Logout</h3>
-                        </a>
+                      <a
+                        href="/User"
+                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                      >
+                        <h3 className="w-full text-center text-white font-bold">
+                          Profile
+                        </h3>
+                      </a>
+                      <a
+                        href="/User"
+                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                      >
+                        <h3 className="w-full text-center text-white font-bold">
+                          Rents
+                        </h3>
+                      </a>
+                      <a
+                        href="/User"
+                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                      >
+                        <h3 className="w-full text-center text-white font-bold">
+                          Bookmark
+                        </h3>
+                      </a>
+                      <a
+                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                        itemType="button"
+                        onClick={() => {
+                          logOut();
+                        }}
+                      >
+                        <h3 className="w-full text-center text-white font-bold">
+                          Logout
+                        </h3>
+                      </a>
                     </div>
                   )}
                 </>
-                ) : (
-                  <>
-                  <button
-                  className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
-                  type="button"
-                  onClick={() => setShowModal(true)}
-                >
-                  Нэвтрэх
-                </button>
-                {showModal ? (
+              ) : (
                 <>
-                  <div
-                    className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+                  <button
+                    className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
+                    type="button"
+                    onClick={() => setShowModal(true)}
                   >
-                    <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                      <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                        <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                          <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
-                            <a href="/UserAuth/loginUser">Түрээслэгч</a>
-                          </button>
-                          <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4">
-                            <a href="/login">Түрээслүүлэгч</a>
-                          </button>
+                    Нэвтрэх
+                  </button>
+                  {showModal ? (
+                    <>
+                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
+                                <a href="/UserAuth/loginUser">Түрээслэгч</a>
+                              </button>
+                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4">
+                                <a href="/login">Түрээслүүлэгч</a>
+                              </button>
+                            </div>
+                            <button
+                              className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                              type="button"
+                              onClick={() => setShowModal(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
                         </div>
-                          <button
-                            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
-                            type="button"
-                            onClick={() => setShowModal(false)}
-                          >
-                            Close
-                          </button>
                       </div>
-                    </div>
-                  </div>
-                  <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                </>
-              ) : null}
+                      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                  ) : null}
                 </>
               )}
             </div>
