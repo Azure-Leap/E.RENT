@@ -4,6 +4,7 @@ export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }: any) => {
   const [supplier, setSupplier] = useState<any>(null);
+  const [supplier_role, setSupplier_role] = useState<any>("");
   const setUser = (sup: any) => {
     setSupplier(sup);
     // localStorage.setItem("user", JSON.stringify(sup));
@@ -16,7 +17,9 @@ const AuthProvider = ({ children }: any) => {
   };
 
   return (
-    <AuthContext.Provider value={{ supplier, setUser, logOut }}>
+    <AuthContext.Provider
+      value={{ supplier, setUser, logOut, setSupplier_role, supplier_role }}
+    >
       {children}
     </AuthContext.Provider>
   );

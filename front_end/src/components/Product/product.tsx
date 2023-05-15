@@ -26,9 +26,8 @@ const Product = () => {
             <>
               <div className="p-2 border border-black rounded-md bg-zinc-50">
                 <img
-                  src={product.img}
-                  width={80}
-                  className="w-full p-1 border bordr-black rounded-sm"
+                  src={product.imgUrl}
+                  className="w-full h-60 object-cover"
                 />
 
                 <Link
@@ -38,7 +37,12 @@ const Product = () => {
                   {product.title}
                 </Link>
                 <p className="font-extralight text-sm">Сагсны бөмбөг</p>
-                <p className="font-bold">{product.price}₮</p>
+                <div className="flex justify-between items-center">
+                  <p className="font-bold">{product.price}₮</p>
+                  <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
+                    Сагслах
+                  </button>
+                </div>
               </div>
             </>
           ))}
