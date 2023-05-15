@@ -1,14 +1,13 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import User from "../models/User";
-const bcrypt = require("bcrypt");
 
-export const getAllUsers = async (req: Request, res: Response) => {
+export const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const users = await User.find();
     if (!users) {
-      return res.status(201).json({ message: "Түрээслэгч байхгүй бай" });
+      return res.status(201).json({ message: "Түрээслэгч байхгүй байна." });
     }
-    res.status(200).json({ message: "Бүх түрээслэгч олдлоо", users });
+    res.status(200).json({ message: "Түрээслэгчийн мэдээлэл олдлоо", users });
   } catch (error: any) {
     res.status(400).json({
       message: "Түрээслэгч мэдээллийг авахад алдаа гарлаа",
@@ -17,66 +16,69 @@ export const getAllUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const getUser = async (req: Request, res: Response) => {
+export const getUser = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  console.log(req.params);
+  if (!id) {
+    res.status(400).json({ message: `${id} -хоосон байна.` });
+  }
   try {
-    const { id } = req.params;
-    console.log(req.params);
-    const user = await User.findById({ id });
-    res.status(200).json({ success: true, user });
+    const user = await User.findById({ _id: id });
+    if (!user) {
+      res.status(400).json({ message: `${id}-тэй хэрэглэгч олдохгүй байна.` });
+    }
+    res.status(200).json({ message: `${id}-тэй хэрэглэгч олдлоо`, user });
   } catch (error: any) {
-    console.log("алдаа", error.message);
+    next(error);
+    console.log("алдаатай мэдээлэл", error.message);
   }
 };
 
-export const createUser = async (req: Request, res: Response) => {
-  const {
-    userName,
-    userEmail,
-    userPassword,
-    phoneNumber,
-    profileImg,
-    address,
-    cardNumber,
-  } = req.body;
+// export const createUser = async (req: Request, res: Response, next: NextFunction) => {
+//   const { name, email, password, phoneNumber, profileImg, address, cardNumber } = req.body;
 
-  if (!userName || !userEmail || !userPassword || !phoneNumber) {
-    return res.status(400).json({ message: "Мэдээллийг бүрэн оруулна уу" });
-  }
-  const newUser = {
-    userName,
-    userEmail,
-    userPassword,
-    phoneNumber,
-    profileImg,
-    address,
-    cardNumber,
-  };
-  try {
-    const user = await User.create(newUser);
-    console.log(user);
-    res.status(201).json({ message: "Амжилттай үүслээ", user });
-  } catch (error) {
-    console.log("Алдааны мэдээлэл", error);
-  }
-};
+//   try {
+//     const isExist = await User.find(email);
 
-export const updateUser = async (req: Request, res: Response) => {
+//     if (isExist) {
+//       return res.status(200).json({ success: false, message: "Бүртгэлтэй хэрэглэгч байна." });
+//     }
+
+//     const newUser = {
+//       name,
+//       email,
+//       password,
+//       phoneNumber,
+//       profileImg,
+//       address,
+//       cardNumber,
+//     };
+//     const user = await User.create(newUser);
+//     console.log(user);
+//     res.status(201).json({ success: true, message: "Амжилттай бүртгэлээ", user });
+//   } catch (error) {
+//     console.log("Алдааны мэдээлэл", error);
+//   }
+// };
+
+export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   if (!id) {
-    res.status(400).json({ message: `${id} түрээслэгч олдсонгүй` });
+    res.status(400).json({ message: `${id} хэрэглэгч олдсонгүй` });
   }
   try {
     const user = await User.findByIdAndUpdate(id, req.body, {
       new: true,
     });
     if (!user) {
-      res.status(400).json({ success: `${id} түрээслэгч олдсонгүй` });
+      res.status(400).json({ success: `${id} хэрэглэгч олдсонгүй` });
     }
-    res.status(201).json({
-      message: `${id} өөрчлөгдлөө`,
+    res.status(200).json({
+      message: `${id}-тэй хэрэглэгч шинэчлэгдлээ`,
       user,
     });
   } catch (error) {
+    next(error);
     console.log("алдаа", error);
   }
 };

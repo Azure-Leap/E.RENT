@@ -1,24 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/e.rent.png";
-// import { useState, useEffect } from "react";
-// const [categories, setCategories] = useState([]);
-// const [subcategories, setSubcategories] = useState([]);
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     const res = await fetch(`http://localhost:9000/subcategories`);
-//     const data = await res.json();
-//     const res1 = await fetch(`http://localhost:9000/categories`);
-//     const data1 = await res1.json();
-//     console.log(data);
-//     setCategories(data1?.categories);
-//     setSubcategories(data?.subCategories);
-//   };
-//   fetchData();
-// }, []);
+import axios from "axios";
 
 const ProductSideBar = () => {
+  const [categories, setCategories] = useState<any[]>([]);
+  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [search,setSearch]=useState<any[]>([]);
+    const handleClick= async ()=>{
+      setSearch(search)
+    }
+
+  const fetchData = async () => {
+    const cat: any = await axios.get(`http://localhost:9000/categories`);
+    const sub: any = await axios.get(`http://localhost:9000/subcategories`);
+
+    console.log("CAT", cat);
+    console.log("Sub", sub);
+
+    setCategories(cat?.data?.categories);
+    setSubCategories(sub?.data?.categories);
+  };
+
+  useEffect(() => {
+    fetchData();
+    handleClick();
+  }, []);
   return (
     <div className="flex h-screen w-64 flex-col justify-between bg-gray-50 text-cyan-500">
       <div className="p-4">
@@ -33,7 +40,7 @@ const ProductSideBar = () => {
         {/* <!-- item --> */}
         <div className="mb-4">
           <div className="flex w-full items-center justify-between">
-            <a className="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:text-white">
+            <a className="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 transition duration-300  hover:bg-cyan-300 hover:text-white">
               <span className="ml-3 font-bold">Бүтээгдэхүүн</span>
             </a>
           </div>
@@ -42,34 +49,45 @@ const ProductSideBar = () => {
         <div className="mb-4 flex flex-col">
           {/* <!-- Main sidebar items --> */}
           <div className="flex w-full items-center justify-between">
-            <a className="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:text-white">
-              <label className="inline-flex items-center w-full ">
-                <input type="checkbox" className="form-checkbox h-5 w-5 text-cyan-300 focus:none" checked />
-                {/* {categories.map((category, idx) => (
-                  <span className="ml-3 font-bold inline" key={idx}>
-                    {category.title}
-                  </span>
-                ))} */}
+            <a className="flex w-full cursor-pointer items-center rounded-lg px-4 py-2  ">
+              <label className="flex-row items-center w-full ">
+                {categories?.map((category: any, idx) => {
+                  return (
+                    <>
+                      <input type="checkbox" className="form-checkbox h-5 w-5 text-cyan-300  hover:bg-cyan-300 hover:text-white transition duration-300" />
+                      <span className="ml-3 font-bold inline" key={idx}>
+                        {category.title}
+                      </span>
+                      {subCategories
+                        ?.filter((el: any) => {
+                          return el?.category._id === category._id;
+                        })
+                        .map((subcat: any) => {
+                          return (
+                            <ul className="ml-4 mt-2 w-full border-l-2 border-cyan-300 pl-6 text-sm">
+                              <li
+                                className="mb-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:rounded-md hover:text-white"
+                                onClick={() => {
+                                  console.log("SS", subcat.type);
+                                 
+                                }}
+                              >
+                                {subcat.title}
+                              </li>
+                            </ul>
+                          );
+                        })}
+                    </>
+                  );
+                })}
               </label>
             </a>
             <button className="ml-4 h-full cursor-pointer px-4 py-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:text-cyan-500"></button>
           </div>
           {/* <!-- Main sidebar item sub menu --> */}
-
-          {/* <ul className="ml-4 mt-2 w-full border-l-2 border-cyan-300 pl-6 text-sm">
-            {subcategories.map((subCategory, idx) => (
-              <li className="mb-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:rounded-md hover:text-white">{subCategory.title}</li>
-            ))}
-          </ul> */}
         </div>
         {/* <!-- item --> */}
-        <div className="mb-4">
-          {/* <div className="flex w-full items-center justify-between">
-            <a className="flex w-full cursor-pointer items-center rounded-lg px-4 py-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:text-white">
-              <span className="ml-3 font-bold">Эрэгтэй & Эмэгтэй</span>
-            </a>
-          </div> */}
-        </div>
+        <div className="mb-4"></div>
       </div>
       {/* <!-- Bottom --> */}
       <div className="flex items-center border-t-2 border-cyan-300 p-4">

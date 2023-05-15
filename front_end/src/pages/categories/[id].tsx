@@ -1,15 +1,19 @@
 import ProductCard from "@/components/Product/ProductCard";
 import ProductSideBar from "@/components/Product/Productsidebar";
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Category = ({ products }: any) => {
+  const router = useRouter();
+  console.log("products", products);
   return (
-    <div>
+    <div className="flex">
       <ProductSideBar />
-      {/* <ProductCard products={products} /> */}
-      {products.map((p: any) => (
-        <p>{p.title}</p>
-      ))}
+      <div className="flex">
+        {products.map((product: any) => (
+          <ProductCard product={product} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -11,10 +11,12 @@ import cloudinary from "./utils/cloudinary";
 import ProductRoutes from "./routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
 import UserRoutes from "./routes/userRoutes";
-import SupplierRoutes from "./routes/SupplierRoutes"
+import SupplierRoutes from "./routes/SupplierRoutes";
+import sendEmail from "./utils/sendEmail";
 
 import cartListRoutes from "./Routes/cartListRoutes";
 import fileUpload from "express-fileupload";
+import authRoutes from "./Routes/authRoutes";
 const app = express();
 
 app.use(cors());
@@ -26,6 +28,15 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+app.get("/", async (res: Response, req: Request) => {
+  try {
+    const r = await sendEmail("Muugii", "azure.munkhtsetseg.urtnasan@gmail.com", "batalgaajuulah code");
+  } catch (err) {
+    console.log("first");
+  }
+});
+
 app.post("/upload", async (req: any, res: Response) => {
   console.log("REQ:", req.files.image);
   const result = await cloudinary.v2.uploader.upload(req.files.image.tempFilePath, { folder: "E.RENT" });
@@ -44,7 +55,8 @@ app.use("/subcategories", SubCategoryRoutes);
 app.use("/products", ProductRoutes);
 app.use("/orders", OrderRoutes);
 app.use("/users", UserRoutes);
-app.use("/supplier", SupplierRoutes)
+app.use("/supplier", SupplierRoutes);
+app.use("/auth", authRoutes);
 
 const MONGO_URI = process.env.MONGO || "";
 connectDB(MONGO_URI);

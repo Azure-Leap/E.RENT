@@ -24,8 +24,10 @@ export const getAllProductByCategory = async (req: Request, res: Response) => {
 // get all products
 
 export const getAllProducts = async (req: Request, res: Response) => {
+  const { title } = req.query;
+  console.log(title);
   try {
-    const products = await Product.find().populate("subcategory");
+    const products = await Product.find({ title: { $regex: title } }).populate("subcategory");
     if (!products) {
       return res.status(201).json({ message: "Бараа хоосон байна." });
     }
@@ -49,21 +51,18 @@ export const getAllProducts = async (req: Request, res: Response) => {
 //   }
 // };
 
-
 export const getBaraa = async (req: Request, res: Response) => {
   const { id } = req.params;
   if (!id) {
     res.status(400).json({ message: `${id} - тай бараа олдсонгүй.` });
   }
   try {
-
     const product = await Product.findById(id);
     res.status(200).json({ message: `${id} - тай бараа олдлоо.`, product });
   } catch (error: any) {
     res.status(400).json({ message: "Алдааны мэдээлэл", error: error.message });
   }
-}
-
+};
 
 export const getProduct = async (req: Request, res: Response) => {
   try {
@@ -123,16 +122,16 @@ export const updateProduct = async (req: Request, res: Response) => {
     console.log("Алдааны мэдээлэл", error);
   }
 };
-  
-export const deleteProduct = async(req:Request, res:Response) => {
-    const { id } = req.params;
-      if (!id) {
-        res.status(400).json({ message: `${id}-тэй бүтээгдэхүүн олдсонгүй` });
-      }
-      try {
-        const product = await Product.findByIdAndDelete(id);
-        res.status(201).json({ message: `${id}-тэй бүтээгдэхүүн устгагдлаа`, product });
-      } catch (error) {
-        console.log("Алдааны мэдээлэл", error);
-      }
-}
+
+export const deleteProduct = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  if (!id) {
+    res.status(400).json({ message: `${id}-тэй бүтээгдэхүүн олдсонгүй` });
+  }
+  try {
+    const product = await Product.findByIdAndDelete(id);
+    res.status(201).json({ message: `${id}-тэй бүтээгдэхүүн устгагдлаа`, product });
+  } catch (error) {
+    console.log("Алдааны мэдээлэл", error);
+  }
+};
