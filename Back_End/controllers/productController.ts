@@ -27,7 +27,7 @@ export const getAllProducts = async (req: Request, res: Response) => {
   const { title } = req.query;
   console.log(title);
   try {
-    const products = await Product.find({ title: { $regex: title } }).populate("subcategory");
+    const products = await Product.find({ title: { $regex: title || ""} }).populate("subcategory");
     if (!products) {
       return res.status(201).json({ message: "Бараа хоосон байна." });
     }
