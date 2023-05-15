@@ -4,14 +4,19 @@ import { NavContext } from "@/context/NavContext";
 import AuthProvider from "@/context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ProductAxiosProvider, {
+  ProductAxiosContext,
+} from "@/context/ProductAxiosContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <AuthProvider>
       <NavContext>
-        <Component {...pageProps} />
-        <ToastContainer />
-        {/* <Footer /> */}
+        <ProductAxiosProvider>
+          <Component {...pageProps} />
+          <ToastContainer />
+          {/* <Footer /> */}
+        </ProductAxiosProvider>
       </NavContext>
     </AuthProvider>
   );

@@ -1,5 +1,6 @@
 import Supplier from "../models/Supplier";
 import { NextFunction, Request, Response } from "express";
+import jwt from 'jsonwebtoken'
 const bcrypt = require("bcrypt");
 
 
@@ -40,14 +41,15 @@ const createSupplier = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { supplier_name, supplier_address, supplier_phone, supplier_email , supplier_password} =
+  const { supplier_name, supplier_address, supplier_phone, supplier_email , supplier_password, supplier_role} =
     req.body;
 
   if (
     !supplier_name ||
     !supplier_address ||
     !supplier_phone ||
-    !supplier_email
+    !supplier_email ||
+    !supplier_role
   ) {
     res
       .status(400)
@@ -61,7 +63,8 @@ const createSupplier = async (
       supplier_address: req.body.supplier_address,
       supplier_phone: req.body.supplier_phone,
       supplier_email: req.body.supplier_email,
-      supplier_password: req.body.supplier_password
+      supplier_password: req.body.supplier_password,
+      supplier_role: req.body.supplier_role
     });
     res
       .status(201)
@@ -116,10 +119,12 @@ const SupplierLogin = async (req: Request, res: Response) => {
   const supplierIf = await Supplier.findOne({ supplier_email });
   if (supplierIf) {
     const passOkey = bcrypt.compareSync(supplier_password, supplierIf.supplier_password);
+
     if (passOkey) {
-      res.status(200).json({ message: `pass okey`, supplier: supplierIf });
+      const token = jwt.sign({email: supplierIf.supplier_email, id: supplierIf._id}, process.env.JWT_SECRET || "", {expiresIn: 1});
+      res.status(200).json({ message: `pass okey`, supplier: supplierIf, token:token });
     } else {
-      res.status(400).json({ message: `pass not okey`, supplier:supplierIf });
+      res.status(400).json({ message: `pass not okey`});
     }
   } else {
     res.status(400).json({ message: `Supplier oldsongui!!` });

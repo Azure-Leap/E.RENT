@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Button from "@mui/material/Button";
 const Register = () => {
   const [supplier_name, setSupplier_name] = useState("");
   const [supplier_email, setSupplier_email] = useState("");
@@ -35,6 +36,11 @@ const Register = () => {
     setSupplier_repassword(e.target.value);
   };
 
+  const changeRole = (role: string) => {
+    console.log("SS", role);
+    setCreateSupplier({ ...createSupplier, supplier_role: role });
+  };
+
   if (supplier_password !== supplier_repassword) {
     toast.error("Нууц үг таарахгүй байна. ", {
       autoClose: 1000,
@@ -42,7 +48,15 @@ const Register = () => {
     });
   }
 
-  const [createSupplier, setCreateSupplier] = useState({});
+  const [createSupplier, setCreateSupplier] = useState({
+    supplier_name: "",
+    supplier_address: "",
+    supplier_phone: "",
+    supplier_email: "",
+    supplier_password: "",
+    supplier_role: "",
+    user_id: "",
+  });
 
   const supplierBarilt = (e) => {
     console.log(e.target.value);
@@ -72,9 +86,10 @@ const Register = () => {
 
   return (
     <NavLayout>
-      <div className="container mx-auto flex justify-center items-center pt-10">
+      {console.log("first", createSupplier)}
+      <div className="container mx-auto flex justify-center items-center pt-5 p-10">
         <div
-          style={{ width: "480px", height: "700px", borderRadius: "25px" }}
+          style={{ width: "480px", height: "730px", borderRadius: "25px" }}
           className="bg-white  shadow-2xl border border-black"
         >
           <div className="p-8">
@@ -140,6 +155,22 @@ const Register = () => {
                   onChange={supplierBarilt}
                 />
               </Box>
+            </div>
+            <div className="pt-5">
+              <div className="grid grid-cols-2 gap-2">
+                <Button
+                  onClick={() => changeRole("User")}
+                  className="font-semibold border border-gray-400 p-1 text-green-500"
+                >
+                  Түрээслэгч
+                </Button>
+                <Button
+                  onClick={() => changeRole("Supplier")}
+                  className="font-semibold border border-gray-400 p-1 text-orange-500"
+                >
+                  Түрээслүүлэгч
+                </Button>
+              </div>
             </div>
             <div className="pt-5 font-light text-green-600">
               <p>Нууц үг сэргээх</p>

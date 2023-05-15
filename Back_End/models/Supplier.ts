@@ -21,6 +21,11 @@ const SupplierSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    supplier_role: {
+        type: String,
+        enum: ["User", "Supplier"],
+        default: "User",
+    },
     payment_methods: {type: Types.ObjectId, ref: "payment_status" },
     current_order: {type: Types.ObjectId, ref: "order"},
     user_id: { type: Types.ObjectId, ref: "user" },
