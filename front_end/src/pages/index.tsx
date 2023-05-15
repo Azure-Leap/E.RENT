@@ -14,6 +14,7 @@ import LoginModal from "@/components/Auth/Login";
 import Hover from "@/components/Hover/hover";
 import ProductSwiper from "@/components/Product/ProductCard/ProductSwiper";
 import Navbar from "@/components/Nav/Navbar";
+import HomeChatIcon from "@/components/Realtime_chat/HomeChatIcon";
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
       <Medee />
       <Footer />
       <BackToTopButton />
+      <HomeChatIcon />
     </NavLayout>
   );
 };
