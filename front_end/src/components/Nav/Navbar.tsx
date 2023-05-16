@@ -7,7 +7,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContext";
-import { toast } from "react-toastify";
 
 const imgPic01 = require("../../assets/images/notification-bell.png");
 const imgPic02 = require("../../assets/images/navbar_cart.png");
@@ -19,7 +18,7 @@ interface Inav {
   setNav: (nav: boolean) => void;
 }
 
-const Navbar = ({ products }: any) => {
+const Navbar = ({ products ,user}: any) => {
   // search heseg
   const [search, setSearch] = useState(products);
   const router = useRouter();
@@ -36,11 +35,6 @@ const Navbar = ({ products }: any) => {
     router.push(`/search?title=${value}`);
     setSearch(filterProducts);
   };
-  //Auth
-
-  const { renter, setUserRenter, logOut } = useContext(AuthContext);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   // responsive mobile menu
 
@@ -49,14 +43,40 @@ const Navbar = ({ products }: any) => {
     setMenuOpen(!menuOpen);
   };
 
-  //Login?
-  const [isLogged, setIsLogged] = React.useState(false);
-
-  //Modal
+  // Login?
+  const { renter, logOut, setUserRenter,setRenter,getUserRenter } = useContext(AuthContext);
+  console.log("renter123",renter)
+  const [isLogged,setIsLogged]=useState(false)
+  
+    // function isLoggedIn (){
+    //   if((localStorage.getItem("renter"))===null){
+    //     setIsLogged(false)
+    //   }else{
+    //     setIsLogged(true)
+    //   }}
+    
+    
+  //   ()=>{
+  //     if
+  //   }
+  //     this.setState({
+  //       isLoggedIn: isLoggedIn
+  //     });
+  // }
 
   const [showModal, setShowModal] = React.useState(false);
 
   const [isModal, setIsModal] = useState(false);
+  function refresh(){
+    if (localStorage.getItem("renter") === null) {
+      setIsLogged(false)
+      console.log("islogged",setIsLogged)
+    }else{
+      setIsLogged(true)
+      console.log("islogged",setIsLogged)
+    }
+  }
+
 
   return (
     <div className="pt-3">
@@ -124,57 +144,8 @@ const Navbar = ({ products }: any) => {
               <span className="absolute top-5 right-36 text-[13px] bg-cyan-400 h-[18px] w-[18px] rounded-full place-item-center items-center text-white">
                 0
               </span>
-              {renter ? (
-                <>
-                  <Image
-                    src={imgPic03}
-                    alt="pic"
-                    height={100}
-                    width={35}
-                    itemType="button"
-                    onClick={() => setIsModal((e: any) => !e)}
-                  />
-                  {isModal && (
-                    <div className="bg-cyan-400 absolute mt-10 ml-36 rounded-lg w-28 z-50">
-                      <a
-                        href="/User"
-                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
-                      >
-                        <h3 className="w-full text-center text-white font-bold">
-                          Profile
-                        </h3>
-                      </a>
-                      <a
-                        href="/User"
-                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
-                      >
-                        <h3 className="w-full text-center text-white font-bold">
-                          Rents
-                        </h3>
-                      </a>
-                      <a
-                        href="/User"
-                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
-                      >
-                        <h3 className="w-full text-center text-white font-bold">
-                          Bookmark
-                        </h3>
-                      </a>
-                      <a
-                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
-                        itemType="button"
-                        onClick={() => {
-                          logOut();
-                        }}
-                      >
-                        <h3 className="w-full text-center text-white font-bold">
-                          Logout
-                        </h3>
-                      </a>
-                    </div>
-                  )}
-                </>
-              ) : (
+              {/* renter===(undefined || null) */}
+              {renter===null ? (
                 <>
                   <button
                     className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
@@ -190,9 +161,11 @@ const Navbar = ({ products }: any) => {
                           <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                             <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                               <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
-                                <a href="/UserAuth/loginUser">Түрээслэгч</a>
+                                <a href="/UserAuthEdit/loginUser">Түрээслэгч</a>
                               </button>
-                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4">
+                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4"
+                  
+                              >
                                 <a href="/login">Түрээслүүлэгч</a>
                               </button>
                             </div>
@@ -210,6 +183,56 @@ const Navbar = ({ products }: any) => {
                     </>
                   ) : null}
                 </>
+                
+              ) : (<>
+                <Image
+                  src={imgPic03}
+                  alt="pic"
+                  height={100}
+                  width={35}
+                  itemType="button"
+                  onClick={() => setIsModal((e: any) => !e)}
+                />
+                {isModal && (
+                  <div className="bg-cyan-400 absolute mt-10 ml-36 rounded-lg w-28 z-50">
+                      <a
+                        href={`/Userid/:${user}`}
+                        className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                      >
+                        <h3 className="w-full text-center text-white font-bold">
+                          Profile
+                        </h3>
+                      </a>
+                    <a
+                      href="/Userid"
+                      className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                    >
+                      <h3 className="w-full text-center text-white font-bold">
+                        Rents
+                      </h3>
+                    </a>
+                    <a
+                      href="/Userid"
+                      className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                    >
+                      <h3 className="w-full text-center text-white font-bold">
+                        Bookmark
+                      </h3>
+                    </a>
+                    <a
+                      className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
+                      itemType="button"
+                      onClick={() => {
+                        logOut();
+                      }}
+                    >
+                      <h3 className="w-full text-center text-white font-bold">
+                        Logout
+                      </h3>
+                    </a>
+                  </div>
+                )}
+              </>
               )}
             </div>
           </div>

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 
 const CategoryItem = ({ category, i, subCategories }: any) => {
   const router = useRouter();
+  console.log("first",category)
 
   return (
     <div className="rounded-lg border-2 border-violet-200 shadow-lg flex flex-col p-4">

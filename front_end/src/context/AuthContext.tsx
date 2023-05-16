@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState,useEffect } from "react";
 import { toast } from "react-toastify";
 
 export const AuthContext = createContext({});
@@ -12,7 +12,6 @@ const AuthProvider = ({ children }: any) => {
   const [renter, setRenter] = useState<any>(null);
   const setUserRenter = (sup: any) => {
     setRenter(sup);
-    console.log("beforeloc",setRenter)
     localStorage.setItem("renter", JSON.stringify(sup));
     console.log("local",localStorage)
   };

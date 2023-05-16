@@ -14,7 +14,7 @@ const LoginUser = () => {
   const [password, setPassword] = useState("");
 
   const [role, setRole] = useState("");
-  const { renter, logOut, setUserRenter } = useContext(AuthContext);
+  const { renter, logOut, setUserRenter,setRenter } = useContext(AuthContext);
   const router = useRouter();
 
   const changeEmail = (e:any) => {
@@ -35,13 +35,14 @@ const LoginUser = () => {
 
       console.log("res",res);
       setUserRenter(res.data.user);
-      console.log("set",setUserRenter)
+      console.log("set123",setUserRenter)
 
       toast.success("Амжилттай нэвтэрлээ", {
         autoClose: 2000,
         position: "bottom-right",
       });
-      router.push("/"); 
+      ()=>{setRenter(true)}
+      // router.push("/"); 
       console.log("orloo")
     } catch {
       toast.error("Амжилтгүй", { autoClose: 1000, position: "bottom-right" });
@@ -85,17 +86,17 @@ const LoginUser = () => {
               <p>Нууц үг сэргээх</p>
             </div>
             <div className="pt-5 text-white font-semibold">
-              <button
-                style={{
-                  background:
-                    "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
-                  height: "50px",
-                }}
-                className="w-full rounded-3xl  shadow-md shadow-indigo-500/40"
-                onClick={handleLoginSubmit}
-              >
-                Нэвтрэх
-              </button>
+                <button
+                  style={{
+                    background:
+                      "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                    height: "50px",
+                  }}
+                  className="w-full rounded-3xl  shadow-md shadow-indigo-500/40"
+                  onClick={handleLoginSubmit}
+                >
+                  Нэвтрэх
+                </button>
             </div>
             <div className="flex justify-center items-center pt-5">
               <div className="h-[1px] bg-onSurface-black-disabled dark:bg-dark-onPrimary-white-disabled w-full mr-8 bg-black"></div>
