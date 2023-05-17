@@ -8,7 +8,8 @@ import Pagination from "../Pagination";
 
 const UserProfile = ({user,categories,idx}:any) => {
   const router = useRouter();
-  // console.log("user",user)
+  console.log("router",router)
+  console.log("userprofile",user)
   const COMPONENTS = [
     {
       title: "Түрээсэлж",
@@ -36,11 +37,10 @@ const UserProfile = ({user,categories,idx}:any) => {
   const onPageChange = (page:any) => {
     setCurrentPage(page);
   };
-  console.log("first",`${user.name}`)
+  console.log("first123",user.profileImg)
 
   return (
     <>
-    {user?
       <div className="grid md:grid-cols-3 p-12 gap-4">
         <div className="bg-white md:col-span-1 rounded-xl h-96">
           <div className="text-center pt-20">
@@ -135,7 +135,6 @@ const UserProfile = ({user,categories,idx}:any) => {
           </div>
         </div>
       </div>
-      : null}
     </>
   );
 };

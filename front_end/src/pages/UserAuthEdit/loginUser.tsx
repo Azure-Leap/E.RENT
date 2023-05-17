@@ -9,12 +9,12 @@ import { AuthContext } from "@/context/AuthContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
-const LoginUser = () => {
+const LoginUser = ({user}:any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [role, setRole] = useState("");
-  const { renter, logOut, setUserRenter,setRenter } = useContext(AuthContext);
+  const { renter, logOut, setUserRenter,setRenter ,setLogged} = useContext(AuthContext);
   const router = useRouter();
 
   const changeEmail = (e:any) => {
@@ -26,23 +26,23 @@ const LoginUser = () => {
     setPassword(e.target.value);
   };
 
-  const handleLoginSubmit = async () => {
+  const handleLoginSubmit = async ({user}:any) => {
     try {
       const res = (await axios.post(`http://localhost:9000/users/login`, {
         email,
         password,
       })) as any;
-
+      
       console.log("res",res);
+      setLogged(true)
+      console.log("setIsLogged",setLogged)
       setUserRenter(res.data.user);
       console.log("set123",setUserRenter)
-
       toast.success("Амжилттай нэвтэрлээ", {
         autoClose: 2000,
         position: "bottom-right",
       });
-      ()=>{setRenter(true)}
-      // router.push("/"); 
+      router.push("/"); 
       console.log("orloo")
     } catch {
       toast.error("Амжилтгүй", { autoClose: 1000, position: "bottom-right" });
@@ -50,7 +50,7 @@ const LoginUser = () => {
   };
 
   return (
-    <NavLayout>
+    <NavLayout user={user}>
       <div className="container mx-auto flex justify-center items-center pt-20">
         <div
           style={{ width: "480px", height: "520px", borderRadius: "25px" }}

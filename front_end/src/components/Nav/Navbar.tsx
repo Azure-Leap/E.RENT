@@ -7,6 +7,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/context/AuthContext";
+import { profile } from "console";
 
 const imgPic01 = require("../../assets/images/notification-bell.png");
 const imgPic02 = require("../../assets/images/navbar_cart.png");
@@ -17,11 +18,11 @@ interface Inav {
   nav: Boolean;
   setNav: (nav: boolean) => void;
 }
-
-const Navbar = ({ products ,user}: any) => {
+const Navbar = ({ products }: any) => {
+  const router = useRouter();
+  console.log("firstrout",router)
   // search heseg
   const [search, setSearch] = useState(products);
-  const router = useRouter();
 
   const handleSearch = async (e: any) => {
     e.preventDefault();
@@ -44,51 +45,35 @@ const Navbar = ({ products ,user}: any) => {
   };
 
   // Login?
-  const { renter, logOut, setUserRenter,setRenter,getUserRenter } = useContext(AuthContext);
-  console.log("renter123",renter)
-  const [isLogged,setIsLogged]=useState(false)
-  
-    // function isLoggedIn (){
-    //   if((localStorage.getItem("renter"))===null){
-    //     setIsLogged(false)
-    //   }else{
-    //     setIsLogged(true)
-    //   }}
-    
-    
-  //   ()=>{
-  //     if
-  //   }
-  //     this.setState({
-  //       isLoggedIn: isLoggedIn
-  //     });
-  // }
+  const { renter, logOut, isLogged ,setLogged} = useContext(AuthContext);
+
+  useEffect(()=>{
+    const logged = window.localStorage.getItem("isLogged")
+    if (logged !== null) setLogged(JSON.parse(logged))
+  })
+  console.log("isLogged",isLogged)
 
   const [showModal, setShowModal] = React.useState(false);
 
   const [isModal, setIsModal] = useState(false);
-  function refresh(){
-    if (localStorage.getItem("renter") === null) {
-      setIsLogged(false)
-      console.log("islogged",setIsLogged)
-    }else{
-      setIsLogged(true)
-      console.log("islogged",setIsLogged)
-    }
-  }
-
-
+  useEffect(()=>{
+    const data = window.localStorage.getItem("renter")
+    // console.log("renterssd",data)
+    console.log("renterssd1",data)
+  })
   return (
     <div className="pt-3">
       <div className="bg-white h-20 shadow-md ">
         <div className="container mx-auto  items-center gap-15 flex justify-between">
           <picture className="flex gap-10 items-center">
-            <img
-              src="./images/e.rent.png"
-              height={100}
-              width={100}
-              alt="imagew"
-            />
+            <a href="/">
+              <img
+                src="./images/e.rent.png"
+                height={100}
+                width={100}
+                alt="imagew"
+              />
+            </a>
           </picture>
           {/* Search heseg ehlej bg ni  */}
 
@@ -145,58 +130,22 @@ const Navbar = ({ products ,user}: any) => {
                 0
               </span>
               {/* renter===(undefined || null) */}
-              {renter===null ? (
+              {isLogged? (
                 <>
-                  <button
-                    className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
-                    type="button"
-                    onClick={() => setShowModal(true)}
-                  >
-                    Нэвтрэх
-                  </button>
-                  {showModal ? (
-                    <>
-                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
-                          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
-                                <a href="/UserAuthEdit/loginUser">Түрээслэгч</a>
-                              </button>
-                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4"
-                  
-                              >
-                                <a href="/login">Түрээслүүлэгч</a>
-                              </button>
-                            </div>
-                            <button
-                              className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
-                              type="button"
-                              onClick={() => setShowModal(false)}
-                            >
-                              Close
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
-                    </>
-                  ) : null}
-                </>
-                
-              ) : (<>
                 <Image
                   src={imgPic03}
+                  // src={}
                   alt="pic"
+                  width={100}
                   height={100}
-                  width={35}
+                  className="h-12 w-12 rounded-full"
                   itemType="button"
                   onClick={() => setIsModal((e: any) => !e)}
                 />
                 {isModal && (
                   <div className="bg-cyan-400 absolute mt-10 ml-36 rounded-lg w-28 z-50">
                       <a
-                        href={`/Userid/:${user}`}
+                        href={`/Userid/:{user.id}`}
                         className="flex w-full px-4 py-2 justify-between hover:bg-cyan-600 cursor-pointer rounded-lg border-l-transparent"
                       >
                         <h3 className="w-full text-center text-white font-bold">
@@ -232,6 +181,45 @@ const Navbar = ({ products ,user}: any) => {
                     </a>
                   </div>
                 )}
+                </>
+                
+              ) : (<>
+              
+              <button
+                    className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
+                    type="button"
+                    onClick={() => setShowModal(true)}
+                  >
+                    Нэвтрэх
+                  </button>
+                  {showModal ? (
+                    <>
+                      <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                        <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                          <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                            <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
+                                <a href="/UserAuthEdit/loginUser">Түрээслэгч</a>
+                              </button>
+                              <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4"
+                  
+                              >
+                                <a href="/login">Түрээслүүлэгч</a>
+                              </button>
+                            </div>
+                            <button
+                              className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                              type="button"
+                              onClick={() => setShowModal(false)}
+                            >
+                              Close
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                    </>
+                  ) : null}
               </>
               )}
             </div>

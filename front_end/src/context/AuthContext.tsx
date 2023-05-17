@@ -15,18 +15,25 @@ const AuthProvider = ({ children }: any) => {
     localStorage.setItem("renter", JSON.stringify(sup));
     console.log("local",localStorage)
   };
+  const [isLogged,setIsLogged]=useState<any>(false)
+  const setLogged = (sup:any)=>{
+    setIsLogged(sup)
+    localStorage.setItem("isLogged",JSON.stringify(sup))
+  }
 
   const logOut = () => {
     console.log("Clicked Log Out Button");
     setSupplier(null);
     setRenter(null);
+    setLogged(false);
     localStorage.removeItem("renter");
+    console.log("renter",renter)
     toast.error("Гарлаа", { autoClose: 1000, position: "bottom-right" });
   };
 
 
   return (
-    <AuthContext.Provider value={{ supplier, setUserSupplier, renter, setUserRenter, logOut }}>
+    <AuthContext.Provider value={{ supplier, setUserSupplier, renter, setUserRenter, logOut ,setLogged,isLogged}}>
       {children}
     </AuthContext.Provider>
   );
