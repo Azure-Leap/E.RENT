@@ -1,4 +1,4 @@
-import UserProfile from "@/components/UserComp/userProfile";
+import UserProfile from "@/components/UserComp/olduserProfile";
 import React, { useState,useEffect,useContext } from "react";
 import Index  from "..";
 import NavLayout from "@/Layout/NavLayout";

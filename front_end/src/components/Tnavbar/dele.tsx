@@ -10,8 +10,16 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 
 const Dele = () => {
-  const { supplier, setUser, logOut } = useContext(AuthContext);
+  const { supplier, setUser, logOut ,isLogged,setLogged} = useContext(AuthContext);
   // const { user } = useContext(AuthContext);
+  useEffect(()=>{
+    const logged = window.localStorage.getItem("isLogged")
+    if (logged !== null) setLogged(JSON.parse(logged))
+  })
+  console.log("isLogged",isLogged)
+  const [showModal, setShowModal] = React.useState(false);
+
+  const [isModal, setIsModal] = useState(false);
 
   const completion = useReadingProgress();
   return (
@@ -43,146 +51,174 @@ const Dele = () => {
             </div> */}
 
             <div className="p-2 rounded-lg text-white">
-              {supplier ? (
-                <>
-                  <Menu as="div" className="relative inline-block text-left">
-                    <div>
-                      <Menu.Button>
-                        <Image
-                          className="w-12 h-12 rounded-full border-2 border-green-400 "
-                          src={profile}
-                        />
-                        {/* <ChevronDownIcon
-                          className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
-                          aria-hidden="true"
-                        /> */}
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 mt-2 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-[20000]">
-                        <div className="px-2 py-2 flex gap-1 ">
-                          <Image
-                            className="w-12 h-12 rounded-full border-2 border-green-400  "
-                            src={profile}
-                          />
-                          <h1 className="text-black text-sm font-semibold flex items-center ">
-                            {/* Bilguunerkh@gmail.com */}
-                            {supplier.supplier_email}
-                          </h1>
-                        </div>
-                        <div className="px-1 py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active
-                                    ? "bg-green-500 text-white"
-                                    : "text-gray-900"
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                              >
-                                <Link href="/Supplier">Профайл</Link>
-                              </button>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active
-                                    ? "bg-green-500 text-white"
-                                    : "text-gray-900"
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                              >
-                                {/* {active ? (
-                                  <ArchiveActiveIcon
-                                    className="mr-2 h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <ArchiveInactiveIcon
-                                    className="mr-2 h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )} */}
-                                Таалагдсан
-                              </button>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={`${
-                                  active
-                                    ? "bg-green-500 text-white"
-                                    : "text-gray-900"
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                              >
-                                {/* {active ? (
-                                  <MoveActiveIcon
-                                    className="mr-2 h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <MoveInactiveIcon
-                                    className="mr-2 h-5 w-5"
-                                    aria-hidden="true"
-                                  />
-                                )} */}
-                                Хэтэвч
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </div>
-                        <div className="px-1 py-1">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={logOut}
-                                className={`${
-                                  active
-                                    ? "bg-green-500 text-white"
-                                    : "text-gray-900"
-                                } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
-                              >
-                                {/* {active ? (
-                                  <DeleteActiveIcon
-                                    className="mr-2 h-5 w-5 text-violet-400"
-                                    aria-hidden="true"
-                                  />
-                                ) : (
-                                  <DeleteInactiveIcon
-                                    className="mr-2 h-5 w-5 text-violet-400"
-                                    aria-hidden="true"
-                                  />
-                                )} */}
-                                Гарах
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </div>
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </>
-              ) : (
-                <div
-                  style={{
-                    background:
-                      "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
-                  }}
-                  className="p-2 font-medium text-white rounded-lg border-2 border-yellow-200"
+              {isLogged?(
+<>
+  <Menu as="div" className="relative inline-block text-left">
+      <div>
+        <Menu.Button>
+          <Image
+            className="w-12 h-12 rounded-full border-2 border-green-400 "
+            src={profile}
+          />
+          {/* <ChevronDownIcon
+            className="ml-2 -mr-1 h-5 w-5 text-violet-200 hover:text-violet-100"
+            aria-hidden="true"
+          /> */}
+        </Menu.Button>
+      </div>
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 mt-2 w-60 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-[20000]">
+          <div className="px-2 py-2 flex gap-1 ">
+            <Image
+              className="w-12 h-12 rounded-full border-2 border-green-400  "
+              src={profile}
+            />
+            <h1 className="text-black text-sm font-semibold flex items-center ">
+              {/* Bilguunerkh@gmail.com */}
+              {/* {supplier.supplier_email} */}
+            </h1>
+          </div>
+          <div className="px-1 py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active
+                      ? "bg-green-500 text-white"
+                      : "text-gray-900"
+                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                 >
-                  <Link href="/login">Нэвтрэх</Link>
-                </div>
+                  <Link href="/User">Профайл</Link>
+                </button>
               )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active
+                      ? "bg-green-500 text-white"
+                      : "text-gray-900"
+                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                >
+                  {/* {active ? (
+                    <ArchiveActiveIcon
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <ArchiveInactiveIcon
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  )} */}
+                  Таалагдсан
+                </button>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  className={`${
+                    active
+                      ? "bg-green-500 text-white"
+                      : "text-gray-900"
+                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                >
+                  {/* {active ? (
+                    <MoveActiveIcon
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <MoveInactiveIcon
+                      className="mr-2 h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  )} */}
+                  Хэтэвч
+                </button>
+              )}
+            </Menu.Item>
+          </div>
+          <div className="px-1 py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <button
+                  onClick={logOut}
+                  className={`${
+                    active
+                      ? "bg-green-500 text-white"
+                      : "text-gray-900"
+                  } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                >
+                  {/* {active ? (
+                    <DeleteActiveIcon
+                      className="mr-2 h-5 w-5 text-violet-400"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <DeleteInactiveIcon
+                      className="mr-2 h-5 w-5 text-violet-400"
+                      aria-hidden="true"
+                    />
+                  )} */}
+                  Гарах
+                </button>
+              )}
+            </Menu.Item>
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  </>
+                ):(<>
+              
+                  <button
+                        className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
+                        type="button"
+                        onClick={() => setShowModal(true)}
+                      >
+                        Нэвтрэх
+                      </button>
+                      {showModal ? (
+                        <>
+                          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
+                                    <a href="/UserAuthEdit/loginUser">Түрээслэгч</a>
+                                  </button>
+                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4"
+                      
+                                  >
+                                    <a href="/login">Түрээслүүлэгч</a>
+                                  </button>
+                                </div>
+                                <button
+                                  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
+                                  type="button"
+                                  onClick={() => setShowModal(false)}
+                                >
+                                  Close
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+                        </>
+                      ) : null}
+                  </>
+                  )}
             </div>
           </div>
         </div>
@@ -354,3 +390,9 @@ const Dele = () => {
 };
 
 export default Dele;
+
+
+
+
+
+
