@@ -1,13 +1,19 @@
 import UserProfile from "@/components/UserComp/userProfile";
-import React, { useState,useEffect } from "react";
+import React, { useState,useEffect,useContext } from "react";
 import NavLayout from "@/Layout/NavLayout";
+import { AuthContext } from "@/context/AuthContext";
 
 const User = () => {
   const [user,setUser] =useState([])
   const [categories, setCategories] = useState([]);
-
-  const fetchData = async ({ query }: any) => {
-    const user = await fetch(`http://localhost:9000/users/645378b115ec2867692f4ae0`);
+  const { renter, logOut, isLogged ,setLogged} = useContext(AuthContext);
+  useEffect(()=>{
+    const getRenter = window.localStorage.getItem("renter")
+    console.log("getRenter",getRenter)
+  })
+  
+  const fetchData = async () => {
+    const user = await fetch(`http://localhost:9000/users/645da8fa27ddf25b06332361`);
     const userdata = await user.json();
     const res = await fetch(`http://localhost:9000/categories`);
     const data = await res.json();
@@ -15,6 +21,12 @@ const User = () => {
     setCategories(data?.categories);
     setUser(userdata?.user)
   };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  console.log("profileuser",user)
+
 
 
   return (

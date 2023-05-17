@@ -25,17 +25,13 @@ const UserProfile = ({user,categories,idx}:any) => {
       },
     ];
     
-  const [selectedComponent, setSelectedComponent] = React.useState({
-    title: "",
-    component: "",
-  });
   const [isClicked, setIsClicked] = useState({
     title: "",
     component: "",
   });
-
-  const handleClicked = (eko: string) => {
-    setSelectedComponent(eko);
+  const handleClicked = (e: string) => {
+    setIsClicked(e);
+    console.log("clicked")
   };
   return (
     <div className="grid md:grid-cols-3 p-4 gap-4">
@@ -89,9 +85,9 @@ const UserProfile = ({user,categories,idx}:any) => {
       </div>
 
       <div className="grid md:grid-cols-3 p-5 bg-white md:col-span-3 rounded-xl gap-4 h-96">
-        <div className="md:col-span-1">
-          <div className="grid md:grid-cols-2 gap-1 text-center">
-            {COMPONENTS.map((el, id,categories) => (
+          <div className="md:col-span-1">
+            <div className="grid-cols-2 gap-1 text-center">
+              {COMPONENTS.map((el, id,categories) => (
                 <div
                   key={id}
                   onClick={() => {
@@ -105,11 +101,11 @@ const UserProfile = ({user,categories,idx}:any) => {
               ))}
             </div>
           </div>
-        </div>
 
-        <div className="md:col-span-2">
-          <div className="border-2 border-black md:col-span-3 h-40 p-3">
-            <p>
+          <div className="md:col-span-2">
+              <h1 className="lg:font-bold text-stone-600 md:text-lg md:font-semibold text-center">{isClicked.title}</h1>
+            <div className="md:col-span-3 h-40 p-3">
+              <p>
                 {isClicked ?
                 <>
                   {categories?.length && categories.map((category: any, idx: number) => <>{isClicked.component}</>)}
@@ -121,10 +117,11 @@ const UserProfile = ({user,categories,idx}:any) => {
                   /> */}
                 </>
                 :null}
-            </p>
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
   );
 };
 
