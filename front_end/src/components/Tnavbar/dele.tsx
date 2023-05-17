@@ -183,7 +183,11 @@ const Dele = () => {
                 ):(<>
               
                   <button
-                        className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100"
+                  style={{
+                    background:
+                      "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                  }}
+                        className="p-2 font-medium text-white rounded-lg border-2 border-yellow-200"
                         type="button"
                         onClick={() => setShowModal(true)}
                       >
@@ -191,26 +195,24 @@ const Dele = () => {
                       </button>
                       {showModal ? (
                         <>
-                          <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-                            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+                          <div className="justify-end items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+                            <div className="relative w-auto mx-end max-w-3xl">
                               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                                <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100">
+                                <div className="flex items-start align-middle justify-between p-4 border-b border-solid border-slate-200 rounded-t">
+                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-6 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1  ease-linear transition-all duration-100">
                                     <a href="/UserAuthEdit/loginUser">Түрээслэгч</a>
                                   </button>
-                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-100 ml-4"
-                      
-                                  >
+                                  <button className="bg-cyan-500 text-white active:bg-cyan-900 font-bold uppercase text-sm px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1  ease-linear transition-all duration-100 ml-4">
                                     <a href="/login">Түрээслүүлэгч</a>
                                   </button>
+                                  <button
+                                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none ease-linear transition-all py-0 pr-3 mt-1"
+                                    type="button"
+                                    onClick={() => setShowModal(false)}
+                                  >
+                                    <p className="text-xl py-0" >X</p>
+                                  </button>
                                 </div>
-                                <button
-                                  className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all"
-                                  type="button"
-                                  onClick={() => setShowModal(false)}
-                                >
-                                  Close
-                                </button>
                               </div>
                             </div>
                           </div>
