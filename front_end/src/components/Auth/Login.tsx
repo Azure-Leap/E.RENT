@@ -158,24 +158,7 @@ export default function LoginModal() {
                 }}
               />
             </Box>
-            {/* <Button
-              disableRipple
-              sx={{
-                color: "#c7c7c8",
-                marginTop: "20px",
-                width: "120px",
-              }}
-            >
-              <CheckCircle />
-              <Typography textTransform="capitalize">Remember</Typography>
-            </Button> */}
-            {/* <Box sx={{ marginTop: "15px" }}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="Remember"
-                sx={{ color: "text.secondary" }}
-              />
-            </Box> */}
+
             <Box
               sx={{
                 paddingTop: "15px",

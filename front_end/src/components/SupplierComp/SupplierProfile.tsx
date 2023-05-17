@@ -23,7 +23,7 @@ const SupplierProfile = () => {
     setSelectedComponent(eko);
   };
   return (
-    <div className="grid md:grid-cols-3 p-12 gap-4">
+    <div className="grid md:grid-cols-3 p-4 gap-4">
       <div className="bg-white md:col-span-1 rounded-xl h-96">
         <div className="text-center pt-20">
           <div className="flex justify-center ">
@@ -41,7 +41,7 @@ const SupplierProfile = () => {
               }}
               className="w-40 h-12 rounded-lg text-white font-semibold text-lg"
             >
-              Follow
+              Edit
             </button>
           </div>
         </div>

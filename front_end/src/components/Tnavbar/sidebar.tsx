@@ -114,7 +114,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li>
-            <a
+            <Link
               href="/product"
               className="flex items-center p-2 text-green-400 rounded-lg dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700"
             >
@@ -131,8 +131,10 @@ const Sidebar = () => {
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span className="flex-1 ml-3 whitespace-nowrap">Products</span>
-            </a>
+              <span className="flex-1 ml-1 whitespace-nowrap">
+                Түрээслүүлэгчийн бараа
+              </span>
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,12 +1,13 @@
 import express from "express";
 import { getAllProducts, getProduct, createProduct, deleteProduct, updateProduct,getBaraa } from "../controllers/productController";
 
+import { checkLogin, authorization } from "../middlewares/auth";
 const router = express.Router();
 
 router.get("/", getAllProducts);
 
-// router.get("/categories/:catId/:subId", getAllProductByCategory);
-router.post("/", createProduct);
+
+router.post("/", checkLogin, authorization("Supplier"),  createProduct);
 // router.get("/:id", getProduct);
 router.get("/:id", getBaraa);
 router.put("/:id", updateProduct);
