@@ -4,7 +4,7 @@ import Dele from "@/components/Tnavbar/dele";
 import Navbar from "@/components/Nav/Navbar";
 import Megamenu from "@/components/MegaMenu/megamenu";
 
-const NavLayout = ({ children }: any) => {
+const NavLayout = ({ children,user }: any) => {
   return (
     <div style={{ background: "#EFF5F5" }}>
       <Dele />

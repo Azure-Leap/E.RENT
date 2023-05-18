@@ -63,6 +63,7 @@ const Register = () => {
     const createObj = {};
     createObj[e.target.name] = e.target.value;
     setCreateSupplier({ ...createSupplier, ...createObj });
+    console.log("obj",createObj)
   };
 
   const createSupplierMan = async () => {
@@ -76,11 +77,13 @@ const Register = () => {
         autoClose: 2000,
         position: "bottom-right",
       });
+      console.log(result)
     } catch {
       toast.error("Түрээслэгч амжилтгүй бүртгэгдлээ. ", {
         autoClose: 1000,
         position: "bottom-right",
       });
+      console.log("aldaa")
     }
   };
 
