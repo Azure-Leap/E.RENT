@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
@@ -25,15 +27,9 @@ const Product = () => {
           products.map((product) => (
             <>
               <div className="p-2 border border-black rounded-md bg-zinc-50">
-                <img
-                  src={product.imgUrl}
-                  className="w-full h-60 object-cover"
-                />
+                <img src={product.imgUrl} className="w-full h-60 object-cover" />
 
-                <Link
-                  className="font-semibold text-md pt-5"
-                  href={`Products/${product._id}`}
-                >
+                <Link className="font-semibold text-md pt-5" href={`Products/${product._id}`}>
                   {product.title}
                 </Link>
                 <p className="font-extralight text-sm">Сагсны бөмбөг</p>

@@ -1,21 +1,19 @@
 import Supplier from "../models/Supplier";
 import { NextFunction, Request, Response } from "express";
-import jwt from 'jsonwebtoken'
-const bcrypt = require("bcrypt");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
-
-const getSuppliers = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+const getAllSuppliers = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await Supplier.find();
-    res.status(200).json({ message: "Бүх түрээслүүлэгчдийн бүртгэл.", result });
+    console
+    const supplier = await Supplier.find();
+    if (!supplier) {
+      res.status(200).json({ message: `Түрээслүүлэгчдийн  мэдээлэл хоосон байна.` });
+    }
+    res.status(200).json({ message: "Бүх түрээслүүлэгчдийн бүртгэл.", supplier });
   } catch (err) {
-    res
-      .status(400)
-      .json({ message: "Түрээслүүлэгчдийн  мэдээллийг авахад алдаа гарлаа." });
+    res.status(400).json({ message: "Түрээслүүлэгчдийн  мэдээллийг авахад алдаа гарлаа." });
+    next(err);
   }
 };
 
@@ -26,110 +24,91 @@ const getSupplier = async (req: Request, res: Response, next: NextFunction) => {
   }
   try {
     const supplier = await Supplier.findById(id);
-    res
-      .status(201)
-      .json({ message: `${id} - тай түрээслүүлэгч олдлоо.`, supplier });
+    res.status(201).json({ message: `${id} - тай түрээслүүлэгч олдлоо.`, supplier });
   } catch (err) {
-    res
-      .status(400)
-      .json({ message: `${id} - тай түрээслүүлэгч авах гэтэл алдаа.` });
+    res.status(400).json({ message: `${id} - тай түрээслүүлэгч авах гэтэл алдаа.` });
   }
 };
 
-const createSupplier = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const { supplier_name, supplier_address, supplier_phone, supplier_email , supplier_password, supplier_role} =
-    req.body;
-
-  if (
-    !supplier_name ||
-    !supplier_address ||
-    !supplier_phone ||
-    !supplier_email ||
-    !supplier_role
-  ) {
-    res
-      .status(400)
-      .json({
-        message: "Нэр, Имэйл, Утасны дугаар эсвэл Нууц үг байхгүй байна.",
-      });
-  }
-  try {
-    const supplier = await Supplier.create({
-      supplier_name: req.body.supplier_name,
-      supplier_address: req.body.supplier_address,
-      supplier_phone: req.body.supplier_phone,
-      supplier_email: req.body.supplier_email,
-      supplier_password: req.body.supplier_password,
-      supplier_role: req.body.supplier_role
-    });
-    res
-      .status(201)
-      .json({ message: "Шинэ түрээслүүлэгч амжилттай бүртгэгдлээ.", supplier });
-  } catch (err) {
-    res
-      .status(400)
-      .json({ err, message: `Шинэ түрээслүүлэгч бүртгэх гэтэл алдаа.` });
-  }
-};
-
-
-const updtadeSupplier = async (req: Request, res: Response) => {
+const updtadeSupplier = async (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
+  const { name } = req.body;
+  console.log("update ajillaa")
   if (!id) {
     res.status(400).json({ message: `${id} -тай түрээслүүлэгч олдсонгүй ` });
   }
   try {
-    const supplier = await Supplier.findByIdAndUpdate(id, req.body);
+    const supplier = await Supplier.findByIdAndUpdate(id, req.body, { new: true });
     res.status(200).json({
-      message: `${id} -тай түрээслүүлэгч өөрчлөгдлөө`,
+      message: `${id} -тай түрээслүүлэгч мэдээлэл өөрчлөгдлөө`,
       supplier,
     });
-
-    
-  } catch (err) {
-    console.log("алдаа", err);
-    
-  }
-};
-
-const SupplierRegister = async (req: Request, res: Response) => {
-  const { supplier_name, supplier_phone, supplier_email, supplier_password } = req.body;
-  try {
-    const hashedPassword = bcrypt.hashSync(supplier_password, 10);
-    const supplier = await Supplier.create({
-      supplier_name,
-      supplier_phone,
-      supplier_email,
-      supplier_password: hashedPassword,
-    });
-    res.status(200).json({ message: `Түрээслүүлэгч амжилттай бүртгэгдлээ`, supplier });
-  } catch (err) {
-    console.log("алдаа", err);
-  }
-};
-
-const SupplierLogin = async (req: Request, res: Response) => {
-  const { supplier_email, supplier_password } = req.body;
-
-  console
-  const supplierIf = await Supplier.findOne({ supplier_email });
-  if (supplierIf) {
-    const passOkey = bcrypt.compareSync(supplier_password, supplierIf.supplier_password);
-
-    if (passOkey) {
-      const token = jwt.sign({email: supplierIf.supplier_email, id: supplierIf._id}, process.env.JWT_SECRET || "", {expiresIn: 1});
-      res.status(200).json({ message: `pass okey`, supplier: supplierIf, token:token });
-    } else {
-      res.status(400).json({ message: `pass not okey`});
+    if (!supplier) {
+      res.status(400).json({ success: `${id} хэрэглэгч олдсонгүй` });
     }
-  } else {
-    res.status(400).json({ message: `Supplier oldsongui!!` });
+  } catch (err) {
+    next(err);
+    console.log("алдаа", err);
   }
-}
+};
 
+const deleteSupplier = async (req: Request, res: Response, next: NextFunction) => {
+  const { id } = req.params;
+  if (!id) {
+    res.status(400).json({ message: `Йим ${id} ID-тай түрээслүүлэгч олдсонгүй` });
+  }
+  try {
+    const supplier = await Supplier.findByIdAndDelete(id);
+    res.status(201).json({ message: `Ийм ${id} ID-тай бизнесийг амжилттай устгалаа`, supplier });
+  } catch (err) {
+    next(err);
+  }
+};
 
-export { getSuppliers, getSupplier, createSupplier, updtadeSupplier,SupplierRegister,SupplierLogin };
+const secretKey = process.env.JWT_SECRET_KEY || "";
+
+const SupplierRegister = async (req: Request, res: Response, next: NextFunction) => {
+  const { name, email, password, address, profileImg, phone, cardNumber, role } = req.body;
+  try {
+    const hashedPassword = bcrypt.hashSync(String(password), 10);
+    const supplier = await Supplier.create({
+      name,
+      email,
+      password: hashedPassword,
+      address,
+      profileImg,
+      phone,
+      cardNumber,
+      role: "supplier",
+    });
+
+    const { id } = supplier;
+    const token = jwt.sign({ id }, secretKey, {
+      expiresIn: 1200,
+    });
+    res.status(200).json({ message: `Түрээслүүлэгч амжилттай бүртгэгдлээ`, supplier, token });
+  } catch (err) {
+    console.log("алдаа", err);
+    next(err);
+  }
+};
+
+const SupplierLogin = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const supplier = await Supplier.findOne({ email: req.body.email }).select("+password");
+    if (!supplier) {
+      res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
+    } else {
+      const checkPass = bcrypt.compareSync(req.body.password, supplier.password.toString());
+      if (!checkPass) {
+        res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
+      }
+      const { id } = supplier;
+      const token = jwt.sign({ id }, secretKey, { expiresIn: 1200 });
+      res.status(200).json({ message: `Амжилттай нэвтэрлээ`, supplier, token });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+export { getAllSuppliers, getSupplier, updtadeSupplier, SupplierRegister, SupplierLogin, deleteSupplier };

@@ -33,11 +33,17 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 };
 
 export const register = async (req: Request, res: Response, next: NextFunction) => {
-  const { name, email, password, phoneNumber, address, profileImg, cardNumber } = req.body;
-
+  const { name, email, password, phone, address, profileImg, cardNumber,role } = req.body;
+   const data=req.body; 
+  if(data) {
+    const oldUser= await User.findOne({email:data.email});
+     if(oldUser) {
+      return res.status(400).json({success:false,status:"Хэрэглэгч аль хэдийн үүссэн байна. Нэвтэрч орно уу."})
+}
+  }
   try {
     const hashedPassword = bcrypt.hashSync(password, 10);
-    const user = await User.create({ name, email, phoneNumber, cardNumber, address, profileImg, password: hashedPassword });
+    const user = await User.create({ name, email, phone, cardNumber, address, profileImg,role, password: hashedPassword });
     res.status(200).json({ message: `Амжилттай бүртгэгдлэлээ`, user });
   } catch (error) {
     next(error);

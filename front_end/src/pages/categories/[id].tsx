@@ -7,11 +7,11 @@ const Category = ({ products }: any) => {
   const router = useRouter();
   console.log("products", products);
   return (
-    <div className="flex">
+    <div className="flex pt-10 gap-5 sm:grid-cols-1  md:grid-cols-4">
       <ProductSideBar />
-      <div className="flex">
-        {products.map((product: any) => (
-          <ProductCard product={product} />
+      <div className="flex gap-5 sm:grid-cols-1  md:grid-cols-4">
+        {products.map((product: any, idx: number) => (
+          <ProductCard key={idx} product={product} />
         ))}
       </div>
     </div>

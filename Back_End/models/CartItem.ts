@@ -9,7 +9,7 @@ const productSchema = new Schema({
 
 const cartItemSchema = new Schema(
   {
-    user: String,
+    user: { type: Schema.Types.ObjectId, ref: "User" },
     productList: [productSchema],
     totalPrice: { type: Number, required: true },
     totalQuantity: { type: Number, required: true },

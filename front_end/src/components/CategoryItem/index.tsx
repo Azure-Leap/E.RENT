@@ -16,9 +16,13 @@ const CategoryItem = ({ category, i, subCategories }: any) => {
       {subCategories?.filter((el: any) => el.category?._id === category?._id).length === 1 ? (
         subCategories
           ?.filter((el: any) => el?.category._id === category?._id)
-          .map((el: any) => (
-            <div className="md:grid-cols-1 ">
+          .map((el: any, idx: number) => (
+            <div className="md:grid-cols-1 flex flex-1" key={idx}>
               <Image
+                onClick={() => {
+                  console.log(el);
+                  router.push({ pathname: "/categories/" + el._id });
+                }}
                 src={el.imgUrl}
                 alt="cate_pic"
                 height={400}
@@ -30,11 +34,11 @@ const CategoryItem = ({ category, i, subCategories }: any) => {
           ))
       ) : (
         <div className="grid md:grid-cols-2 sm:grid-cols-1 gap-2">
-          {console.log("A", subCategories)}
           {subCategories
             ?.filter((el: any) => el.category?._id === category?._id)
             .map((subCategory: any, idx: number) => (
               <Image
+                key={idx}
                 onClick={() => {
                   console.log("/subcategories/" + subCategory?._id);
                   router.push({ pathname: "/categories/" + subCategory._id });
