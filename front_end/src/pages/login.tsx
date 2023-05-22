@@ -5,88 +5,94 @@ import TextField from "@mui/material/TextField";
 import Link from "@mui/material/Link";
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { AuthContext } from "@/context/AuthContext";
+
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { AuthContext } from "@/context/AuthContext";
+import { CartContext } from "@/context/CartContext";
 
 const Login = () => {
-  const [supplier_email, setSupplierEmail] = useState("");
-  const [supplier_password, setSupplierPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user");
 
-  const [role, setRole] = useState("");
-  const { supplier, setUser } = useContext(AuthContext);
+  const { setUserData, setSupplierData, setToken, setSupplierToken, token, user }: any = useContext(AuthContext);
+  const { addItemToCart, getCartList }: any = useContext(CartContext);
   const router = useRouter();
 
-  const changeEmail = (e) => {
-    console.log("Supplier_Email: ", e.target.value);
-    setSupplierEmail(e.target.value);
+  const changeEmail = (e: any) => {
+    setEmail(e.target.value);
   };
-  const changePass = (e) => {
-    console.log("Supplier_Password: ", e.target.value);
-    setSupplierPassword(e.target.value);
+  const changePass = (e: any) => {
+    setPassword(e.target.value);
   };
 
   const handleLoginSubmit = async () => {
     try {
-      const res = (await axios.post(`http://localhost:9000/supplier/login`, {
-        supplier_email,
-        supplier_password,
-      })) as any;
+      if (role === "user") {
+        const res = await axios.post(`http://localhost:9000/auth/login`, { email, password });
+        setUserData(res.data.user);
+        setToken(res.data.token);
+      } else {
+        const res = await axios.post(`http://localhost:9000/supplier/login`, { email, password });
+        setSupplierData(res.data.supplier);
+        setSupplierToken(res.data.token);
+      }
 
-      console.log(res);
-      setUser(res.data.supplier);
+      // console.log("login res", res);
 
-      toast.success("Амжилттай нэвтэрлээ", {
-        autoClose: 2000,
-        position: "bottom-right",
-      });
+      toast.success("Амжилттай нэвтэрлээ.", { autoClose: 1000, position: "bottom-right" });
+      // setTimeout(addItemToCart, 2);
+
       router.push("/");
-    } catch {
+    } catch (err) {
+      console.log("ERROR", err);
       toast.error("Амжилтгүй", { autoClose: 1000, position: "bottom-right" });
     }
   };
-
   return (
     <NavLayout>
       <div className="container mx-auto flex justify-center items-center pt-20">
-        <div
-          style={{ width: "480px", height: "520px", borderRadius: "25px" }}
-          className="bg-white  shadow-2xl border border-black"
-        >
+        <div style={{ width: "480px", borderRadius: "25px" }} className="bg-white  shadow-2xl border border-black">
           <div className="p-8">
             <div>
-              <p className="font-semibold text-3xl">Нэвтрэх</p>
+              <p className="font-semibold text-3xl">Бүртгүүлэх</p>
             </div>
             <div className="pt-5">
               <Box>
                 <p className="pb-3 font-medium">Нэвтрэх нэр</p>
-                <TextField
-                  sx={{ width: "100%" }}
-                  id="supplier_email"
-                  onChange={changeEmail}
-                  variant="outlined"
-                />
+                <TextField sx={{ width: "100%" }} onChange={changeEmail} variant="outlined" />
               </Box>
             </div>
             <div className="pt-5">
               <Box>
                 <p className="pb-3 font-medium">Нууц үг</p>
-                <TextField
-                  sx={{ width: "100%" }}
-                  id="supplier_password"
-                  onChange={changePass}
-                  variant="outlined"
-                />
+                <TextField sx={{ width: "100%" }}  onChange={changePass} variant="outlined" />
               </Box>
             </div>
+
+            <div className="pt-5">
+              <Box>
+                <p className="pb-3 font-medium">Аль төрөл - {role}</p>
+                {/*  */}
+                <div>
+                  <button className={`mx-4 p-5 bg-violet-300 ${role === "user" ? "bg-violet-300" : "bg-red-300"}`} onClick={() => setRole("user")}>
+                    Хэрэглэгч
+                  </button>
+                  <button className={`mx-4 p-5 bg-violet-300 ${role === "supplier" ? "bg-violet-300" : "bg-red-300"}`} onClick={() => setRole("supplier")}>
+                    Түрээслэгч
+                  </button>
+                </div>
+              </Box>
+            </div>
+
             <div className="pt-5 font-light text-green-600">
               <p>Нууц үг сэргээх</p>
             </div>
             <div className="pt-5 text-white font-semibold">
               <button
                 style={{
-                  background:
-                    "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                  background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
                   height: "50px",
                 }}
                 className="w-full rounded-3xl  shadow-md shadow-indigo-500/40"
@@ -112,5 +118,4 @@ const Login = () => {
     </NavLayout>
   );
 };
-
 export default Login;

@@ -1,27 +1,49 @@
-import React, { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext({});
+export const AuthContext = createContext<any>(null);
 
-const AuthProvider = ({ children }: any) => {
-  const [supplier, setSupplier] = useState<any>(null);
-  const [supplier_role, setSupplier_role] = useState<any>("");
-  const setUser = (sup: any) => {
-    setSupplier(sup);
-    // localStorage.setItem("user", JSON.stringify(sup));
+export const AuthProvider = ({ children }: any) => {
+  const [user, setUser] = useState<any>(null);
+  const [token, setToken] = useState<any>(null);
+  const [supplier, setSupplier] = useState();
+  const [supplierToken, setSupplierToken] = useState();
+
+  useEffect(() => {
+    const us = localStorage.getItem("user");
+    const sup = localStorage.getItem("supplier");
+    if (us) {
+      setUser(JSON.parse(us));
+    }
+    if (sup) {
+      setSupplier(JSON.parse(sup));
+    }
+  }, []);
+
+  const setSupplierData = (data: any) => {
+    setSupplier(data);
+    localStorage.setItem("supplier", JSON.stringify(data));
   };
 
-  const logOut = () => {
-    console.log("Clicked Log Out Button");
-    setSupplier(null);
-    // localStorage.removeItem("user");
+  const setUserData = (data: any) => {
+    setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
   };
-
   return (
     <AuthContext.Provider
-      value={{ supplier, setUser, logOut, setSupplier_role, supplier_role }}
+      value={{
+        user,
+        token,
+        setUserData,
+        setToken,
+        setUser,
+        supplier,
+        setSupplier,
+        supplierToken,
+        setSupplierToken,
+        setSupplierData,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 };
-export default AuthProvider;

@@ -6,10 +6,10 @@ import axios from "axios";
 const ProductSideBar = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [subCategories, setSubCategories] = useState<any[]>([]);
-  const [search,setSearch]=useState<any[]>([]);
-    const handleClick= async ()=>{
-      setSearch(search)
-    }
+  const [search, setSearch] = useState<any[]>([]);
+  const handleClick = async () => {
+    setSearch(search);
+  };
 
   const fetchData = async () => {
     const cat: any = await axios.get(`http://localhost:9000/categories`);
@@ -62,14 +62,13 @@ const ProductSideBar = () => {
                         ?.filter((el: any) => {
                           return el?.category._id === category._id;
                         })
-                        .map((subcat: any) => {
+                        .map((subcat: any, idx: number) => {
                           return (
-                            <ul className="ml-4 mt-2 w-full border-l-2 border-cyan-300 pl-6 text-sm">
+                            <ul className="ml-4 mt-2 w-full border-l-2 border-cyan-300 pl-6 text-sm" key={idx}>
                               <li
                                 className="mb-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:rounded-md hover:text-white"
                                 onClick={() => {
                                   console.log("SS", subcat.type);
-                                 
                                 }}
                               >
                                 {subcat.title}

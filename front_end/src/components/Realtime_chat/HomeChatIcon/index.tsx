@@ -1,14 +1,14 @@
 import { useRouter } from "next/router";
 import React from "react";
 
-
 const HomeChatIcon = () => {
-  const router =useRouter();
+  const router = useRouter();
   return (
     <div>
-      <button onClick={()=>{
-        router.push({pathname:"/chat"})
-      }}
+      <button
+        onClick={() => {
+          router.push({ pathname: "/chat" });
+        }}
         style={{
           position: "fixed",
           bottom: "40px",
@@ -18,7 +18,7 @@ const HomeChatIcon = () => {
           fontSize: "60px",
         }}
       >
-       <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <title>speech-chat-talk-bubble-flat</title>
           <path d="M0,256C0,114.62,114.62,0,256,0S512,114.63,512,256,397.37,512,256,512,0,397.38,0,256Z" fill="#0086cd" />
           <path

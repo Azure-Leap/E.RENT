@@ -8,8 +8,7 @@ const Supplier = () => {
       <div className="pt-5">
         <div
           style={{
-            background:
-              "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+            background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
           }}
           className="container mx-auto "
         >

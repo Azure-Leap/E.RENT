@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -14,7 +15,7 @@ const ProductSwipers = () => {
   const getAllBranches = async () => {
     try {
       const result = await axios.get("http://localhost:9000/products");
-      console.log(result.data.products);
+
       setProducts(result.data.products);
     } catch (err) {
       console.log("Err", err);
@@ -64,27 +65,21 @@ const ProductSwipers = () => {
         className="mySwiper"
       >
         {products.length > 0 &&
-          products.map((product) => (
+          products.map((product: any, idx: number) => (
             <>
               <SwiperSlide>
-                <div className="p-2 border border-slate-600 rounded-md bg-zinc-50">
-                  <img
-                    src={product.imgUrl}
-                    className="w-full h-60 object-cover"
-                  />
+                <div className="p-2 border border-slate-600 rounded-md bg-zinc-50" key={idx}>
+                  <img src={product.imgUrl} className="w-full h-60 object-cover " />
 
-                  <Link
-                    className="font-semibold text-md pt-5 text-left truncate"
-                    href={`Products/${product._id}`}
-                  >
-                    {product.title}
-                  </Link>
-                  <p className="font-extralight text-sm">Сагсны бөмбөг</p>
+                  <div className="font-semibold text-md pt-5 text-left truncate">{product.title}</div>
+                  <p className="font-extralight text-sm">{product.description}</p>
                   <div className="flex justify-between items-center">
                     <p className="font-bold">{product.price}₮</p>
-                    <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
-                      Сагслах
-                    </button>
+                    <Link href={`Products/${product._id}`}>
+                      <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
+                        Дэлгэрэнгүй
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </SwiperSlide>

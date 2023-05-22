@@ -1,6 +1,6 @@
 import React, { useState, createContext, useContext } from "react";
 import axios from "axios";
-import AuthProvider, { AuthContext } from "./AuthContext";
+import { AuthContext } from "./AuthContext";
 import { CatchingPokemon } from "@mui/icons-material";
 import { toast } from "react-toastify";
 export const ProductAxiosContext = createContext({});

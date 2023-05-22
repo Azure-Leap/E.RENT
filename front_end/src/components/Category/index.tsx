@@ -2,9 +2,6 @@ import React from "react";
 import CategoryItem from "../CategoryItem";
 
 const Category = ({ categories, subCategories }: any) => {
-  // const mainCat = removeDuplicates(categories);
-  console.log("UC", categories);
-  // console.log("UN", mainCat);
   return (
     <div className="container mx-auto pt-5">
       <h1 className="p-5 pl-5 text-2xl text-cyan-500 top-0 left-0 bg-clip-text  rounded-xl transition-all duration-500 font-bold"> Категори </h1>

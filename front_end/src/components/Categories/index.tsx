@@ -10,7 +10,7 @@ const CategoryList = () => {
     const data = await res.json();
     const res1 = await fetch(`http://localhost:9000/subcategories`);
     const data1 = await res1.json();
-    console.log(data);
+
     setCategories(data?.categories);
     setSubCategories(data1?.categories);
   };
