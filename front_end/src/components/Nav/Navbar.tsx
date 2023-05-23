@@ -27,7 +27,7 @@ const Navbar = ({ products }: any) => {
     const { value } = e.target.searchInput;
     console.log("value:", value);
     const filterProducts = products?.filter((product: any) => product.title.toLowerCase().include(value.toLowerCase()));
-    const res = await axios(`http://localhost:9000/products?title=${value}`);
+    const res = await axios(`https://erent.onrender.com/products?title=${value}`);
     console.log("search", res);
     router.push(`/search?title=${value}`);
     setSearch(filterProducts);

@@ -30,11 +30,11 @@ const Login = () => {
   const handleLoginSubmit = async () => {
     try {
       if (role === "user") {
-        const res = await axios.post(`http://localhost:9000/auth/login`, { email, password });
+        const res = await axios.post(`https://erent.onrender.com/auth/login`, { email, password });
         setUserData(res.data.user);
         setToken(res.data.token);
       } else {
-        const res = await axios.post(`http://localhost:9000/supplier/login`, { email, password });
+        const res = await axios.post(`https://erent.onrender.com/supplier/login`, { email, password });
         setSupplierData(res.data.supplier);
         setSupplierToken(res.data.token);
       }

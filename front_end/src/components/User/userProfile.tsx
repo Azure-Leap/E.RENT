@@ -49,7 +49,7 @@ const UserProfile = () => {
 
   const updatedUser = async () => {
     try {
-      const res = await axios.put(`http://localhost:9000/user/${user._id}`, { name, email, phone, address, profileImg });
+      const res = await axios.put(`https://erent.onrender.com/user/${user._id}`, { name, email, phone, address, profileImg });
       setUserData(res.data.user);
     } catch (err) {
       console.log("ERROR", err);

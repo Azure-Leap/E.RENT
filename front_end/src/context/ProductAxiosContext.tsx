@@ -27,7 +27,7 @@ const ProductAxiosProvider = ({ children }: any) => {
     console.log("Түрээслэгч", supplier);
     if (supplier) {
       try {
-        const result = await axios.post(`http://localhost:9000/products`, {
+        const result = await axios.post(`https://erent.onrender.com/products`, {
           ...createPro,
           supplier_id: supplier._id,
           rent_start_day: new Date(),
@@ -46,7 +46,7 @@ const ProductAxiosProvider = ({ children }: any) => {
 
   const getAllSubcategories = async () => {
     try {
-      const result = await axios.get("http://localhost:9000/subcategories");
+      const result = await axios.get("https://erent.onrender.com/subcategories");
       console.log(result.data.categories);
       setSubCat(result.data.categories);
     } catch (err) {

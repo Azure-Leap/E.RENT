@@ -76,7 +76,7 @@ const ProductDetial = ({ product }: any) => {
 };
 
 export async function getServerSideProps({ query }: any) {
-  const result = await fetch(`http://localhost:9000/products/${query.productId}`);
+  const result = await fetch(`https://erent.onrender.com/products/${query.productId}`);
   const data = await result.json();
   return {
     props: { product: data.product },

@@ -12,7 +12,7 @@ const ProductSwiper = () => {
   // console.log(products.length);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`http://localhost:9000/products`);
+      const res = await fetch(`https://erent.onrender.com/products`);
       const data = await res.json();
       console.log(data);
       setProducts(data?.products);

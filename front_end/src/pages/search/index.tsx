@@ -12,7 +12,7 @@ const Search = () => {
 
   const fetchData = async () => {
     console.log("title", title);
-    const res = await axios(`http://localhost:9000/products?title=${title}`);
+    const res = await axios(`https://erent.onrender.com/products?title=${title}`);
     const data = await res.data;
     setProducts(data.products);
     setIsLoading(false);

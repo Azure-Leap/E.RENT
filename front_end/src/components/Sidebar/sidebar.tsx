@@ -13,7 +13,7 @@ const Sidebar1 = () => {
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get("http://localhost:9000/products", {});
+      const result = await axios.get("https://erent.onrender.com/products", {});
       console.log(result.data.products);
       setProducts(result.data.products);
     } catch (err) {

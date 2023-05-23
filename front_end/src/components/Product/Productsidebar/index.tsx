@@ -14,8 +14,8 @@ const ProductSideBar = () => {
   };
 
   const fetchData = async () => {
-    const cat: any = await axios.get(`http://localhost:9000/categories`);
-    const sub: any = await axios.get(`http://localhost:9000/subcategories`);
+    const cat: any = await axios.get(`https://erent.onrender.com/categories`);
+    const sub: any = await axios.get(`https://erent.onrender.com/subcategories`);
 
     console.log("CAT", cat);
     console.log("Sub", sub);
