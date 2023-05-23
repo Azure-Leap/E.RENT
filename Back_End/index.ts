@@ -3,20 +3,20 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 
-import CategoryRoutes from "./Routes/CategoryRoutes";
-import SubCategoryRoutes from "./Routes/SubCategoryRoutes";
+import CategoryRoutes from "./routes/CategoryRoutes";
+import SubCategoryRoutes from "./routes/SubCategoryRoutes";
 import { connectDB } from "./config/mongoDB";
 import upload from "./middlewares/upload";
 import cloudinary from "./utils/cloudinary";
 import ProductRoutes from "./routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
 import UserRoutes from "./routes/userRoutes";
-import SupplierRoutes from "./routes/SupplierRoutes";
+import SupplierRoutes from "./routes/supplierRoutes";
 import sendEmail from "./utils/sendEmail";
 
-import cartListRoutes from "./Routes/cartListRoutes";
+import cartListRoutes from "./routes/cartListRoutes";
 import fileUpload from "express-fileupload";
-import authRoutes from "./Routes/authRoutes";
+import authRoutes from "./routes/authRoutes";
 
 const app = express();
 
