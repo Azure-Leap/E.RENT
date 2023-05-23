@@ -13,6 +13,7 @@ import RegisterChooseModal from "./RegisterChoose";
 import { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "@/context/AuthContext";
+import { BASE_URL_API } from "@/util/variables";
 
 const loginstyle = {
   position: "absolute" as "absolute",
@@ -60,7 +61,7 @@ export default function LoginModal() {
 
   const handleLoginSubmit = async () => {
     try {
-      const res = (await axios.post(`http://localhost:9000/supplier/login`, {
+      const res = (await axios.post(`${BASE_URL_API}/supplier/login`, {
         supplier_email,
         supplier_password,
       })) as any;

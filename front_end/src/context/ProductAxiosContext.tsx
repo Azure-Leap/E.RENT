@@ -3,6 +3,7 @@ import axios from "axios";
 import { AuthContext } from "./AuthContext";
 import { CatchingPokemon } from "@mui/icons-material";
 import { toast } from "react-toastify";
+import { BASE_URL_API } from "@/util/variables";
 export const ProductAxiosContext = createContext({});
 
 const ProductAxiosProvider = ({ children }: any) => {
@@ -27,7 +28,7 @@ const ProductAxiosProvider = ({ children }: any) => {
     console.log("Түрээслэгч", supplier);
     if (supplier) {
       try {
-        const result = await axios.post(`https://erent.onrender.com/products`, {
+        const result = await axios.post(`${BASE_URL_API}/products`, {
           ...createPro,
           supplier_id: supplier._id,
           rent_start_day: new Date(),
@@ -46,7 +47,7 @@ const ProductAxiosProvider = ({ children }: any) => {
 
   const getAllSubcategories = async () => {
     try {
-      const result = await axios.get("https://erent.onrender.com/subcategories");
+      const result = await axios.get(`${BASE_URL_API}/subcategories`);
       console.log(result.data.categories);
       setSubCat(result.data.categories);
     } catch (err) {

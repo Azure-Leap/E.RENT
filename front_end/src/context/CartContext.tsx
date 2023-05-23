@@ -76,7 +76,7 @@ export function CartContextProvider({ children }: any) {
       // console.log("SERVER START", value);
       console.log("SERVER TRY");
       const res2 = await axios.post(
-        "https://erent.onrender.com/carts/",
+        "${BASE_URL_API}/carts/",
         {
           cartItems: value,
           userId: uid,
@@ -102,7 +102,7 @@ export function CartContextProvider({ children }: any) {
     }
 
     if (!cartItems) {
-      const res: any = await axios.get(`https://erent.onrender.com/carts/carts/${user._id}`);
+      const res: any = await axios.get(`{BASE_URL_API}/carts/carts/${user._id}`);
       console.log("RES", res?.data?.cartItems[0]);
       setCartItems(res?.data?.cartItems[0]);
     }

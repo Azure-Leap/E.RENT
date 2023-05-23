@@ -6,13 +6,14 @@ import { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
 import { useState, useEffect } from "react";
 import ProductCard from "..";
+import { BASE_URL_API } from "@/util/variables";
 
 const ProductSwiper = () => {
   const [products, setProducts] = useState([""]);
   // console.log(products.length);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://erent.onrender.com/products`);
+      const res = await fetch(`${BASE_URL_API}/products`);
       const data = await res.json();
       console.log(data);
       setProducts(data?.products);
