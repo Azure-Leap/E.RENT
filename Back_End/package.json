@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx nodemon index.ts",
-    "build": "concurrently \"tsc\" \"node ./dist/index.js\""
+    "build": "concurrently \"tsc\" \"node dist/index.js\""
   },
   "author": "",
   "license": "ISC",
