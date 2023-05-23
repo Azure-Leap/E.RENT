@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { createContext } from "react";
 
 import { toast } from "react-toastify";
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import { AuthContext } from "./AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -98,6 +98,7 @@ export function CartContextProvider({ children }: any) {
     if (!user) {
       const getCard = localStorage.getItem("card") as string;
       const value = JSON.parse(getCard);
+      setCartItems(value);
     }
 
     if (!cartItems) {

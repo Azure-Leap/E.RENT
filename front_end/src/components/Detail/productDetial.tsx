@@ -40,7 +40,7 @@ const ProductDetial = ({ product }: any) => {
       className="md:grid grid-cols-2 gap-6 sm:space-y-2 max-sm:space-y-0 md:space-y-0 p-5 "
     >
       <div className="border-2 border-black">
-        <Image src={bosch} />
+        <Image src={bosch} alt="pic"/>
       </div>
       <div className="text-white">
         <h1 className="font-bold text-2xl sm:pt-1 md:pt-0 max-sm:pt-1">Bosch TWK3P420 SS Ус буцалгагч 1.7л багтаамжтай / car</h1>

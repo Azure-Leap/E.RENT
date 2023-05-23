@@ -34,7 +34,7 @@ const BackToTopButton = () => {
           }}
           onClick={scrollUp}
         >
-          <Image src={upIcon} />
+          <Image src={upIcon} alt="icon" />
         </button>
       )}
     </div>

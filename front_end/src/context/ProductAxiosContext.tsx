@@ -19,7 +19,7 @@ const ProductAxiosProvider = ({ children }: any) => {
   const travelBarilt = (e: any) => {
     console.log(e.target.value);
     const createObj = {};
-    createObj[e.target.name] = e.target.value;
+    // createObj[e.target.name] = e.target.value;
     setCreatePro({ ...createPro, ...createObj });
   };
 

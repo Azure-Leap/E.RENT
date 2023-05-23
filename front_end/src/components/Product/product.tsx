@@ -24,13 +24,13 @@ const Product = () => {
     <div className="p-10">
       <div className="grid md:grid-cols-6 sm:grid-cols-3 max-sm:space-y-2 md:space-y-0 gap-4 container mx-auto text-black pt-10">
         {products.length > 0 &&
-          products.map((product) => (
+          products.map((product: any) => (
             <>
               <div className="p-2 border border-black rounded-md bg-zinc-50">
-                <img src={product.imgUrl} className="w-full h-60 object-cover" />
+                <img src={product?.imgUrl} className="w-full h-60 object-cover" />
 
                 <Link className="font-semibold text-md pt-5" href={`Products/${product._id}`}>
-                  {product.title}
+                  {product?.title}
                 </Link>
                 <p className="font-extralight text-sm">Сагсны бөмбөг</p>
                 <div className="flex justify-between items-center">

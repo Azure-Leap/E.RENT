@@ -6,7 +6,7 @@ import Link from "next/link";
 import profile from "../../../public/images/ekos.png";
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useRef, useState, useContext } from "react";
-import { ChevronDownIcon } from "@heroicons/react/20/solid";
+// import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { CartContext } from "@/context/CartContext";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/router";
@@ -166,7 +166,7 @@ const Dele = () => {
           <ul className="flex items-center font-light text-sm text-cyan-700 gap-10">
             <li className="relative group">
               <button className="hover:opacity-50 cursor-default">
-                <a href="/">Нүүр</a>
+                <Link href="/">Нүүр</Link>
               </button>
             </li>
             <li className="relative group">

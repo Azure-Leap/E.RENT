@@ -11,85 +11,61 @@ const Similar = () => {
     >
       <div className="h-80 border border-black p-8 ">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>
       <div className="h-80 border border-black p-8">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>
       <div className="h-80 border border-black p-8">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>
       <div className="h-80 border border-black p-8">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>
       <div className="h-80 border border-black p-8">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>
       <div className="h-80 border border-black p-8">
         <div className="sm:hidden md:block max-sm:hidden">
-          <Image src={bosch} />
+          <Image src={bosch} alt="pic" />
         </div>
         <div>
-          <h1 className="font-bold text-md">
-            Bosch TWK3P420 SS Ус буцалгагч 1.7л...
-          </h1>
-          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">
-            Ус буцалгагч
-          </p>
+          <h1 className="font-bold text-md">Bosch TWK3P420 SS Ус буцалгагч 1.7л...</h1>
+          <p className="md:font-normal  sm:font-extralight sm:text-sm  ">Ус буцалгагч</p>
           <h1 className="font-extrabold text-lg">329,900 ₮</h1>
         </div>
       </div>

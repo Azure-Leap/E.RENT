@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/e.rent.png";
@@ -7,6 +8,7 @@ const ProductSideBar = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [subCategories, setSubCategories] = useState<any[]>([]);
   const [search, setSearch] = useState<any[]>([]);
+
   const handleClick = async () => {
     setSearch(search);
   };
@@ -25,7 +27,8 @@ const ProductSideBar = () => {
   useEffect(() => {
     fetchData();
     handleClick();
-  }, []);
+  }, [handleClick]);
+
   return (
     <div className="flex h-screen w-64 flex-col justify-between bg-gray-50 text-cyan-500">
       <div className="p-4">
@@ -92,7 +95,7 @@ const ProductSideBar = () => {
       <div className="flex items-center border-t-2 border-cyan-300 p-4">
         <img
           src="https://images.unsplash.com/photo-1649180493506-1074b5f7c9b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=face&w=1936&q=80"
-          alt=""
+          alt="pic"
           className="h-12 w-12 rounded-full object-cover"
         />
         <a href="https://www.youtube.com/channel/UCZXcplsSliFfK3vGUjCKY2A" className="ml-2 text-sm" target="_blank">
