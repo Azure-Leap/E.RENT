@@ -30,12 +30,11 @@ const productSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Supplier",
     },
-    
   },
   { timestamps: true }
 );
 
 const Product = model("Product", productSchema);
-Product.collection.createIndex({ product_location: "2dsphere" });
+// Product.collection.createIndex({ product_location: "2dsphere" });
 
 export { Product };
