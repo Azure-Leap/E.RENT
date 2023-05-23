@@ -8,20 +8,24 @@ import Link from "next/link";
 
 const posterData = [
   {
-    image: "./images/m1.jpeg",
+    image:
+      "https://media.istockphoto.com/id/1397371364/photo/young-woman-using-laptop-at-new-house.jpg?s=612x612&w=0&k=20&c=jIyh1_DGriEe5DPJ3yajSIwp4230ChR7A1dfrtyk4HM=",
     title: "Store",
   },
 
   {
-    image: "./images/m2.jpeg",
+    image:
+      "https://images.unsplash.com/photo-1615404420216-cc423164563f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     title: "Food",
   },
   {
-    image: "./images/m3.jpeg",
+    image:
+      "https://images.unsplash.com/photo-1617048551602-f377d4174089?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmVudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
     title: "Blog",
   },
   {
-    image: "./images/m4.jpeg",
+    image:
+      "https://media.istockphoto.com/id/1402501680/photo/mature-woman-with-moving-boxes-in-new-home.jpg?s=612x612&w=0&k=20&c=6CcFDHXuZ9ZpOmzlI9qcUzGrmtXw1YvXpG64hQHuxAc=",
     title: "Fitness",
   },
 ];
@@ -60,14 +64,11 @@ const SwiperSection = () => {
       >
         {posterData.map((item, idx) => (
           <SwiperSlide key={idx}>
-            <div
-              style={{
-                background:
-                  "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
-              }}
-              className="w-full h-96 p-10 rounded-md text-white text-3xl pt-20"
-            >
-              {item.title}
+            <div className=" text-white text-3xl pt-20">
+              <img
+                style={{ width: "800px", height: "500px" }}
+                src={item.image}
+              />
             </div>
           </SwiperSlide>
         ))}

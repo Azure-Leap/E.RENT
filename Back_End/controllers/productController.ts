@@ -40,16 +40,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
   }
 };
 
-// export const getProduct = async (req: Request, res: Response) => {
-//   try {
-//     const { id } = req.params;
-//     console.log(req.params);
-//     const product = await Product.findById({ id }).populate("category");
-//     res.status(200).json({ success: true, product });
-//   } catch (error: any) {
-//     console.log("Алдааны мэдээлэл", error.message);
-//   }
-// };
 
 export const getBaraa = async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -76,10 +66,8 @@ export const getProduct = async (req: Request, res: Response) => {
 };
 
 export const createProduct = async (req: Request, res: Response) => {
-  const { title, description, price, imgUrl, subcategory, location, rating, supplier, rent_start_day, rent_finish_day } = req.body;
-  // if (!title || !discription || !price || !img || !category || !location || !rating || !supplier || !rent_start_day || !rent_finish_day) {
-  //   return res.status(400).json({ messagea: "Мэдээллийг бүрэн оруулна уу" });
-  // }
+  const { title, description, price, imgUrl, subcategory, location, rating, supplier, rent_start_day, rent_finish_day, name, product_location } = req.body;
+
   const newProduct = {
     title,
     price,
@@ -91,6 +79,8 @@ export const createProduct = async (req: Request, res: Response) => {
     rent_finish_day,
     supplier,
     subcategory,
+    product_location,
+    name,
   };
 
   try {

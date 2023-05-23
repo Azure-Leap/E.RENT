@@ -5,6 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { Dialog } from "@headlessui/react";
 import { ProductAxiosContext } from "@/context/ProductAxiosContext";
+import { motion } from "framer-motion";
 
 const Sidebar1 = () => {
   const { subCat, setSubCat, getAllSubcategories, createProduct, handleChange, travelBarilt }: any = useContext(ProductAxiosContext);
@@ -31,7 +32,25 @@ const Sidebar1 = () => {
       <div className="flex justify-between h-20 items-center w-full">
         <div className="flex items-center font-semibold text-2xl">
           <div className="h-10 w-1 bg-red-600 mr-2"></div>
-          <p>Түрээслүүлэгчийн бараа</p>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: {
+                scale: 0.8,
+                opacity: 0,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+                transition: {
+                  delay: 0.3,
+                },
+              },
+            }}
+          >
+            <p>Түрээслүүлэгчийн бараа</p>
+          </motion.div>
         </div>
         <h1
           style={{
@@ -49,7 +68,24 @@ const Sidebar1 = () => {
           {/* Full-screen scrollable container */}
           <div className="fixed inset-0 overflow-y-auto">
             {/* Container to center the panel */}
-            <div className="flex min-h-full items-center justify-center p-4">
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {
+                  scale: 0.8,
+                  opacity: 0,
+                },
+                visible: {
+                  scale: 1,
+                  opacity: 1,
+                  transition: {
+                    delay: 0.3,
+                  },
+                },
+              }}
+              className="flex min-h-full items-center justify-center p-4"
+            >
               {/* The actual dialog panel  */}
               <Dialog.Panel className="mx-auto max-w-sm  bg-white w-full rounded-sm">
                 <div className="p-5">
@@ -124,7 +160,7 @@ const Sidebar1 = () => {
                   </div>
                 </div>
               </Dialog.Panel>
-            </div>
+            </motion.div>
           </div>
         </Dialog>
       </div>
@@ -132,6 +168,26 @@ const Sidebar1 = () => {
       <div className="grid md:grid-cols-6 sm:grid-cols-2  gap-4">
         {products?.length > 0 &&
           products?.map((product: any, index: number) => (
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {
+            scale: 0.8,
+            opacity: 0,
+          },
+          visible: {
+            scale: 1,
+            opacity: 1,
+            transition: {
+              delay: 0.8,
+            },
+          },
+        }}
+        className="grid md:grid-cols-6 sm:grid-cols-2  gap-4"
+      >
+        {products.length > 0 &&
+          products.map((product) => (
             <>
               <SwiperSlide key={index}>
                 <div className="p-2 border border-black rounded-md bg-zinc-50">
@@ -151,8 +207,9 @@ const Sidebar1 = () => {
               </SwiperSlide>
             </>
           ))}
-      </div>
-    </div>
+            </motion.div>
+            </div>
+
   );
 };
 

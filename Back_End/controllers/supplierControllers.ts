@@ -47,8 +47,10 @@ const updtadeSupplier = async (req: Request, res: Response, next: NextFunction) 
       res.status(400).json({ success: `${id} хэрэглэгч олдсонгүй` });
     }
   } catch (err) {
-    next(err);
-    console.log("алдаа", err);
+    console.log("ERR", err)
+    res
+      .status(400)
+      .json({ err, message: `Шинэ түрээслүүлэгч бүртгэх гэтэл алдаа.` });
   }
 };
 

@@ -3,7 +3,7 @@ import { getAllSuppliers, getSupplier, updtadeSupplier, SupplierRegister, Suppli
 
 const router = Router();
 
-router.route("/register").post(SupplierRegister);
+router.route("/register").post(createSupplier);
 router.route("/login").post(SupplierLogin);
 
 router.route("/").get(getAllSuppliers);

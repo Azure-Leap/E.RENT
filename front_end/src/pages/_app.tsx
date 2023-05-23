@@ -1,10 +1,14 @@
 import "@/styles/globals.css";
+import "../../node_modules/leaflet/dist/leaflet.css";
 import type { AppProps } from "next/app";
 import { NavContext } from "@/context/NavContext";
-import { AuthProvider } from "@/context/AuthContext";
+import AuthProvider from "@/context/AuthContext";
+import CartProvider from "@/context/CartContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProductAxiosProvider, { ProductAxiosContext } from "@/context/ProductAxiosContext";
+import ProductAxiosProvider, {
+  ProductAxiosContext,
+} from "@/context/ProductAxiosContext";
 import { CartContextProvider } from "@/context/CartContext";
 import { useEffect } from "react";
 

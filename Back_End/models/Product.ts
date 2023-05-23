@@ -5,19 +5,6 @@ const productSchema = new Schema(
     title: { type: String, required: true },
     price: { type: Number },
     imgUrl: [String],
-    // location: {
-    //   type: {
-    //     type: String,
-    //     default: "Point",
-    //   },
-    //   coordinates: [Number],
-    // },
-    // rating: {
-    //   type: Number,
-    //   min: 1,
-    //   max: 5,
-    //   required: true,
-    // },
     description: { type: String, required: true },
     rent_start_day: { type: Date, required: true },
     rent_finish_day: { type: Date, required: false },
@@ -30,7 +17,15 @@ const productSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Supplier",
     },
-    
+    name: String,
+    product_location: {
+      name: String,
+      type: {
+          type: "String",
+          default: "Point",
+      },
+      coordinates: [Number],
+  },
   },
   { timestamps: true }
 );

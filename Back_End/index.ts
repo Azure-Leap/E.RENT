@@ -39,16 +39,16 @@ app.get("/", async (res: Response, req: Request) => {
 });
 
 app.post("/upload", async (req: any, res: Response) => {
-  console.log("REQ:", req.files.image);
   const result = await cloudinary.v2.uploader.upload(req.files.image.tempFilePath, { folder: "E.RENT" });
-  res.status(200).json({ message: "Амжилттай хадгаллаа.", imgUrl: result.secure_url });
+  res.status(200).json({ message: "Амжилттай хадгаллаа.", imgUrl: result.secure_url , public_id: result.public_id });
   console.log("====>", result);
 });
+
 app.get("/", (req: Request, res: Response) => {
   res.send("file");
 });
 
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
 
 // connect Routes
 app.use("/categories", CategoryRoutes);
