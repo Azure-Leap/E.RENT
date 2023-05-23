@@ -50,23 +50,23 @@ export default function RegisterBusinessModal() {
   const [supplier_phone, setSupplier_phone] = useState("");
 
   //onchange start
-  const changeName = (e) => {
+  const changeName = (e: any) => {
     console.log("Supplier_name: ", e.target.value);
     setSupplier_name(e.target.value);
   };
-  const changeEmail = (e) => {
+  const changeEmail = (e: any) => {
     console.log("Supplier_email: ", e.target.value);
     setSupplier_email(e.target.value);
   };
-  const changePhone = (e) => {
+  const changePhone = (e: any) => {
     console.log("Supplier_phone: ", e.target.value);
     setSupplier_phone(e.target.value);
   };
-  const changePass = (e) => {
+  const changePass = (e: any) => {
     console.log("Supplier_password: ", e.target.value);
     setSupplier_password(e.target.value);
   };
-  const changeRePass = (e) => {
+  const changeRePass = (e: any) => {
     console.log("Supplier_repassword: ", e.target.value);
     setSupplier_repassword(e.target.value);
   };
@@ -82,10 +82,10 @@ export default function RegisterBusinessModal() {
 
   const [createSupplier, setCreateSupplier] = useState({});
 
-  const supplierBarilt = (e) => {
+  const supplierBarilt = (e: any) => {
     console.log(e.target.value);
     const createObj = {};
-    createObj[e.target.name] = e.target.value;
+    // createObj[e.target.name] = e.target.value;
     setCreateSupplier({ ...createSupplier, ...createObj });
   };
   const [open, setOpen] = React.useState(false);
@@ -94,10 +94,7 @@ export default function RegisterBusinessModal() {
 
   const createSupplierMan = async () => {
     try {
-      const result = await axios.post(
-        `http://localhost:9000/supplier/register`,
-        { ...createSupplier }
-      );
+      const result = await axios.post(`http://localhost:9000/supplier/register`, { ...createSupplier });
       console.log(result);
       alert("Supplier Amjilttai burtgegdlee. Odoo nevtren orno uu");
     } catch {
@@ -134,8 +131,7 @@ export default function RegisterBusinessModal() {
         <Box sx={loginstyle}>
           <Box
             sx={{
-              background:
-                "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+              background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
               position: "absolute",
               top: "0",
               left: "0",
@@ -156,11 +152,7 @@ export default function RegisterBusinessModal() {
             >
               Register
             </Typography>
-            <Button
-              sx={{ marginLeft: "25%", marginBottom: "2%" }}
-              disableRipple
-              onClick={handleClose}
-            >
+            <Button sx={{ marginLeft: "25%", marginBottom: "2%" }} disableRipple onClick={handleClose}>
               <CloseIcon sx={{ color: "white" }} />
             </Button>
           </Box>
@@ -321,8 +313,7 @@ export default function RegisterBusinessModal() {
 
             <Box
               sx={{
-                background:
-                  "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
                 width: "200px",
                 height: "45px",
                 marginTop: "15px",
@@ -330,12 +321,7 @@ export default function RegisterBusinessModal() {
                 marginLeft: "25%",
               }}
             >
-              <Button
-                sx={{ width: "200px", height: "45px" }}
-                style={{ backgroundColor: "transparent" }}
-                variant="contained"
-                onClick={createSupplierMan}
-              >
+              <Button sx={{ width: "200px", height: "45px" }} style={{ backgroundColor: "transparent" }} variant="contained" onClick={createSupplierMan}>
                 <Typography>Register</Typography>
               </Button>
             </Box>

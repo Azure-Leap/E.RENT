@@ -45,11 +45,11 @@ export default function LoginModal() {
   const [role, setRole] = useState("");
   const { supplier, setSupplier } = useContext(AuthContext);
 
-  const changeEmail = (e) => {
+  const changeEmail = (e: any) => {
     console.log("Supplier_Email: ", e.target.value);
     setSupplierEmail(e.target.value);
   };
-  const changePass = (e) => {
+  const changePass = (e: any) => {
     console.log("Supplier_Password: ", e.target.value);
     setSupplierPassword(e.target.value);
   };
@@ -101,8 +101,7 @@ export default function LoginModal() {
         <Box sx={loginstyle}>
           <Box
             sx={{
-              background:
-                "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+              background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
               position: "absolute",
               top: "0",
               left: "0",
@@ -203,8 +202,7 @@ export default function LoginModal() {
             </Box>
             <Box
               sx={{
-                background:
-                  "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
                 width: "200px",
                 height: "45px",
                 marginTop: "5px",
@@ -212,12 +210,7 @@ export default function LoginModal() {
                 marginLeft: "25%",
               }}
             >
-              <Button
-                sx={{ width: "200px", height: "45px" }}
-                style={{ backgroundColor: "transparent" }}
-                variant="contained"
-                onClick={handleLoginSubmit}
-              >
+              <Button sx={{ width: "200px", height: "45px" }} style={{ backgroundColor: "transparent" }} variant="contained" onClick={handleLoginSubmit}>
                 <Typography>Нэвтрэх</Typography>
               </Button>
             </Box>
@@ -230,16 +223,10 @@ export default function LoginModal() {
               }}
             >
               <Button href="#" sx={{ color: "#06b6d4" }} component={Link}>
-                <Typography sx={{ fontSize: "12px" }}>
-                  Нууц үгээ мартсан уу?
-                </Typography>
+                <Typography sx={{ fontSize: "12px" }}>Нууц үгээ мартсан уу?</Typography>
               </Button>
               <Button disabled>|</Button>
-              <Button
-                href="#"
-                sx={{ color: "#06b6d4" }}
-                component={RegisterChooseModal}
-              ></Button>
+              <Button href="#" sx={{ color: "#06b6d4" }} component={RegisterChooseModal}></Button>
             </Box>
           </Box>
         </Box>

@@ -28,7 +28,7 @@ const UserProfile = () => {
     title: "",
     component: "",
   });
-  const handleClicked = (e: string) => {
+  const handleClicked = (e: any) => {
     setSelectedComponent(e);
   };
 

@@ -20,13 +20,13 @@ const Search = () => {
 
   useEffect(() => {
     fetchData();
-  }, [title]);
+  },[]);
 
   return (
     <div className="container grid grid-cols-4 p-10 gap-5">
       {!isLoading ? (
-        products.map((product) => {
-          return <ProductCard product={product} />;
+        products.map((product, index: number) => {
+          return <ProductCard product={product} key={index} />;
         })
       ) : (
         <h1>Уншиж байна...</h1>

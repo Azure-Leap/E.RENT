@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -19,8 +20,8 @@ const Add_card = () => {
           className="h-96 rounded-2xl"
         >
           <div className="flex justify-between p-10 ">
-            <img className="w-30 h-20" src="./images/chip.png" />
-            <img className="w-29 h-14" src="./images/visaLogo.png" />
+            <img className="w-30 h-20" src="./images/chip.png" alt="pic"/>
+            <img className="w-29 h-14" src="./images/visaLogo.png" alt="pic" />
           </div>
           <div className="p-10 py-20 flex justify-between text-zinc-200 text-lg">
             <h1>Card Holder</h1>

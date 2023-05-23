@@ -1,11 +1,11 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
   return (
     <div
       style={{
-        background:
-          "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+        background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
       }}
     >
       <div className="container mx-auto text-white">
@@ -14,13 +14,13 @@ const Footer = () => {
             <h4 className="font-semibold text-md">Компани</h4>
             <ul className="font-light text-sm pt-5">
               <li>
-                <a href="/">Бидний тухай</a>
+                <Link href="/">Бидний тухай</Link>
               </li>
               <li>
-                <a href="/">Чанарын бодлого</a>
+                <Link href="/">Чанарын бодлого</Link>
               </li>
               <li>
-                <a href="/">Нээлттэй ажлын байр</a>
+                <Link href="/">Нээлттэй ажлын байр</Link>
               </li>
             </ul>
           </div>
@@ -28,19 +28,19 @@ const Footer = () => {
             <h4 className="font-semibold text-md">Тусламж</h4>
             <ul className="font-light text-sm pt-5 ">
               <li>
-                <a href="/">Дэлгүүрийн байршил</a>
+                <Link href="/">Дэлгүүрийн байршил</Link>
               </li>
               <li>
-                <a href="/">Бараа захиалах заавар</a>
+                <Link href="/">Бараа захиалах заавар</Link>
               </li>
               <li>
-                <a href="/">Шинээр гишүүн болох</a>
+                <Link href="/">Шинээр гишүүн болох</Link>
               </li>
               <li>
-                <a href="/">Хэтэвч</a>
+                <Link href="/">Хэтэвч</Link>
               </li>
               <li>
-                <a href="/">Асуулт хариулт</a>
+                <Link href="/">Асуулт хариулт</Link>
               </li>
             </ul>
           </div>
@@ -48,16 +48,16 @@ const Footer = () => {
             <h4 className="font-semibold text-md">Үйлчилгээ</h4>
             <ul className="font-light text-sm pt-5">
               <li>
-                <a href="/">Үйлчилгээний нөхцөл</a>
+                <Link href="/">Үйлчилгээний нөхцөл</Link>
               </li>
               <li>
-                <a href="/">Төлбөрийн нөхцөл</a>
+                <Link href="/">Төлбөрийн нөхцөл</Link>
               </li>
               <li>
-                <a href="/">Хүргэлт</a>
+                <Link href="/">Хүргэлт</Link>
               </li>
               <li>
-                <a href="/">Онлайн гэрээний үйлчилгээ</a>
+                <Link href="/">Онлайн гэрээний үйлчилгээ</Link>
               </li>
             </ul>
           </div>
@@ -72,15 +72,9 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-        <div
-          style={{ backgroundColor: "white" }}
-          className="w-full h-0.5 my-10 scale-y-50 "
-        ></div>
+        <div style={{ backgroundColor: "white" }} className="w-full h-0.5 my-10 scale-y-50 "></div>
       </div>
-      <div
-        style={{ backgroundColor: "#20262E" }}
-        className="text-white flex justify-center items-center h-10"
-      >
+      <div style={{ backgroundColor: "#20262E" }} className="text-white flex justify-center items-center h-10">
         <h4 className="opacity-90">
           © 2023 Erent LLC |<span className="text-green-400"> version 1.0</span>
         </h4>

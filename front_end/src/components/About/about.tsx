@@ -26,7 +26,7 @@ const About = () => {
     component: <All />,
   });
 
-  const handleClicked = (eko: string) => {
+  const handleClicked = (eko: any) => {
     setSelectedAbout(eko);
   };
   return (

@@ -22,7 +22,7 @@ const link = [
 
 const Sidebar = () => {
   const [index, setIndex] = useState(0);
-  const clicked = (i) => {
+  const clicked = (i:any) => {
     setIndex(i);
   };
   return (
@@ -34,7 +34,7 @@ const Sidebar = () => {
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-800 text-white dark:bg-gray-800">
         <ul className="space-y-2 font-medium">
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-green-400 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -49,10 +49,10 @@ const Sidebar = () => {
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
               <span className="ml-3">Dashboard</span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="/"
               className="flex items-center p-2 text-green-400 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -69,10 +69,10 @@ const Sidebar = () => {
               <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
                 Pro
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-green-400 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -90,10 +90,10 @@ const Sidebar = () => {
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                 3
               </span>
-            </a>
+            </Link>
           </li>
           <li>
-            <a
+            <Link
               href="#"
               className="flex items-center p-2 text-green-400 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
@@ -111,7 +111,7 @@ const Sidebar = () => {
                 ></path>
               </svg>
               <span className="flex-1 ml-3 whitespace-nowrap">Users</span>
-            </a>
+            </Link>
           </li>
           <li>
             <Link

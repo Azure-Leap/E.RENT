@@ -57,7 +57,7 @@ const ProductItem = ({ item }: any) => {
 
 const CartSection = () => {
   const { cartItems, addItemToCart }: any = useContext(CartContext);
-  console.log("fdsagsad", cartItems.productList);
+  // console.log("fdsagsad", cartItems.productList);
   return (
     <div className="h-screen bg-white">
       <div className="flex justify-center p-5 sm:flex-row">
@@ -89,8 +89,8 @@ const CartSection = () => {
         </div>
 
         <div className=" border-2 shadow-md h-60 p-5 grid ">
-          <p>Нийт барааны тоо :{cartItems.totalQuantity}</p>
-          <p>Нийт үнэ : {cartItems.totalPrice}</p>
+          <p>Нийт барааны тоо :{cartItems?.totalQuantity}</p>
+          <p>Нийт үнэ : {cartItems?.totalPrice}</p>
           <button onClick={addItemToCart} className="bg-cyan-400  border-2 shadow-md text-white text-lg w-32 h-10 items-center rounded-lg ">
             Түрээслэх
           </button>
