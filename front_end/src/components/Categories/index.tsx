@@ -6,9 +6,9 @@ const CategoryList = () => {
   const [subCategories, setSubCategories] = useState([]);
 
   const fetchData = async () => {
-    const res = await fetch(`http://localhost:9000/categories`);
+    const res = await fetch(`https://erent.onrender.com/categories`);
     const data = await res.json();
-    const res1 = await fetch(`http://localhost:9000/subcategories`);
+    const res1 = await fetch(`https://erent.onrender.com/subcategories`);
     const data1 = await res1.json();
 
     setCategories(data?.categories);

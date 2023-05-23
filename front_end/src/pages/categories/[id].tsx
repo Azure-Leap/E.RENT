@@ -23,7 +23,7 @@ export default Category;
 export async function getServerSideProps(context: any) {
   console.log("IIDD", context.query);
   const { id } = context.query;
-  const data: any = await fetch("http://localhost:9000/subcategories/" + id + "/products").then((res) => res.json());
+  const data: any = await fetch("https://erent.onrender.com/subcategories/" + id + "/products").then((res) => res.json());
   console.log("DD", data);
 
   return { props: { products: data.products } };
