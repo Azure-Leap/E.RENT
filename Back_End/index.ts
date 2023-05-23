@@ -17,6 +17,7 @@ import sendEmail from "./utils/sendEmail";
 import cartListRoutes from "./Routes/cartListRoutes";
 import fileUpload from "express-fileupload";
 import authRoutes from "./Routes/authRoutes";
+
 const app = express();
 
 app.use(cors());
