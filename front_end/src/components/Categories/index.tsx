@@ -7,17 +7,13 @@ const CategoryList = () => {
   const [subCategories, setSubCategories] = useState([]);
 
   const fetchData = async () => {
-    try {
-      const res = await fetch(`${BASE_URL_API}/categories`);
-      const data = await res.json();
-      const res1 = await fetch(`${BASE_URL_API}/subcategories`);
-      const data1 = await res1.json();
+    const res = await fetch(`${BASE_URL_API}/categories`);
+    const data = await res.json();
+    const res1 = await fetch(`${BASE_URL_API}/subcategories`);
+    const data1 = await res1.json();
 
-      setCategories(data?.categories);
-      setSubCategories(data?.categories);
-    } catch (error) {
-      console.log("ERR", error);
-    }
+    setCategories(data?.categories);
+    setSubCategories(data1?.categories);
   };
 
   useEffect(() => {

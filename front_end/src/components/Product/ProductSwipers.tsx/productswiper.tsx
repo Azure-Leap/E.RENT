@@ -84,9 +84,7 @@ const ProductSwipers = () => {
                   <div className="font-semibold text-md pt-5 text-left truncate">
                     {product.title}
                   </div>
-                  <p className="font-extralight text-sm">
-                    {product.description}
-                  </p>
+                  <p className="truncate ...">{product.description}</p>
                   <div className="flex justify-between items-center">
                     <p className="font-bold">{product.price}₮</p>
                     <button onClick={() => updateCard(product, "inc")}>

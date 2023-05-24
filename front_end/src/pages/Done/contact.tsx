@@ -2,7 +2,7 @@ import React from "react";
 
 const Contact = () => {
   return (
-    <div className="bg-white shadow-xl rounded-md border border-gray-500 w-96 h-46  p-5">
+    <div className="bg-white shadow-xl border border-gray-500 w-96 h-46  p-5">
       <div className="">
         <div className="flex justify-between">
           <div></div>

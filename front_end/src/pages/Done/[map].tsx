@@ -1,4 +1,4 @@
-import React, { use, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 
 import { useState } from "react";
@@ -10,12 +10,11 @@ import Contact from "./contact";
 const Map = dynamic(() => import("../../components/MapClient/map"), {
   ssr: false,
 });
-import Sos from "./sos";
 
 const MapDetail = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [product, setProduct] = useState<any>(null);
+  const [product, setProduct] = useState<any>({});
 
   useEffect(() => {
     const getProduct = async () => {
@@ -45,15 +44,11 @@ const MapDetail = () => {
         <div className="absolute bottom-4 left-4 z-[10000]">
           <Contact />
         </div>
-        {/* <div className="absolutr bottom-4 left-4 z-[10000]">
-          <Sos />
-        </div> */}
-
         {!isLoading && (
           <div className="p-2 w-70 border border-black rounded-md bg-amber-200 absolute top-5 right-5 z-[10000] shadow-2xl">
-            <Image
-              src={product.imgUrl}
-              alt="imgUrl"
+            <img
+              src={product?.imgUrl}
+              alt="ImgUrl"
               className="w-full h-60 object-cover border border-black"
             />
 
@@ -65,7 +60,7 @@ const MapDetail = () => {
               <h1 className="font-extrabold text-black text-lg">13 хороолол</h1>
             </div>
 
-            <div className="w-full h-0.5 bg-black my-2 scale-y-50 "></div>
+            <div className="w-full h-0.5 bg-black my-2 scale-y-50"></div>
             <div className="flex justify-between items-center">
               <p className="font-extralight text-sm">
                 Тохиролцоно /{" "}
