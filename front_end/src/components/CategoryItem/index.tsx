@@ -7,13 +7,11 @@ const CategoryItem = ({ category, i, subCategories }: any) => {
   const router = useRouter();
 
   return (
-    <div className="rounded-lg border-2 border-violet-200 shadow-lg flex flex-col p-4">
-      {/* {i === 0 && ( */}
-      <h2 className=" text-md bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% top-0 left-0 bg-clip-text text-transparent rounded-xl transition-all duration-500 font-bold ">
-        {category?.title}
-      </h2>
+    <div className="border border-gray-400 rounded-sm p-4 shadow-xl">
+      <h2 className="text-cyan-500 font-semibold">{category?.title}</h2>
 
-      {subCategories?.filter((el: any) => el.category?._id === category?._id).length === 1 ? (
+      {subCategories?.filter((el: any) => el.category?._id === category?._id)
+        .length === 1 ? (
         subCategories
           ?.filter((el: any) => el?.category._id === category?._id)
           .map((el: any, idx: number) => (
@@ -28,7 +26,7 @@ const CategoryItem = ({ category, i, subCategories }: any) => {
                 height={400}
                 width={400}
                 style={{ height: "100%", width: "100%" }}
-                className="cursor-pointer object-cover flex flex-1 md:h-32 max-md:h-16 max-sm:h-16 md:w-full sm:w-screen max-sm:w-screen rounded-md"
+                className="cursor-pointer object-cover flex flex-1 md:h-32 max-md:h-16 max-sm:h-16 md:w-full sm:w-screen max-sm:w-screen "
               />
             </div>
           ))
@@ -47,7 +45,7 @@ const CategoryItem = ({ category, i, subCategories }: any) => {
                 alt="sub_photo"
                 width={300}
                 height={300}
-                className="cursor-pointer object-cover md:h-32 max-md:h-16 max-sm:h-16 md:w-full sm:w-screen max-sm:w-screen rounded-md"
+                className="cursor-pointer object-cover md:h-32 max-md:h-16 max-sm:h-16 md:w-full sm:w-screen max-sm:w-screen border border-gray-400 shadow-md"
               />
             ))}
         </div>

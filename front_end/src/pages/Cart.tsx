@@ -1,18 +1,13 @@
-import CartSection from "@/components/Cart/cartSection";
+import React, { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/context/CartContext";
+import axios from "axios";
 import NavLayout from "@/Layout/NavLayout";
-
-
+import CartSection from "@/components/Cart/cartSection";
 
 const Cart = () => {
-
-
-
-
   return (
     <NavLayout>
-      <div className="container mx-auto pt-5">
-        <CartSection />
-      </div>
+      <CartSection />
     </NavLayout>
   );
 };

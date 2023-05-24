@@ -39,10 +39,10 @@ const About = () => {
           <div className="rounded-3xl h-1.5 w-32 my-2 mx-auto bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"></div>
         </div>
         <div className="grid lg:grid-cols-4 gap-20">
-          {AboutButton.map((el, id) => (
+          {AboutButton.map((el, iso) => (
             <>
               <div
-                key={id}
+                key={iso}
                 onClick={() => {
                   handleClicked(el);
                 }}

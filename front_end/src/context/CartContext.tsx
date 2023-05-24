@@ -6,10 +6,11 @@ import { toast } from "react-toastify";
 import { AuthContext } from "./AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { BASE_URL_API } from "@/util/variables";
 
-export const CartContext = createContext({});
+export const CartContext = createContext<any>(null);
 
-export function CartContextProvider({ children }: any) {
+export function CartProvider({ children }: any) {
   const [cartItems, setCartItems] = useState<any>(null);
   const { user, setUserData } = useContext(AuthContext);
 
@@ -22,30 +23,25 @@ export function CartContextProvider({ children }: any) {
     const prev = JSON.parse(localCard);
     let items: any[] = [];
     if (prev) {
-      items = [...prev.productList];
-    } else {
-      items = [...cartItems.productList];
+      items = [...prev];
     }
-    const prevProductIdx = items?.findIndex((item) => item?.product?._id === product?._id);
+    const prevProductIdx = items?.findIndex(
+      (item) => item?.product._id === product?._id
+    );
     if (prevProductIdx > -1) {
-      const cnt = type === "inc" ? items[prevProductIdx].quantity + 1 : items[prevProductIdx].quantity - 1;
+      const cnt =
+        type === "inc"
+          ? items[prevProductIdx].quantity + 1
+          : items[prevProductIdx].quantity - 1;
       if (cnt < 0) return;
       items[prevProductIdx].quantity = cnt;
-      items[prevProductIdx].price = cnt * items[prevProductIdx].product.price;
+      items[prevProductIdx].totalPrice =
+        cnt * items[prevProductIdx].product.price;
     } else {
-      items.push({ product, quantity: 1, price: product.price * 1 });
+      items.push({ product, quantity: 1, totalPrice: product.price });
     }
-    const niilberShirheg = items?.reduce((acc: any, item: any) => acc + item.quantity, 0);
-    console.log(niilberShirheg, "shirheg");
-    const niilberUne = items?.reduce((acc: any, item: any) => acc + item.quantity * item.price, 0);
-    console.log(niilberUne, "niilberune");
-    const cardData = { productList: items, totalQuantity: niilberShirheg, totalPrice: niilberUne };
-    if (!user) {
-      localStorage.setItem("card", JSON.stringify(cardData)); //{pList:[{produ,tota,qty},{produ,tota,qty}]}
-      setCartItems(cardData);
-    } else {
-      addItemToCardToServer(user._id, cardData);
-    }
+    localStorage.setItem("card", JSON.stringify(items));
+    setCartItems(items);
 
     // addItemToCart();
   };
@@ -76,7 +72,7 @@ export function CartContextProvider({ children }: any) {
       // console.log("SERVER START", value);
       console.log("SERVER TRY");
       const res2 = await axios.post(
-        "${BASE_URL_API}/carts/",
+        `${BASE_URL_API}/carts/`,
         {
           cartItems: value,
           userId: uid,
@@ -92,6 +88,8 @@ export function CartContextProvider({ children }: any) {
       console.log("Error", error);
       console.log("SERVER ERROR");
     }
+    localStorage.setItem("card", JSON.stringify(value));
+    setCartItems(value);
   };
 
   const getCartList = async () => {
@@ -102,7 +100,9 @@ export function CartContextProvider({ children }: any) {
     }
 
     if (!cartItems) {
-      const res: any = await axios.get(`{BASE_URL_API}/carts/carts/${user._id}`);
+      const res: any = await axios.get(
+        `{BASE_URL_API}/carts/carts/${user._id}`
+      );
       console.log("RES", res?.data?.cartItems[0]);
       setCartItems(res?.data?.cartItems[0]);
     }
@@ -145,32 +145,29 @@ export function CartContextProvider({ children }: any) {
     setCartItems(prev);
   }, []);
 
-  // const getCartList = async () => {
-  //   const token = localStorage.getItem("token");
-
-  //   if (token) {
-  //     const decoded = jwt_decode(token);
-  //     const res: any = await fetch(`http://localhost:9000/carts/${decoded.id}`).then((res) => res.json());
-  //     console.log("RES", res.cartItem.productList);
-  //   }
-  // };
-  // getCartList();
+  const deleteCard = (item: any) => {
+    const cards = localStorage.getItem("card") as string;
+    const parse = JSON.parse(cards);
+    let list: any[] = [];
+    if (parse) {
+      list = [...parse];
+    }
+    const idx = list?.findIndex((el) => el.product?._id === item.product?._id);
+    list.splice(idx, 1);
+    localStorage.setItem("card", JSON.stringify(list));
+    setCartItems(list);
+  };
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        addItemToCart,
-        getCartList,
-        // removeItemFromCart,
         updateCard,
+        deleteCard,
       }}
     >
       {children}
     </CartContext.Provider>
   );
-
-  // const removeItem = (index: any) => {
-  //   setCartItems((old) => old.filter((item, idx) => idx !== index));
-  // };
 }
+export default CartProvider;
