@@ -7,14 +7,15 @@ import NavLayout from "@/Layout/NavLayout";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Contact from "./contact";
-const Map = dynamic(() => import("../../components/MapClient/map"), {});
+const Map = dynamic(() => import("../../components/MapClient/map"), {
+  ssr: false,
+});
 import Sos from "./sos";
 
 const MapDetail = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
-  const [product, setProduct] = useState(null);
-  console.log("KK", router.query.map);
+  const [product, setProduct] = useState<any>(null);
 
   useEffect(() => {
     const getProduct = async () => {
@@ -50,12 +51,13 @@ const MapDetail = () => {
 
         {!isLoading && (
           <div className="p-2 w-70 border border-black rounded-md bg-amber-200 absolute top-5 right-5 z-[10000] shadow-2xl">
-            <img
+            <Image
               src={product.imgUrl}
+              alt="imgUrl"
               className="w-full h-60 object-cover border border-black"
             />
 
-            <div className="font-semibold text-xl pt-2">{product.title}</div>
+            <div className="font-semibold text-xl pt-2">{product?.title}</div>
             <div className="w-full h-0.5 bg-black my-2 scale-y-50"></div>
 
             <div className="flex justify-between items-center">

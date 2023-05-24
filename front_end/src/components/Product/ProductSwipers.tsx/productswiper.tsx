@@ -9,6 +9,7 @@ import axios from "axios";
 import Link from "next/link";
 import { CartContext } from "@/context/CartContext";
 import like from "../../../../public/images/like.png";
+import { BASE_URL_API } from "../../../util/variables";
 
 const ProductSwipers = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const ProductSwipers = () => {
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get("http://localhost:9000/products");
+      const result = await axios.get(`${BASE_URL_API}/products`);
 
       setProducts(result.data.products);
     } catch (err) {
@@ -89,7 +90,7 @@ const ProductSwipers = () => {
                   <div className="flex justify-between items-center">
                     <p className="font-bold">{product.price}₮</p>
                     <button onClick={() => updateCard(product, "inc")}>
-                      <Image src={like} width={30} />
+                      <Image src={like} alt="photo" width={30} />
                     </button>
                   </div>
                 </div>

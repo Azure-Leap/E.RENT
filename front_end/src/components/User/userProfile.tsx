@@ -7,6 +7,7 @@ import Bookmark from "@/components/UserComp/Bookmark";
 import { AuthContext } from "@/context/AuthContext";
 import axios from "axios";
 import Link from "next/link";
+import { BASE_URL_API } from "../../util/variables";
 
 const COMPONENTS = [
   {
@@ -49,7 +50,7 @@ const UserProfile = () => {
 
   const updatedUser = async () => {
     try {
-      const res = await axios.put(`http://localhost:9000/user/${user._id}`, { name, email, phone, address, profileImg });
+      const res = await axios.put(`${BASE_URL_API}/user/${user._id}`, { name, email, phone, address, profileImg });
       setUserData(res.data.user);
     } catch (err) {
       console.log("ERROR", err);

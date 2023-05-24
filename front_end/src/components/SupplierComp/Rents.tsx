@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import "swiper/css";
-import Product from "../product";
+
 import axios from "axios";
 import Link from "next/link";
 

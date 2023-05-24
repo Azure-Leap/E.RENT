@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { AuthContext } from "./AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
+import { BASE_URL_API } from "@/util/variables";
 
 export const CartContext = createContext<any>(null);
 
@@ -27,8 +28,6 @@ export function CartProvider({ children }: any) {
     const prevProductIdx = items?.findIndex(
       (item) => item?.product._id === product?._id
     );
-
-    console.log(type);
     if (prevProductIdx > -1) {
       const cnt =
         type === "inc"
@@ -43,7 +42,102 @@ export function CartProvider({ children }: any) {
     }
     localStorage.setItem("card", JSON.stringify(items));
     setCartItems(items);
+
+    // addItemToCart();
   };
+  // const deleteItemFromCart = (product:{_id:any}) => {
+  //   const newCartItems = cartItems?.filter((item) => item?.product?._id !== _id);
+
+  //   localStorage.setItem("card", JSON.stringify({ items: newCartItems }));
+  //   setCartItems(items);
+  // };
+
+  // backEnd ruu cartItems yabuulah huselt
+  const addItemToCart = async () => {
+    if (!user) {
+      toast.warn("Нэвтэрнэ үү");
+      return router.replace("/login");
+    }
+
+    const getCard = localStorage.getItem("card") as string;
+    const value = JSON.parse(getCard);
+    if (value) {
+      addItemToCardToServer(user._id, value);
+    }
+  };
+
+  const addItemToCardToServer = async (uid: string, value: object) => {
+    try {
+      // console.log("SERVER START", uid);
+      // console.log("SERVER START", value);
+      console.log("SERVER TRY");
+      const res2 = await axios.post(
+        `${BASE_URL_API}/carts/`,
+        {
+          cartItems: value,
+          userId: uid,
+        },
+        { headers: { Authorization: "Bearer" + localStorage.getItem("token") } }
+      );
+      console.log("RES", res2.data);
+      setCartItems(res2.data.cartList);
+      localStorage.removeItem("card");
+      console.log("SERVER END");
+      toast.success("Amjilttai ");
+    } catch (error) {
+      console.log("Error", error);
+      console.log("SERVER ERROR");
+    }
+    localStorage.setItem("card", JSON.stringify(value));
+    setCartItems(value);
+  };
+
+  const getCartList = async () => {
+    if (!user) {
+      const getCard = localStorage.getItem("card") as string;
+      const value = JSON.parse(getCard);
+      setCartItems(value);
+    }
+
+    if (!cartItems) {
+      const res: any = await axios.get(
+        `{BASE_URL_API}/carts/carts/${user._id}`
+      );
+      console.log("RES", res?.data?.cartItems[0]);
+      setCartItems(res?.data?.cartItems[0]);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      addItemToCart();
+      getCartList();
+    }
+  }, [user]);
+
+  // useEffect(() => {
+  //   if (user) {
+  //     // addItemToCart();
+  //   }
+  // }, []);
+
+  // const removeItemFromCart = async (pId: string, userId: string) => {
+  //   // setUserId(userId);
+  //   try {
+  //     const res = await axios.post(
+  //       "http://localhost:9000/carts/",
+  //       {
+  //         pId,
+  //         userId,
+  //       },
+  //       { headers: { Authorization: "Bearer" + localStorage.getItem("token") } }
+  //     );
+  //     console.log("RES", res.data.cartList.productList);
+  //     setCartItems(res.data.cartList.productList);
+  //   } catch (error) {
+  //     console.log("Error", error);
+  //   }
+  // };
 
   useEffect(() => {
     const localCard = localStorage.getItem("card") as string;

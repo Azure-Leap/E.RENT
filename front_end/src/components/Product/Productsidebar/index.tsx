@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import logo from "../../../assets/images/e.rent.png";
 import axios from "axios";
+import { BASE_URL_API } from "@/util/variables";
 
 const ProductSideBar = () => {
   const [categories, setCategories] = useState<any[]>([]);
@@ -14,8 +16,8 @@ const ProductSideBar = () => {
   };
 
   const fetchData = async () => {
-    const cat: any = await axios.get(`http://localhost:9000/categories`);
-    const sub: any = await axios.get(`http://localhost:9000/subcategories`);
+    const cat: any = await axios.get(`${BASE_URL_API}/categories`);
+    const sub: any = await axios.get(`${BASE_URL_API}/subcategories`);
 
     console.log("CAT", cat);
     console.log("Sub", sub);

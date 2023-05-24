@@ -104,7 +104,7 @@ const Login = () => {
                 {/*  */}
                 <div>
                   <button
-                    className={`mx-4 p-5 bg-violet-300 ${
+                    className={`mx-4 p-5  ${
                       role === "user" ? "bg-violet-300" : "bg-red-300"
                     }`}
                     onClick={() => setRole("user")}
@@ -112,7 +112,7 @@ const Login = () => {
                     Хэрэглэгч
                   </button>
                   <button
-                    className={`mx-4 p-5 bg-violet-300 ${
+                    className={`mx-4 p-5  ${
                       role === "supplier" ? "bg-violet-300" : "bg-red-300"
                     }`}
                     onClick={() => setRole("supplier")}

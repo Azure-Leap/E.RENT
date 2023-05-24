@@ -97,11 +97,13 @@ const SupplierRegister = async (req: Request, res: Response, next: NextFunction)
 
 const SupplierLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
+    console.log("REQ",req.body)
     const supplier:any = await Supplier.findOne({ email: req.body.email }).select("+password");
     if (!supplier) {
       res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
     } else {
-      const checkPass = bcrypt.compareSync(req.body.password, supplier.password.toString());
+      console.log("F",supplier)
+      const checkPass = await bcrypt.compare(req.body.password, supplier.password)
       if (!checkPass) {
         res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
       }

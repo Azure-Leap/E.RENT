@@ -9,8 +9,10 @@ import { Fragment, useEffect, useRef, useState, useContext } from "react";
 import { CartContext } from "@/context/CartContext";
 import like from "../../../public/images/like.png";
 import { AuthContext } from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
 const Dele = () => {
+  const router = useRouter();
   const { user, setUser, supplier, setSupplier } = useContext<any>(AuthContext);
   const { cartItems }: any = useContext(CartContext);
   const [role, setrole] = useState("user");
@@ -19,17 +21,24 @@ const Dele = () => {
     try {
       if (role === "user") {
         setUser(null);
+        setSupplier(null);
         localStorage.removeItem("user");
+        localStorage.removeItem("supplier");
         localStorage.removeItem("card");
         // setCartItems = null;
       } else {
+        setUser(null);
         setSupplier(null);
+        localStorage.removeItem("user");
         localStorage.removeItem("supplier");
+        localStorage.removeItem("card");
       }
     } catch (err) {
       console.log("ERROR", err);
     }
+    router.push("/");
   };
+
   const handleOut = (go: any) => {
     if ("Гарах" === go) {
       logout();
@@ -146,10 +155,18 @@ const Dele = () => {
                                     ? "bg-green-500 text-white"
                                     : "text-gray-900"
                                 } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+                                onClick={() => {
+                                  if (user) {
+                                    router.push("/user");
+                                  } else {
+                                    router.push("/Supplier");
+                                  }
+                                  //   <Link href={user ? "/user" : "/supplier"}>
+                                  //   Профайл
+                                  // </Link>
+                                }}
                               >
-                                <Link href={user ? "/user" : "/supplier"}>
-                                  Профайл
-                                </Link>
+                                Профайл
                               </button>
                             )}
                           </Menu.Item>

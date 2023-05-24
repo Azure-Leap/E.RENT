@@ -4,13 +4,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { BASE_URL_API } from "@/util/variables";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get("http://localhost:9000/products");
+      const result = await axios.get(`${BASE_URL_API}/products`);
       console.log(result.data.products);
       setProducts(result.data.products);
     } catch (err) {

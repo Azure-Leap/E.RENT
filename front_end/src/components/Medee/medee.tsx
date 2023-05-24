@@ -38,7 +38,7 @@ const Medee = () => {
           </div>
           <div className="text-black shadow-lg border border-black md:hover:-translate-y-3 ease-in duration-300">
             <Link href="/media/">
-              <Image src={medee3} alt="pic" />
+              <Image src={medee3} alt="pic1" />
             </Link>
             <footer className="pt-3 p-2">
               <Link href="/">
@@ -51,7 +51,7 @@ const Medee = () => {
           </div>
           <div className="text-black shadow-lg border border-black md:hover:-translate-y-3 ease-in duration-300">
             <Link href="/media/">
-              <Image src={medee1} />
+              <Image src={medee1} alt="pic5" />
             </Link>
             <footer className="pt-3 p-2">
               <Link href="/">
@@ -64,7 +64,7 @@ const Medee = () => {
           </div>
           <div className="text-black shadow-lg border border-black md:hover:-translate-y-3 ease-in duration-300">
             <Link href="/media/">
-              <Image src={medee3} />
+              <Image src={medee3} alt="pic3" />
             </Link>
             <footer className="pt-3 p-2">
               <Link href="/">

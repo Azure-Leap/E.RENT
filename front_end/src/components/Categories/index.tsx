@@ -1,5 +1,5 @@
 import Category from "@/components/Category";
-import axios from "axios";
+import { BASE_URL_API } from "@/util/variables";
 import React, { useState, useEffect } from "react";
 
 const CategoryList = () => {
@@ -8,11 +8,13 @@ const CategoryList = () => {
 
   const fetchData = async () => {
     try {
-      const res = await axios.get(`http://localhost:9000/categories`);
-      const res1 = await axios.get(`http://localhost:9000/subcategories`);
+      const res = await fetch(`${BASE_URL_API}/categories`);
+      const data = await res.json();
+      const res1 = await fetch(`${BASE_URL_API}/subcategories`);
+      const data1 = await res1.json();
 
-      setCategories(res.data?.categories);
-      setSubCategories(res1.data?.categories);
+      setCategories(data?.categories);
+      setSubCategories(data?.categories);
     } catch (error) {
       console.log("ERR", error);
     }
