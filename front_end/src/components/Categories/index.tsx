@@ -1,4 +1,5 @@
 import Category from "@/components/Category";
+import { BASE_URL_API } from "@/util/variables";
 import React, { useState, useEffect } from "react";
 
 const CategoryList = () => {
@@ -6,9 +7,9 @@ const CategoryList = () => {
   const [subCategories, setSubCategories] = useState([]);
 
   const fetchData = async () => {
-    const res = await fetch(`https://erent.onrender.com/categories`);
+    const res = await fetch(`${BASE_URL_API}/categories`);
     const data = await res.json();
-    const res1 = await fetch(`https://erent.onrender.com/subcategories`);
+    const res1 = await fetch(`${BASE_URL_API}/subcategories`);
     const data1 = await res1.json();
 
     setCategories(data?.categories);

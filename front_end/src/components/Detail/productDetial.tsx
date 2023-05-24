@@ -5,6 +5,7 @@ import box from "../../../public/images/box.png";
 import bosch from "../../../public/images/BOSCH.jpeg";
 import Link from "next/link";
 import { useContext } from "react";
+import { BASE_URL_API } from "@/util/variables";
 // import { CartContext } from "@/context/CartContext";
 
 const ProductDetial = ({ product }: any) => {
@@ -76,7 +77,7 @@ const ProductDetial = ({ product }: any) => {
 };
 
 export async function getServerSideProps({ query }: any) {
-  const result = await fetch(`https://erent.onrender.com/products/${query.productId}`);
+  const result = await fetch(`${BASE_URL_API}/products/${query.productId}`);
   const data = await result.json();
   return {
     props: { product: data.product },

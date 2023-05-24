@@ -5,6 +5,7 @@ import Link from "next/link";
 import axios from "axios";
 import { Dialog } from "@headlessui/react";
 import { ProductAxiosContext } from "@/context/ProductAxiosContext";
+import { BASE_URL_API } from "@/util/variables";
 
 const Sidebar1 = () => {
   const { subCat, setSubCat, getAllSubcategories, createProduct, handleChange, travelBarilt }: any = useContext(ProductAxiosContext);
@@ -13,7 +14,7 @@ const Sidebar1 = () => {
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get("https://erent.onrender.com/products", {});
+      const result = await axios.get(`${BASE_URL_API}/products`, {});
       console.log(result.data.products);
       setProducts(result.data.products);
     } catch (err) {
