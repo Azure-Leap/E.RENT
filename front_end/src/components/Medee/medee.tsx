@@ -17,7 +17,9 @@ const Medee = () => {
             <footer className="pt-3 p-2">
               <Link href="/">
                 <h6 className="font-light text-sm">2023/4/30</h6>
-                <h4 className="font-semibold text-sm pt-1 ">БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД</h4>
+                <h4 className="font-semibold text-sm pt-1 ">
+                  БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД
+                </h4>
               </Link>
             </footer>
           </div>
@@ -28,7 +30,9 @@ const Medee = () => {
             <footer className="pt-3 p-2">
               <Link href="/">
                 <h6 className="font-light text-sm">2023/4/30</h6>
-                <h4 className="font-semibold text-sm pt-1">БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД</h4>
+                <h4 className="font-semibold text-sm pt-1">
+                  БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД
+                </h4>
               </Link>
             </footer>
           </div>
@@ -39,34 +43,36 @@ const Medee = () => {
             <footer className="pt-3 p-2">
               <Link href="/">
                 <h6 className="font-light text-sm">2023/4/30</h6>
-                <h4 className="font-semibold text-sm pt-1">БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД</h4>
+                <h4 className="font-semibold text-sm pt-1">
+                  БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД
+                </h4>
               </Link>
             </footer>
           </div>
           <div className="text-black shadow-lg border border-black md:hover:-translate-y-3 ease-in duration-300">
-            <a href="/media/">
+            <Link href="/media/">
               <Image src={medee1} />
-            </a>
+            </Link>
             <footer className="pt-3 p-2">
-              <a href="/">
+              <Link href="/">
                 <h6 className="font-light text-sm">2023/4/30</h6>
                 <h4 className="font-semibold text-sm pt-1 ">
                   БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД
                 </h4>
-              </a>
+              </Link>
             </footer>
           </div>
           <div className="text-black shadow-lg border border-black md:hover:-translate-y-3 ease-in duration-300">
-            <a href="/media/">
+            <Link href="/media/">
               <Image src={medee3} />
-            </a>
+            </Link>
             <footer className="pt-3 p-2">
-              <a href="/">
+              <Link href="/">
                 <h6 className="font-light text-sm">2023/4/30</h6>
                 <h4 className="font-semibold text-sm pt-1">
                   БОГИНО ДОЛГИОНЫ ЗУУХНЫ ТАЛААРХ БУРУУ ОЙЛГОЛТУУД
                 </h4>
-              </a>
+              </Link>
             </footer>
           </div>
         </div>

@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { getAllSuppliers, getSupplier, updtadeSupplier, SupplierRegister, SupplierLogin, deleteSupplier } from "../controllers/supplierControllers";
+import { getAllSuppliers,getSupplier, updtadeSupplier, SupplierRegister, SupplierLogin, deleteSupplier } from "../controllers/supplierControllers";
 
 const router = Router();
 
-router.route("/register").post(createSupplier);
+router.route("/register").post(SupplierRegister);
 router.route("/login").post(SupplierLogin);
 
 router.route("/").get(getAllSuppliers);

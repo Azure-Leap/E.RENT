@@ -7,7 +7,7 @@ import { Dialog } from "@headlessui/react";
 import { ProductAxiosContext } from "@/context/ProductAxiosContext";
 import { motion } from "framer-motion";
 
-const Sidebar1 = () => {
+export const Sidebar1 = () => {
   const { subCat, setSubCat, getAllSubcategories, createProduct, handleChange, travelBarilt }: any = useContext(ProductAxiosContext);
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -135,16 +135,6 @@ const Sidebar1 = () => {
                           {el.title}
                         </option>
                       ))}
-                      {/* <option value="Гэрийн Тавилга">Гэрийн Тавилга</option>
-                      <option value="Эрэгтэй & Эмэгтэй">
-                        Эрэгтэй & Эмэгтэй
-                      </option>
-                      <option value="Хүүхэд">Хүүхэд</option>
-                      <option value="Цахилгаан хэрэгсэл">
-                        Цахилгаан хэрэгсэл
-                      </option>
-                      <option value="Цахилгаан хэрэгсэл">Компьютер</option>
-                      <option value="Цахилгаан хэрэгсэл">Машин</option> */}
                     </select>
                   </div>
                   <div className="grid grid-cols-1 pt-5">
@@ -168,49 +158,46 @@ const Sidebar1 = () => {
       <div className="grid md:grid-cols-6 sm:grid-cols-2  gap-4">
         {products?.length > 0 &&
           products?.map((product: any, index: number) => (
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: {
-            scale: 0.8,
-            opacity: 0,
-          },
-          visible: {
-            scale: 1,
-            opacity: 1,
-            transition: {
-              delay: 0.8,
-            },
-          },
-        }}
-        className="grid md:grid-cols-6 sm:grid-cols-2  gap-4"
-      >
-        {products.length > 0 &&
-          products.map((product) => (
-            <>
-              <SwiperSlide key={index}>
-                <div className="p-2 border border-black rounded-md bg-zinc-50">
-                  <img src={product?.imgUrl} alt="pic" className="w-full h-60 object-cover" />
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: {
+                  scale: 0.8,
+                  opacity: 0,
+                },
+                visible: {
+                  scale: 1,
+                  opacity: 1,
+                  transition: {
+                    delay: 0.8,
+                  },
+                },
+              }}
+              className="grid md:grid-cols-6 sm:grid-cols-2  gap-4"
+            >
+              {products.length > 0 &&
+                products.map((product) => (
+                  <>
+                    <SwiperSlide key={index}>
+                      <div className="p-2 border border-black rounded-md bg-zinc-50">
+                        <img src={product?.imgUrl} alt="pic" className="w-full h-60 object-cover" />
 
-                  <Link className="font-semibold text-md pt-5  truncate" href={`Products/${product?._id}`}>
-                    {product?.title}
-                  </Link>
-                  <p className="font-extralight text-sm">Сагсны бөмбөг</p>
-                  <div className="flex justify-between items-center">
-                    <p className="font-bold">{product?.price}₮</p>
-                    <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
-                      Сагслах
-                    </button>
-                  </div>
-                </div>
-              </SwiperSlide>
-            </>
-          ))}
+                        <Link className="font-semibold text-md pt-5  truncate" href={`Products/${product?._id}`}>
+                          {product?.title}
+                        </Link>
+                        <p className="font-extralight text-sm">Сагсны бөмбөг</p>
+                        <div className="flex justify-between items-center">
+                          <p className="font-bold">{product?.price}₮</p>
+                          <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
+                            Сагслах
+                          </button>
+                        </div>
+                      </div>
+                    </SwiperSlide>
+                  </>
+                ))}
             </motion.div>
-            </div>
-
-  );
-};
-
-export default Sidebar1;
+          ))}
+      </div>
+    </div>

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
@@ -49,16 +51,21 @@ const CARD_DATAS = [
 
 const All = () => {
   const [ongoi, setOngoi] = useState(false);
-  const [selectedPerson, setSelectedPerson] = React.useState({
+  const [selectedPerson, setSelectedPerson] = useState({
     name: "",
     url: "",
     bolovsrol: "",
+    roles: "",
+    on: "",
+    on1: "",
+    on2: "",
+    on3: "",
   });
 
   const handleOpen = () => setOngoi(true);
   const handleClose = () => setOngoi(false);
 
-  const handleClicked = (person) => {
+  const handleClicked = (person: any) => {
     setSelectedPerson(person);
     handleOpen();
   };
@@ -137,7 +144,7 @@ const All = () => {
                       {selectedPerson.on1}
                     </div>
                     <div className="text-black text-sm">
-                      {selectedPerson.bolovsrol1}
+                      {selectedPerson.bolovsrol}
                     </div>
                   </div>
                   <div className="my-3">
@@ -146,7 +153,7 @@ const All = () => {
                     </div>
                     <div className="text-black text-sm">
                       {" "}
-                      {selectedPerson.bolovsrol2}
+                      {selectedPerson.bolovsrol}
                     </div>
                   </div>
                 </div>

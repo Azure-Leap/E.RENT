@@ -97,7 +97,7 @@ const SupplierRegister = async (req: Request, res: Response, next: NextFunction)
 
 const SupplierLogin = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const supplier = await Supplier.findOne({ email: req.body.email }).select("+password");
+    const supplier:any = await Supplier.findOne({ email: req.body.email }).select("+password");
     if (!supplier) {
       res.status(400).json({ message: `Имэйл эсвэл нууц үг буруу байна` });
     } else {

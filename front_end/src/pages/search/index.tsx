@@ -20,7 +20,7 @@ const Search = () => {
 
   useEffect(() => {
     fetchData();
-  },[]);
+  }, []);
 
   return (
     <div className="container grid grid-cols-4 p-10 gap-5">
@@ -34,13 +34,5 @@ const Search = () => {
     </div>
   );
 };
-// export async function getServerSideProps() {
-//   const router = useRouter();
-//   console.log(router.query);
-//   const res = await fetch(`http://localhost:9000/products/`);
-//   const data = await res.json();
-//   console.log("PP", data);
 
-//   return { props: { products: data.products } };
-// }
 export default Search;

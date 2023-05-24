@@ -1,4 +1,5 @@
 import Category from "@/components/Category";
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 
 const CategoryList = () => {
@@ -6,13 +7,15 @@ const CategoryList = () => {
   const [subCategories, setSubCategories] = useState([]);
 
   const fetchData = async () => {
-    const res = await fetch(`http://localhost:9000/categories`);
-    const data = await res.json();
-    const res1 = await fetch(`http://localhost:9000/subcategories`);
-    const data1 = await res1.json();
+    try {
+      const res = await axios.get(`http://localhost:9000/categories`);
+      const res1 = await axios.get(`http://localhost:9000/subcategories`);
 
-    setCategories(data?.categories);
-    setSubCategories(data1?.categories);
+      setCategories(res.data?.categories);
+      setSubCategories(res1.data?.categories);
+    } catch (error) {
+      console.log("ERR", error);
+    }
   };
 
   useEffect(() => {

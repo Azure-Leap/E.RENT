@@ -8,6 +8,7 @@ import axios from "axios";
 import { AuthContext } from "@/context/AuthContext";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+import Image from "next/image";
 
 const Avatar = dynamic(() => import("react-avatar-edit"), { ssr: false });
 
@@ -84,7 +85,7 @@ const SupplierProfile = () => {
           <div className="text-center pt-20">
             <div style={{ width: "120px" }} className="flex mx-auto ">
               {preview && (
-                <img
+                <Image
                   className="border-2 border-black rounded-full"
                   src={preview}
                 />

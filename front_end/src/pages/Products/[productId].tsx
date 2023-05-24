@@ -1,5 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect } from "react";
 import React, { useContext, useState } from "react";
 import { CartContext } from "@/context/CartContext";
 import { useRouter } from "next/router";
@@ -13,14 +13,16 @@ import dynamic from "next/dynamic";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import like from "../../../public/images/like.png";
 const Avatar = dynamic(() => import("react-avatar-edit"), { ssr: false });
 
 const Detail = ({ product }: any) => {
   const router = useRouter();
+  const { cartItems, updateCard } = useContext(CartContext);
+  let [isOpen, setIsOpen] = useState(true);
   console.log("mm===>", product);
-
-  const { cartItems, addItemToCart, addCartToList, updateCard }: any =
-    useContext(CartContext);
+  // const { cartItems, addItemToCart, addCartToList, updateCard }: any =
+  //   useContext(CartContext);
   // const addCartItem = (_id: string, price: number) => {
   //   console.log("manai cartItems:", cartItems);
   //   const isHaveProduct = cartItems.filter((item: any) => item._id == _id);
@@ -30,14 +32,9 @@ const Detail = ({ product }: any) => {
   //     setCartItems(cartItems.push({ _id, price, quantity: 1 }));
   //   }
   // };
-
   if (router.isFallback) {
     return <div>Уншиж байна ...</div>;
   }
-
-  const { cartItems, updateCard } = useContext(CartContext);
-
-  let [isOpen, setIsOpen] = useState(true);
 
   function closeModal() {
     setIsOpen(false);
@@ -60,7 +57,7 @@ const Detail = ({ product }: any) => {
                   {product.title}
                 </h1>
                 <button onClick={() => updateCard(product, "inc")}>
-                  <Image src={like} width={40} />
+                  <Image src={like || ""} alt="photo" width={40} />
                 </button>
               </div>
               <p className="md:font-normal  sm:font-extralight sm:text-sm  ">

@@ -7,7 +7,7 @@ import { AuthContext } from "./AuthContext";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-export const CartContext = createContext({});
+export const CartContext = createContext<any>(null);
 
 export function CartProvider({ children }: any) {
   const [cartItems, setCartItems] = useState<any>(null);

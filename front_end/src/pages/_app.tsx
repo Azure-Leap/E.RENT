@@ -2,22 +2,20 @@ import "@/styles/globals.css";
 import "../../node_modules/leaflet/dist/leaflet.css";
 import type { AppProps } from "next/app";
 import { NavContext } from "@/context/NavContext";
-import AuthProvider from "@/context/AuthContext";
-import CartProvider from "@/context/CartContext";
+import { AuthProvider } from "@/context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProductAxiosProvider, {
   ProductAxiosContext,
 } from "@/context/ProductAxiosContext";
-import { CartContextProvider } from "@/context/CartContext";
-import { useEffect } from "react";
+import CartProvider from "@/context/CartContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   // useEffect(() => localStorage.removeItem("supplier"));
   // useEffect(() => localStorage.removeItem("user"));
   return (
     <AuthProvider>
-      <CartContextProvider>
+      <CartProvider>
         <NavContext>
           <ProductAxiosProvider>
             <Component {...pageProps} />
@@ -25,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             {/* <Footer /> */}
           </ProductAxiosProvider>
         </NavContext>
-      </CartContextProvider>
+      </CartProvider>
     </AuthProvider>
   );
 }
