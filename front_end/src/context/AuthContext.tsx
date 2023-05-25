@@ -1,5 +1,6 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
+import { CartContext } from "./CartContext";
 
 export const AuthContext = createContext<any>(null);
 
@@ -12,12 +13,14 @@ export const AuthProvider = ({ children }: any) => {
   useEffect(() => {
     const us = localStorage.getItem("user");
     const sup = localStorage.getItem("supplier");
+    const tok = localStorage.getItem("token");
     if (us) {
       setUser(JSON.parse(us));
     }
     if (sup) {
       setSupplier(JSON.parse(sup));
     }
+    setToken(tok);
   }, []);
 
   const setSupplierData = (data: any) => {
@@ -28,11 +31,23 @@ export const AuthProvider = ({ children }: any) => {
   const setUserData = (data: any) => {
     setUser(data);
     localStorage.setItem("user", JSON.stringify(data));
+    setToken(data.token);
+    localStorage.setItem("token", JSON.stringify(data.token));
   };
+
+  const logout = () => {
+    console.log("Logout Start");
+    setUser(null);
+    setToken(null);
+    localStorage.clear();
+    console.log("Logout End");
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        logout,
         token,
         setUserData,
         setToken,

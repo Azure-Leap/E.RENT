@@ -14,12 +14,15 @@ const orderSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ["CREATED", "PROCESSING", "CANCELLED"],
+      enum: ["CREATED", "PROCESSING", "CANCELLED", "COMPLETED"],
       default: "CREATED",
     },
     transactStatus: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Payment_status",
+      qty: String,
+      status: { type: String, enum: ["PENDING", "SUCCESS"], default: "Pending" },
+      amount: {
+        type: Number,
+      },
     },
     order_date: {
       type: Date,

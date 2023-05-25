@@ -2,6 +2,7 @@ import ProductCard from "@/components/Product/ProductCard";
 
 // import ProductSwiper from "@/components/Product/ProductCard/ProductSwiper";
 import ProductSideBar from "@/components/Product/Productsidebar";
+import { BASE_URL_API } from "@/util/variables";
 // import Link from "next/link";
 // const product = ({ product }: any) => {
 //   const router = useRouter();
@@ -26,7 +27,7 @@ const ProductList = ({ products }: any) => {
 };
 
 export async function getServerSideProps() {
-  const res = await fetch(`https://erent.onrender.com/products/`);
+  const res = await fetch(`${BASE_URL_API}/products/`);
   const data = await res.json();
   console.log("PP", data);
 

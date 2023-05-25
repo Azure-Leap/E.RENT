@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect } from "react";
 import axios from "axios";
 
@@ -7,6 +8,7 @@ import NavLayout from "@/Layout/NavLayout";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Contact from "./contact";
+import { BASE_URL_API } from "@/util/variables";
 const Map = dynamic(() => import("../../components/MapClient/map"), {
   ssr: false,
 });
@@ -20,7 +22,7 @@ const MapDetail = () => {
     const getProduct = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:9000/products/${router.query.map}`
+          `${BASE_URL_API}/products/${router.query.map}`
         );
         console.log("PP", result.data.product);
         setProduct(result.data.product);

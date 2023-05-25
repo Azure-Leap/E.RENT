@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -7,13 +8,14 @@ import "swiper/css";
 
 import axios from "axios";
 import Link from "next/link";
+import { BASE_URL_API } from "@/util/variables";
 
 const Rents = () => {
   const [products, setProducts] = useState([]);
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get("http://localhost:9000/products");
+      const result = await axios.get(`${BASE_URL_API}/products`);
       console.log(result.data.products);
       setProducts(result.data.products);
     } catch (err) {
@@ -68,7 +70,7 @@ const Rents = () => {
             <>
               <SwiperSlide>
                 <div className="p-2 border border-slate-600 rounded-md bg-zinc-50">
-                  <img src="" className="w-full h-44 object-cover" />
+                  <img src="" alt="pic" className="w-full h-44 object-cover" />
 
                   <Link
                     className="font-semibold text-md pt-5 text-left truncate"
