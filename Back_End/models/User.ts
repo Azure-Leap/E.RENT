@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import mongoose from "mongoose";
 import supplier from "./Supplier";
 
 const UserSchema = new mongoose.Schema(
@@ -34,6 +33,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       enum: ["user", "supplier"],
       default: "user",
+    },
+    favProduct: {
+      type: Schema.Types.ObjectId,
+      ref: "Product",
     },
   },
   { timestamps: true }

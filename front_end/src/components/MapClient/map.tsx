@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { Marker } from "react-leaflet";
 import axios from "axios";
 import L from "leaflet";
+import { BASE_URL_API } from "@/util/variables";
 
 function GetIcon() {
   return L.icon({
@@ -20,7 +21,7 @@ const Map = () => {
     const getProduct = async () => {
       try {
         const result = await axios.get(
-          `http://localhost:9000/products/${router.query.map}`
+          `${BASE_URL_API}/products/${router.query.map}`
         );
         console.log("PP", result.data.product);
         setProduct(result.data.product);

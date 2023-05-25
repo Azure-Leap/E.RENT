@@ -12,7 +12,7 @@ import ProductRoutes from "./routes/ProductRoutes";
 import OrderRoutes from "./routes/OrderRoutes";
 import UserRoutes from "./routes/userRoutes";
 import SupplierRoutes from "./routes/supplierRoutes";
-import sendEmail from "./utils/sendEmail";
+// import sendEmail from "./utils/sendEmail";
 
 import cartListRoutes from "./routes/cartListRoutes";
 import fileUpload from "express-fileupload";
@@ -30,13 +30,13 @@ app.use(
   })
 );
 
-app.get("/", async (res: Response, req: Request) => {
-  try {
-    const r = await sendEmail("Muugii", "azure.munkhtsetseg.urtnasan@gmail.com", "batalgaajuulah code");
-  } catch (err) {
-    console.log("first");
-  }
-});
+// app.get("/", async (res: Response, req: Request) => {
+//   try {
+//     const r = await sendEmail("Muugii", "azure.munkhtsetseg.urtnasan@gmail.com", "batalgaajuulah code");
+//   } catch (err) {
+//     console.log("first");
+//   }
+// });
 
 app.post("/upload", async (req: any, res: Response) => {
   console.log("REQ:", req.files.image);

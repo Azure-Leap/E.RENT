@@ -7,6 +7,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
+import { BASE_URL_API } from "@/util/variables";
 
 const Register = () => {
   const [role, setRole] = useState("User");
@@ -52,7 +53,7 @@ const Register = () => {
     console.log("ROLE", role);
     console.log("Name", name);
     try {
-      const url = role === "user" ? `https://erent.onrender.com/auth/register` : `https://erent.onrender.com/supplier/register`;
+      const url = role === "user" ? `${BASE_URL_API}/auth/register` : `${BASE_URL_API}/supplier/register`;
       const data = { name, email, password, phone, address, profileImg, cardNumber, role };
 
       const result = await axios.post(url, data); //user register

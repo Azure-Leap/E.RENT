@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import Left02 from "@/components/Payments/Left02";
 import Left03 from "@/components/Payments/Left03";

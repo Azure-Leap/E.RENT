@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect, useContext } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -76,7 +77,7 @@ const ProductSwipers = () => {
                   className="p-2 border border-slate-600 rounded-md bg-zinc-50"
                   key={idx}
                 >
-                  <img
+                  <img alt="pic"
                     src={product.imgUrl}
                     className="w-full h-60 object-cover "
                   />

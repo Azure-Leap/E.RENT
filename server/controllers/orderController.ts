@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import Order from "../models/Order";
+import CartModel from "../models/CartItem";
 // get all Orders
 export const getAllOrder = async (req: Request, res: Response) => {
   try {
@@ -28,9 +29,22 @@ export const getOrder = async (req: Request, res: Response) => {
 };
 
 export const createOrder = async (req: Request, res: Response) => {
-  const newOrder = req.body;
+  const { cardData } = req.body;
+  console.log("CD", cardData);
   try {
+    const newOrder = {
+      user: cardData.user,
+      cart_item: cardData,
+      status: "CREATED",
+      transactStatus: {
+        qty: cardData.totalQuantity,
+        amount: cardData.totalPrice,
+        status: "PENDING",
+      },
+      order_date: new Date(),
+    };
     const order = await Order.create(newOrder);
+    await CartModel.findByIdAndDelete(cardData._id);
     res.status(200).json({ message: "Захиалга амжилттай үүслээ", order });
   } catch (error: any) {
     res.status(400).json({ message: "Алдааны мэдээлэл", error: error.message });

@@ -29,7 +29,7 @@ const ProductSideBar = () => {
   useEffect(() => {
     fetchData();
     handleClick();
-  }, [handleClick]);
+  }, []);
 
   return (
     <div className="flex h-screen w-64 flex-col justify-between bg-gray-50 text-cyan-500">

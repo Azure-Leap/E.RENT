@@ -1,14 +1,13 @@
 import React from "react";
-
 import NavLayout from "@/Layout/NavLayout";
-import CartSection from "@/components/Cart/cartSection";
+import FavSection from "@/components/Fav/favSection";
 
-const Cart = () => {
+const Fav = () => {
   return (
     <NavLayout>
-      <CartSection />
+      <FavSection />
     </NavLayout>
   );
 };
 
-export default Cart;
+export default Fav;

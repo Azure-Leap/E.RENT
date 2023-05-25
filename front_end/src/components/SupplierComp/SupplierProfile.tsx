@@ -7,6 +7,7 @@ import { AuthContext } from "@/context/AuthContext";
 import axios from "axios";
 import { TextField } from "@mui/material";
 import Link from "next/link";
+  import { BASE_URL_API } from "@/util/variables";
 const COMPONENTS = [
   {
     title: "Түрээслүүлсэн бараа",
@@ -29,6 +30,7 @@ const SupplierProfile = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [profileImg, setProfileImg] = useState("");
+  const [role, setRole] = useState("");
 
   const handleClicked = (eko: string) => {
     setSelectedComponent(selectedComponent);
@@ -36,10 +38,7 @@ const SupplierProfile = () => {
 
   const updatedSupplier = async () => {
     try {
-      const res = await axios.put(
-        `http://localhost:9000/supplier/${supplier._id}`,
-        { name, email, phone, address, profileImg }
-      );
+      const res = await axios.put(`${BASE_URL_API}/supplier/${supplier._id}`, { name, email, phone, address, profileImg });
 
       setSupplierData(res.data.supplier);
     } catch (err) {
@@ -54,16 +53,13 @@ const SupplierProfile = () => {
           <div className="flex justify-center ">
             <img src={supplier?.profileImg} width={100} />
           </div>
-          <h1 className="font-semibold text-zinc-600 text-xl pt-5">
-            {supplier?.name}
-          </h1>
+          <h1 className="font-semibold text-zinc-600 text-xl pt-5">{supplier?.name}</h1>
           <p className="font-light text-zinc-600 "> Улаанбаатар хот</p>
           <div className="p-5">
             <button
               onClick={updatedSupplier}
               style={{
-                background:
-                  "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
               }}
               className="w-40 h-12 rounded-lg text-white font-semibold text-lg"
             >
@@ -75,9 +71,7 @@ const SupplierProfile = () => {
       <div className="bg-white md:col-span-2 rounded-xl">
         <div className="h-96 p-10 rounded-2xl">
           <div className="flex justify-between p-4">
-            <h1 className="font-medium text-xl text-stone-900">
-              Түрээслүүлэгчийн Нэр
-            </h1>
+            <h1 className="font-medium text-xl text-stone-900">Түрээслүүлэгчийн Нэр</h1>
             <input
               className="text-stone-500 border-none outline-none text-end"
               value={supplier?.name}
@@ -89,38 +83,23 @@ const SupplierProfile = () => {
           <div className="w-full h-0.5 bg-black my-2 scale-y-50 "></div>
           <div className="flex justify-between p-4">
             <h1 className="font-medium text-xl text-stone-900">Имэйл</h1>
-            <input
-              className="text-stone-500 border-none outline-none text-end"
-              value={supplier?.email}
-              onChange={(e: any) => setEmail(e.target.value)}
-            />
+            <input className="text-stone-500 border-none outline-none text-end" value={supplier?.email} onChange={(e: any) => setEmail(e.target.value)} />
           </div>
           <div className="w-full h-0.5 bg-black my-2 scale-y-50 "></div>
           <div className="flex justify-between p-4">
-            <h1 className="font-medium text-xl text-stone-900">
-              Утасны дугаар
-            </h1>{" "}
-            <input
-              className="border-none outline-none text-stone-500 text-end"
-              value={supplier?.phone}
-              onChange={(e: any) => setPhone(e.target.value)}
-            />
+            <h1 className="font-medium text-xl text-stone-900">Утасны дугаар</h1>{" "}
+            <input className="border-none outline-none text-stone-500 text-end" value={supplier?.phone} onChange={(e: any) => setPhone(e.target.value)} />
           </div>
           <div className="w-full h-0.5 bg-black my-2 scale-y-50 "></div>
           <div className="flex justify-between p-4">
             <h1 className="font-medium text-xl text-stone-900">Хаяг</h1>
-            <input
-              className="border-none outline-none text-stone-500 text-end"
-              value={supplier?.address}
-              onChange={(e: any) => setAddress(e.target.value)}
-            />
+            <input className="border-none outline-none text-stone-500 text-end" value={supplier?.address} onChange={(e: any) => setAddress(e.target.value)} />
           </div>
         </div>
         <div className="text-end p-3">
           <button
             style={{
-              background:
-                "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+              background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
             }}
             className="w-40 h-12 rounded-lg text-white font-semibold text-lg "
           >
@@ -139,9 +118,7 @@ const SupplierProfile = () => {
                   handleClicked(el);
                 }}
               >
-                <h1 className="lg:font-bold text-cyan-600 md:text-lg md:font-semibold border-2  border-cyan-600 rounded-lg">
-                  {el.title}
-                </h1>
+                <h1 className="lg:font-bold text-cyan-600 md:text-lg md:font-semibold border-2  border-cyan-600 rounded-lg">{el.title}</h1>
               </div>
             ))}
           </div>

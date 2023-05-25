@@ -95,3 +95,18 @@ export const deleteUser = async (req: Request, res: Response) => {
     console.log("алдаа", error);
   }
 };
+
+//Fav Product
+export const getFavProduct = async (req: Request, res: Response) => {
+  const { id } = req.params; //userId
+  const { pId } = req.body;
+  console.log("UID", id);
+  console.log("PID", pId);
+  const user = await User.findOne({ _id: id });
+  console.log("Old", user);
+  user?.favProduct.push(pId);
+  const newuser = await (await user?.save())?.populate("favProduct");
+  console.log("NEW", newuser);
+
+  res.status(201).json({ success: true, favProduct: user?.favProduct });
+};
