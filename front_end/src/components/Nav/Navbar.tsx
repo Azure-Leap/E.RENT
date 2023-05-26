@@ -7,10 +7,10 @@ import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 
-const imgPic01 = require("../../assets/images/notification-bell.png");
-const imgPic02 = require("../../assets/images/navbar_cart.png");
-const imgPic03 = require("../../assets/images/navbar_avatar.png");
-const imgPic04 = require("../../assets/images/navbar_bookmark.png");
+// const imgPic01 = require("../../assets/images/notification-bell.png");
+// const imgPic02 = require("../../assets/images/navbar_cart.png");
+// const imgPic03 = require("../../assets/images/navbar_avatar.png");
+// const imgPic04 = require("../../assets/images/navbar_bookmark.png");
 
 interface Inav {
   nav: Boolean;
@@ -51,7 +51,7 @@ const Navbar = ({ products }: any) => {
           <form className="w-9/12 pl-10" onSubmit={handleSearch}>
             <div className="md:flex z-[-1] md:z-auto md:static absolute w-10/12 left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0  top-[-300px] transition-all ease-in duration-500">
               {/* bugd deer darahaar category dropdown hiih component  */}
-              <Subnav />
+              {/* <Subnav /> */}
 
               <div className="relative w-full mr-5">
                 <input
@@ -81,13 +81,13 @@ const Navbar = ({ products }: any) => {
             className="inline-flex items-center p-2 text-2xl text-cyan-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-cyan-400 dark:hover:bg-cyan-700 dark:focus:ring-gray-600"
           />
           <div id="navbar-search">
-            <div className=" lg:flex gap-10 w-3/12 md:hidden max-sm:hidden z-[-1] md:z-auto md:static absolute">
+            {/* <div className=" lg:flex gap-10 w-3/12 md:hidden max-sm:hidden z-[-1] md:z-auto md:static absolute">
               <Image src={imgPic01} alt="pic" height={35} width={35} />
               <Image src={imgPic04} alt="pic" height={35} width={35} />
               <Image src={imgPic02} alt="pic" height={35} width={35} />
               <span className="absolute top-5 right-36 text-[13px] bg-cyan-400 h-[18px] w-[18px] rounded-full place-item-center items-center text-white">0</span>
               <Image src={imgPic03} alt="pic" height={35} width={35} />
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

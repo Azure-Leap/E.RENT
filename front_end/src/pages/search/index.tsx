@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import NavLayout from "@/Layout/NavLayout";
 
 const Search = () => {
   const router = useRouter();
@@ -23,15 +24,17 @@ const Search = () => {
   }, []);
 
   return (
-    <div className="container grid grid-cols-4 p-10 gap-5">
-      {!isLoading ? (
-        products.map((product, index: number) => {
-          return <ProductCard product={product} key={index} />;
-        })
-      ) : (
-        <h1>Уншиж байна...</h1>
-      )}
-    </div>
+    <NavLayout>
+      <div className="container grid grid-cols-4 p-10 gap-5">
+        {!isLoading ? (
+          products.map((product, index: number) => {
+            return <ProductCard product={product} key={index} />;
+          })
+        ) : (
+          <h1 className="flex items-center justify-center">Уншиж байна...</h1>
+        )}
+      </div>
+    </NavLayout>
   );
 };
 

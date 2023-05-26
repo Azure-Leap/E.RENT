@@ -10,6 +10,7 @@ const ProductSideBar = () => {
   const [categories, setCategories] = useState<any[]>([]);
   const [subCategories, setSubCategories] = useState<any[]>([]);
   const [search, setSearch] = useState<any[]>([]);
+  const [change, setChange] = useState<any[]>([]);
 
   const handleClick = async () => {
     setSearch(search);
@@ -73,6 +74,7 @@ const ProductSideBar = () => {
                               <li
                                 className="mb-2 transition duration-300 ease-in-out hover:bg-cyan-300 hover:rounded-md hover:text-white"
                                 onClick={() => {
+                                 
                                   console.log("SS", subcat.type);
                                 }}
                               >

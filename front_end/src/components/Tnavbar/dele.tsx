@@ -11,18 +11,32 @@ import like from "../../../public/images/like.png";
 import { AuthContext } from "@/context/AuthContext";
 import { useRouter } from "next/router";
 import { BasketIcon } from "../../assets/images/icons";
+// import Navbar from "../Nav/Navbar";
+import axios from "axios";
+import { BASE_URL_API } from "@/util/variables";
 
 const Dele = () => {
   const router = useRouter();
   const { user, setUser, supplier, setSupplier, setToken, logout } = useContext<any>(AuthContext);
   const { cartItems, setCartItems, favItems, setFavItems }: any = useContext(CartContext);
   const [role, setRole] = useState("user");
+  const [search, setSearch] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleLogout = () => {
     console.log(setCartItems);
     setCartItems(null);
     setFavItems(null);
     logout();
+  };
+
+  const handleSearch = async (e: any) => {
+    e.preventDefault();
+    const { value } = e.target.searchInput;
+    console.log("value:", value);
+
+    router.push(`/search?title=${value}`);
   };
   const completion = useReadingProgress();
 
@@ -42,7 +56,34 @@ const Dele = () => {
                 <Link href="/services" className="block mt-4 lg:inline-block lg:mt-0 text-gray-600 font-medium text-lg hover:text-gray-400">
                   Үйлчилгээ
                 </Link>
-                <></>
+                <>
+                  <form className="w-9/12 pl-10" onSubmit={handleSearch}>
+                    <div className="md:flex z-[-1] md:z-auto md:static absolute w-10/12 left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0  top-[-300px] transition-all ease-in duration-500">
+                      {/* bugd deer darahaar category dropdown hiih component  */}
+                      {/* <Subnav /> */}
+
+                      <div className="relative w-full mr-5">
+                        <input
+                          type="search"
+                          id="search-dropdown"
+                          name="searchInput"
+                          className="block p-2.5  w-full z-20 text-sm  placeholder-cyan-500 rounded-r-md border-cyan-500"
+                          placeholder="Хайлт жишээ нь: search, хайх зүйлээ бичнэ үү..."
+                          required
+                        />
+                        <button
+                          type="submit"
+                          className="absolute top-0 right-0 p-2.5 text-sm font-medium text-white rounded-r-lg  hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 bg-transparent"
+                        >
+                          <svg aria-hidden="true" className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                          </svg>
+                          <span className="sr-only px-5">Хайх</span>
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </>
                 <Link href={"/fav"}>
                   <button className="relative scale-75">
                     <Image src={like} width={40} alt="fav" />
@@ -113,7 +154,7 @@ const Dele = () => {
                                   if (user) {
                                     router.push("/user");
                                   } else {
-                                    router.push("/Supplier");
+                                    router.push("/product");
                                   }
                                   //   <Link href={user ? "/user" : "/supplier"}>
                                   //   Профайл
@@ -167,7 +208,7 @@ const Dele = () => {
           <ul className="flex items-center font-light text-sm text-cyan-700 gap-10">
             <li className="relative group">
               <button className="hover:opacity-50 cursor-default">
-                <Link href="/">Нүүр</Link>
+                <Link href="/"></Link>
               </button>
             </li>
             <li className="relative group">

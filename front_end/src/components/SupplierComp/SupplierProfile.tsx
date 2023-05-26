@@ -7,7 +7,8 @@ import { AuthContext } from "@/context/AuthContext";
 import axios from "axios";
 import { TextField } from "@mui/material";
 import Link from "next/link";
-  import { BASE_URL_API } from "@/util/variables";
+import { BASE_URL_API } from "@/util/variables";
+import Sidebar from "../Tnavbar/sidebar";
 const COMPONENTS = [
   {
     title: "Түрээслүүлсэн бараа",
@@ -48,6 +49,7 @@ const SupplierProfile = () => {
 
   return (
     <div className="grid md:grid-cols-3 p-4 gap-4">
+      <Sidebar />
       <div className="bg-white md:col-span-1 rounded-xl h-96">
         <div className="text-center pt-20">
           <div className="flex justify-center ">
