@@ -9,20 +9,13 @@ import { motion } from "framer-motion";
 import { BASE_URL_API } from "@/util/variables";
 
 export const Sidebar1 = () => {
-  const {
-    subCat,
-    setSubCat,
-    getAllSubcategories,
-    createProduct,
-    handleChange,
-    travelBarilt,
-  }: any = useContext(ProductAxiosContext);
+  const { subCat, setSubCat, getAllSubcategories, createProduct, handleChange, travelBarilt }: any = useContext(ProductAxiosContext);
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
   const getAllBranches = async () => {
     try {
-      const result = await axios.get(`${BASE_URL_API}/products`, {});
+      const result = await axios.get(`${BASE_URL_API}/products`);
       console.log(result.data.products);
       setProducts(result.data.products);
     } catch (err) {
@@ -63,19 +56,14 @@ export const Sidebar1 = () => {
           </div>
           <h1
             style={{
-              background:
-                "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+              background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
             }}
             className="text-white p-2 font-semibold rounded-md text-lg"
             onClick={() => setIsOpen(true)}
           >
             Шинэ түрээс үүсгэх
           </h1>
-          <Dialog
-            open={isOpen}
-            onClose={() => setIsOpen(false)}
-            className="relative z-5"
-          >
+          <Dialog open={isOpen} onClose={() => setIsOpen(false)} className="relative z-5">
             {/* The backdrop, rendered as a fixed sibling to the panel container */}
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
@@ -110,33 +98,12 @@ export const Sidebar1 = () => {
                       </div>
                     </div>
                     <div className="grid grid-cols-1 pt-5">
-                      <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        onChange={travelBarilt}
-                        className="w-full rounded-md focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Барааны нэр"
-                      />
+                      <input type="text" name="title" id="title" onChange={travelBarilt} className="w-full rounded-md focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Барааны нэр" />
                     </div>
                     <div className="grid grid-cols-2 gap-2 pt-5">
-                      <input
-                        type="text"
-                        name="title"
-                        id="title"
-                        onChange={travelBarilt}
-                        className="w-full rounded-md focus:ring-indigo-600 sm:text-sm"
-                        placeholder="Барааны товч нэр"
-                      />
+                      <input type="text" name="title" id="title" onChange={travelBarilt} className="w-full rounded-md focus:ring-indigo-600 sm:text-sm" placeholder="Барааны товч нэр" />
 
-                      <input
-                        type="number"
-                        name="price"
-                        id="price"
-                        onChange={travelBarilt}
-                        className="w-full rounded-md focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        placeholder="Барааны үнэ"
-                      />
+                      <input type="number" name="price" id="price" onChange={travelBarilt} className="w-full rounded-md focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Барааны үнэ" />
                     </div>
                     <div className="grid grid-cols-1 pt-5">
                       <textarea
@@ -159,9 +126,7 @@ export const Sidebar1 = () => {
                       />
                     </div>
                     <div className="grid grid-cols-1 pt-5">
-                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Барааны ангилал сонгох
-                      </label>
+                      <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Барааны ангилал сонгох</label>
                       <select
                         className="bg-gray-50 border border-gray-600 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         onChange={handleChange}
@@ -177,8 +142,7 @@ export const Sidebar1 = () => {
                     <div className="grid grid-cols-1 pt-5">
                       <button
                         style={{
-                          background:
-                            "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
+                          background: "linear-gradient(to right , #55A3DF,#4BA58C,#1FC4DC, #5ECDB1)",
                         }}
                         className="p-2 font-semibold text-white text-lg"
                         onClick={createProduct}
@@ -194,6 +158,36 @@ export const Sidebar1 = () => {
         </div>
         {/* start */}
         <div className="grid md:grid-cols-6 sm:grid-cols-2  gap-4">
+          {products.length > 0 &&
+            products.map((product: any, index: any) => (
+              <>
+                <SwiperSlide key={index}>
+                  <div className="p-2 border border-black rounded-md bg-zinc-50">
+                    <img src={product?.imgUrl} alt="pic" className="w-full h-60 object-cover" />
+
+                    <Link className="font-semibold text-md pt-5  truncate" href={`Products/${product?._id}`}>
+                      {product?.title}
+                    </Link>
+                    <p className="font-extralight text-sm">Сагсны бөмбөг</p>
+                    <div className="flex justify-between items-center">
+                      <p className="font-bold">{product?.price}₮</p>
+                      <button className="bg-blue-500 px-4 py-1.5 bg-gradient-to-r from-blue-300 from-10% via-sky-500 via-30% to-emerald-300 to-90% rounded-lg text-white font-semibold text-md">
+                        устгах
+                      </button>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </>
+            ))}
+        </div>
+        {/* end */}
+      </div>
+    </>
+  );
+};
+
+{
+  /* <div className="grid md:grid-cols-6 sm:grid-cols-2  gap-4">
           {products?.length > 0 &&
             products?.map((product: any, index: number) => (
               <motion.div
@@ -247,9 +241,5 @@ export const Sidebar1 = () => {
                   ))}
               </motion.div>
             ))}
-        </div>
-        {/* end */}
-      </div>
-    </>
-  );
-};
+        </div> */
+}

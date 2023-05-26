@@ -141,14 +141,14 @@ const Detail = ({ product }: any) => {
             <div className="text-3xl font-bold text-gray-600">
               <h1>Ижил зарууд</h1>
             </div>
-            <div className="grid lg:grid-cols-6 pt-2 gap-5">
+            {/* <div className="grid lg:grid-cols-6 pt-2 gap-5">
               <div className="border border-black text-black h-60">1</div>
               <div className="border border-black text-black h-60">2</div>
               <div className="border border-black text-black h-60">3</div>
               <div className="border border-black text-black h-60">4</div>
               <div className="border border-black text-black h-60">5</div>
               <div className="border border-black text-black h-60">6</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
