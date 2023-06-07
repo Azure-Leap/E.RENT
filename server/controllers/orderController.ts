@@ -29,11 +29,12 @@ export const getOrder = async (req: Request, res: Response) => {
 };
 
 export const createOrder = async (req: Request, res: Response) => {
-  const { cardData } = req.body;
+  const { cardData, uid } = req.body;
   console.log("CD", cardData);
+  console.log("UID", uid);
   try {
     const newOrder = {
-      user: cardData.user,
+      user: uid,
       cart_item: cardData,
       status: "CREATED",
       transactStatus: {

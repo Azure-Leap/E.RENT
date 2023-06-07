@@ -24,6 +24,10 @@ export function CartProvider({ children }: any) {
       console.log(cartItems);
       // const data = calculateCard(product, type);
       // addItemToCardToServer(user._id, data);
+      console.log("LOC", product);
+      const data = calculateCard(product, type);
+      localStorage.setItem("card", JSON.stringify(data));
+      setCartItems(data);
       localStorage.removeItem("card");
     } else {
       console.log("LOC", product);
@@ -62,9 +66,10 @@ export function CartProvider({ children }: any) {
       toast.warn("Нэвтэрнэ үү");
       return router.replace("/login");
     } else {
-      console.log("Rent Pay");
+      console.log("Rent Pay", user._id);
       try {
         const res = await axios.post(`${BASE_URL_API}/orders`, {
+          uid: user._id,
           cardData: cartItems,
         });
         console.log("Rent Finish", res.data.order);

@@ -6,6 +6,7 @@ export const AuthContext = createContext<any>(null);
 
 export const AuthProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(null);
+  const [orders, setOrders] = useState<any>(null);
   const [token, setToken] = useState<any>(null);
   const [supplier, setSupplier] = useState();
   const [supplierToken, setSupplierToken] = useState();
@@ -29,10 +30,12 @@ export const AuthProvider = ({ children }: any) => {
   };
 
   const setUserData = (data: any) => {
-    setUser(data);
-    localStorage.setItem("user", JSON.stringify(data));
+    setUser(data.user);
+    localStorage.setItem("user", JSON.stringify(data.user));
     setToken(data.token);
     localStorage.setItem("token", JSON.stringify(data.token));
+    setOrders(data.orders);
+    localStorage.setItem("orders", JSON.stringify(data.orders));
   };
 
   const logout = () => {
@@ -52,6 +55,8 @@ export const AuthProvider = ({ children }: any) => {
         setUserData,
         setToken,
         setUser,
+        orders,
+        setOrders,
         supplier,
         setSupplier,
         supplierToken,

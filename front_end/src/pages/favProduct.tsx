@@ -1,13 +1,14 @@
 import ProductCard from "@/components/Product/ProductCard";
 import ProductSideBar from "@/components/Product/Productsidebar";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import { BASE_URL_API } from "@/util/variables";
 import NavLayout from "@/Layout/NavLayout";
 
 const Category = ({ products }: any) => {
-  const router = useRouter();
-  console.log("products", products);
+  // const router = useRouter();
+  // console.log("products", products);
+  // const {cartItems} = useContext(Cart)
   return (
     <NavLayout>
       <div className="pt-5">

@@ -59,7 +59,7 @@ const ProductItem = ({ item }: any) => {
 };
 
 const CartSection = () => {
-  // const router = useRouter();
+  const router = useRouter();
   const { user }: any = useContext(AuthContext);
   const { cartItems, addItemToCart }: any = useContext(CartContext);
 
@@ -107,7 +107,13 @@ const CartSection = () => {
             <div className=" border-2 shadow-md h-60 p-5 grid ">
               <p>Нийт барааны тоо :{cartItems?.totalQuantity}</p>
               <p>Нийт үнэ : {cartItems?.totalPrice}</p>
-              <button onClick={addItemToCart} className="bg-cyan-400  border-2 shadow-md text-white text-lg w-32 h-10 items-center rounded-lg ">
+              <button
+                onClick={() => {
+                  router.push(`/Done/${cartItems.productList[0].product._id}`);
+                  // addItemToCart()
+                }}
+                className="bg-cyan-400  border-2 shadow-md text-white text-lg w-32 h-10 items-center rounded-lg "
+              >
                 Түрээслэх
               </button>
             </div>
